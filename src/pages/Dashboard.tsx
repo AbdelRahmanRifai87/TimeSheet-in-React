@@ -14,7 +14,7 @@ function Dashboard() {
 
 
     return (
-        <div className="p-9 bg-gray-100 min-h-screen font-sans">
+        <div className="px-9 pt-3 bg-gray-100 min-h-screen font-sans">
             <p className="text-gray-500 text-sm mb-4">Dashboard / Your Details - General</p>
 
             <div className="flex justify-between items-center w-full mb-8">
@@ -55,7 +55,7 @@ function Dashboard() {
                     <span>Add widget</span>
                 </button>
             </div>
-            <div style={{ marginTop: "100px", marginLeft: "auto" }}>
+            <div style={{ marginLeft: "auto" }}>
 
                 <ResponsiveGridLayout
                     className="layout"
@@ -84,4 +84,4 @@ function Dashboard() {
     );
 
 }
-export default Dashboard
+export default Dashboard;
