@@ -85,11 +85,10 @@ const TopBar: React.FC<TopBarProps> = ({
                       setSelectedCompany(company);
                       setIsOpen(false);
                     }}
-                    className={`px-4 py-2 cursor-pointer hover:bg-[#dbeeff] ${
-                      selectedCompany === company
+                    className={`px-4 py-2 cursor-pointer hover:bg-[#dbeeff] ${selectedCompany === company
                         ? "text-[#248ee0]" // Blue color for selected
                         : "text-[#06080839]" // Dark/grey for others
-                    }`}
+                      }`}
                   >
                     {company}
                   </li>
