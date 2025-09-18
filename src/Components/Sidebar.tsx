@@ -41,7 +41,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
   return (
     <aside
       className={` row-span-2 ${isDarkMode ? "bg-[#121212]" : "bg-[#2186d4]"
-        } flex flex-col transition-all duration-300 ease-in-out `}
+        } flex flex-col  `}
     >
       <div className="flex justify-center items-center py-4">
         {isCollapsed ? (

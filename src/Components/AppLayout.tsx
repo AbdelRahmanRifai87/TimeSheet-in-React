@@ -19,8 +19,8 @@ function AppLayout() {
                 <TopBar />
 
 
-                <main className="bg-blue-200 px-[4.8rem] pt-[4rem] pb-[6.4rem] overflow-auto">
-                    <div className="col-span-1 row-span-1 max-w-[120rem] mx-auto flex flex-col gap-[3.2rem]" >
+                <main className="col-span-1 row-span-1   overflow-auto">
+                    <div className="  mx-auto flex flex-col gap-[3.2rem]" >
                         <Outlet />
                     </div>
                 </main>
