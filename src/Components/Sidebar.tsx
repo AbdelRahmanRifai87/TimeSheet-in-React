@@ -17,8 +17,12 @@ const menuItems = [
   { label: "Messaging", icon: "fas fa-comments" },
 ];
 
-const Sidebar = () => {
-  const [isCollapsed, setIsCollapsed] = useState(false);
+interface SidebarProps {
+  isCollapsed: boolean;
+  setIsCollapsed: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   // Check for saved preference in local storage on initial load
@@ -36,11 +40,8 @@ const Sidebar = () => {
 
   return (
     <aside
-      className={`fixed top-0 left-0 h-screen ${
-        isDarkMode ? "bg-[#121212]" : "bg-[#2186d4]"
-      } flex flex-col transition-all duration-300 ease-in-out ${
-        isCollapsed ? "w-[60px]" : "w-[260px]"
-      }`}
+      className={` row-span-2 ${isDarkMode ? "bg-[#121212]" : "bg-[#2186d4]"
+        } flex flex-col transition-all duration-300 ease-in-out `}
     >
       <div className="flex justify-center items-center py-4">
         {isCollapsed ? (
@@ -56,11 +57,10 @@ const Sidebar = () => {
 
       <div className="px-4 my-4">
         <div
-          className={`h-px w-full ${
-            isDarkMode
-              ? "bg-gradient-to-r from-transparent via-gray-600/25 to-transparent"
-              : "bg-gradient-to-r from-white/5 via-white/30 to-white/5"
-          } transition-colors duration-300`}
+          className={`h-px w-full ${isDarkMode
+            ? "bg-gradient-to-r from-transparent via-gray-600/25 to-transparent"
+            : "bg-gradient-to-r from-white/5 via-white/30 to-white/5"
+            } transition-colors duration-300`}
         />
       </div>
 
@@ -71,34 +71,31 @@ const Sidebar = () => {
         {menuItems.map((item) => (
           <React.Fragment key={item.label}>
             {item.label === "Yours Details" ||
-            item.label === "Locations" ||
-            item.label === "Reports" ||
-            item.label === "Documents" ? (
+              item.label === "Locations" ||
+              item.label === "Reports" ||
+              item.label === "Documents" ? (
               <div className="px-4 my-4">
                 <div
-                  className={`h-px w-full ${
-                    isDarkMode
-                      ? "bg-gradient-to-r from-white via-white-600/25 to-transparent"
-                      : "bg-gradient-to-r from-white/5 via-white/30 to-white/5"
-                  } transition-colors duration-300`}
+                  className={`h-px w-full ${isDarkMode
+                    ? "bg-gradient-to-r from-white via-white-600/25 to-transparent"
+                    : "bg-gradient-to-r from-white/5 via-white/30 to-white/5"
+                    } transition-colors duration-300`}
                 />
               </div>
             ) : null}
 
             <div
-              className={`flex items-center cursor-pointer ${
-                item.label === "Dashboard"
-                  ? isDarkMode
-                    ? "mx-3 my-1 rounded-lg bg-blue-500 text-white"
-                    : "mx-3 my-1 rounded-lg bg-white text-[#2186d4]"
-                  : isDarkMode
+              className={`flex items-center cursor-pointer ${item.label === "Dashboard"
+                ? isDarkMode
+                  ? "mx-3 my-1 rounded-lg bg-blue-500 text-white"
+                  : "mx-3 my-1 rounded-lg bg-white text-[#2186d4]"
+                : isDarkMode
                   ? "mx-3 my-1 rounded-lg text-gray-300/65 hover:bg-gray-700"
                   : "mx-3 my-1 rounded-lg text-white/65 hover:bg-white/10"
-              } ${
-                isCollapsed
+                } ${isCollapsed
                   ? "justify-center px-1 py-3"
                   : "px-5 py-3 justify-between"
-              }`}
+                }`}
             >
               <div className="flex items-center">
                 <i
@@ -123,18 +120,16 @@ const Sidebar = () => {
         {/* Night Mode Toggle */}
         {!isCollapsed && (
           <button
-            className={`flex items-center justify-between w-[80%] py-2 px-4 ${
-              isDarkMode
-                ? "bg-gray-700 text-black border border-gray-600"
-                : "bg-[#1971b3] text-black border border-[#1971b3]"
-            } rounded-md mx-auto transition-colors duration-300`}
+            className={`flex items-center justify-between w-[80%] py-2 px-4 ${isDarkMode
+              ? "bg-gray-700 text-black border border-gray-600"
+              : "bg-[#1971b3] text-black border border-[#1971b3]"
+              } rounded-md mx-auto transition-colors duration-300`}
             onClick={() => setIsDarkMode((prev) => !prev)}
           >
             <span className="text-sm font-medium flex items-center">
               <i
-                className={`${
-                  isDarkMode ? "fas fa-sun" : "fas fa-moon"
-                } mr-2 text-sm`}
+                className={`${isDarkMode ? "fas fa-sun" : "fas fa-moon"
+                  } mr-2 text-sm`}
               ></i>
               {isDarkMode ? "Activate Light " : "Activate Dark "}
             </span>
@@ -144,11 +139,9 @@ const Sidebar = () => {
 
         {/* Collapse Button */}
         <button
-          className={`flex items-center justify-center ${
-            isDarkMode ? "bg-gray-800 text-blue-400" : "bg-white text-[#2186d4]"
-          } rounded-md mx-auto ${
-            isCollapsed ? "w-10 h-10" : "w-[80%] py-3 px-4"
-          }`}
+          className={`flex items-center justify-center ${isDarkMode ? "bg-gray-800 text-blue-400" : "bg-white text-[#2186d4]"
+            } rounded-md mx-auto ${isCollapsed ? "w-10 h-10" : "w-[80%] py-3 px-4"
+            }`}
           onClick={() => setIsCollapsed((prev) => !prev)}
         >
           {isCollapsed ? (
@@ -164,9 +157,8 @@ const Sidebar = () => {
 
       {!isCollapsed && (
         <div
-          className={`flex flex-col items-center py-4 ${
-            isDarkMode ? "text-gray-400/65" : "text-white/65"
-          } text-xs`}
+          className={`flex flex-col items-center py-4 ${isDarkMode ? "text-gray-400/65" : "text-white/65"
+            } text-xs`}
         >
           <div className="flex items-center mt-1">
             <span>Powered by </span>
