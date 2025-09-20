@@ -5,29 +5,37 @@ import { useState } from "react";
 
 function AppLayout() {
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  /* const toggleDarkMode = () => setIsDarkMode((prev) => !prev); */
 
   return (
-    <>
-      <div
-        className={`grid  grid-rows-[auto_1fr] h-screen `}
-        style={{
-          gridTemplateColumns: isCollapsed ? "60px 1fr" : "26rem 1fr",
-        }}
-      >
-        <Sidebar isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed} />
+    <div className="min-h-screen flex">
+      {/* Sidebar */}
+      <Sidebar
+        isCollapsed={isCollapsed}
+        setIsCollapsed={setIsCollapsed}
+        isDarkMode={isDarkMode}
+      />
+
+      {/* Main content */}
+      <div className="flex-1 flex flex-col">
         <TopBar
+          isDarkMode={isDarkMode}
+          setIsDarkMode={setIsDarkMode}
           userName="Mohamad Zakaria"
           companyName="Partisan Protective Services"
           userAvatarUrl="https://columbus.in.us/wp-content/uploads/2020/01/person-01.jpg"
         />
 
-        <main className="bg-blue-200 rounded-lg px-[4.8rem] pt-[4rem] pb-[6.4rem] overflow-auto">
-          <div className="col-span-1 row-span-1 max-w-[120rem] mx-auto flex flex-col gap-[3.2rem]">
-            <Outlet />
-          </div>
-        </main>
+        {/* Page content */}
+        <div
+          className={`p-6 flex-1 transition-colors duration-500 ${
+            isDarkMode ? "bg-[#000000e4] text-white" : "bg-[#f6f8fa]"
+          }`}
+        ></div>
       </div>
-    </>
+    </div>
   );
 }
 export default AppLayout;
