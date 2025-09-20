@@ -78,3 +78,11 @@ body {
   border-bottom: 10px solid white;
   /* rounded line */
 }
+
+.menu-items-nav::-webkit-scrollbar {
+  width: 10px;
+}
+
+.menu-items-nav::-webkit-scrollbar-button {
+  display: none;
+}
