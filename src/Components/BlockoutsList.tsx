@@ -25,7 +25,7 @@ export function BlockoutList({ blockouts }: { blockouts: Blockout[] }) {
         handleScroll();
     }, [blockouts]);
     return (
-        <div className="relative w-full h-full">
+        <div className="relative w-full h-fit">
             <div
                 ref={containerRef}
                 onScroll={handleScroll}

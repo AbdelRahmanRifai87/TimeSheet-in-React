@@ -26,7 +26,7 @@ export function ReportList({ reports }: { reports: Report[] }) {
         handleScroll();
     }, [reports]);
     return (
-        <div className="relative w-full h-full">
+        <div className="relative w-full h-fit">
             <div
                 ref={containerRef}
                 onScroll={handleScroll}
