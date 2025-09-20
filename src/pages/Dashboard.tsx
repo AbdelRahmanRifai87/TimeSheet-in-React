@@ -5,15 +5,22 @@ import Widget from "../Components/widget/Widget";
 import { useDynamicGrid } from "../hooks/useDynamicGrid";
 import { DataList } from "../Components/DataList";
 
-
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
-
 function Dashboard() {
-
     // 1. Initialize state to manage the dropdown's visibility
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const { layouts, allItems, addItem, removeItem, updateLayouts, breakpoints, cols } = useDynamicGrid(3);
+    const {
+        layouts,
+        allItems,
+        addItem,
+        removeItem,
+        updateLayouts,
+        breakpoints,
+        cols,
+    } = useDynamicGrid(3);
+
+
 
 
     return (
@@ -112,7 +119,8 @@ function Dashboard() {
 
 
         </div>
-    );
 
+
+    );
 }
 export default Dashboard;

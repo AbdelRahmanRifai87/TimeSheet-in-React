@@ -4,33 +4,38 @@ import TopBar from "./topbar/TopBar";
 import { useState } from "react";
 
 function AppLayout() {
-    const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
-    return (
-        <>
-            <div
-                className={`grid  grid-rows-[auto_1fr] h-screen `}
-                style={{
-                    gridTemplateColumns: isCollapsed ? "60px 1fr" : "17rem 1fr",
-                    transition: "all 350ms ease-in-out",
-                }}>
-                <Sidebar isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed} />
-                <TopBar
-                    userName="Mohamad Zakaria"
-                    companyName="Partisan Protective Services"
-                    userAvatarUrl="https://columbus.in.us/wp-content/uploads/2020/01/person-01.jpg"
-                />
+  /* const toggleDarkMode = () => setIsDarkMode((prev) => !prev); */
 
-                <main className="col-span-1 row-span-1 rounded-lg  bg-[#F1F3F3] min-h-[93.5vh] overflow-auto">
-                    <div className="  mx-auto flex flex-col gap-[3.2rem]" >
-                        <Outlet />
-                    </div>
-                </main>
+  return (
+    <div className="min-h-screen flex">
+      {/* Sidebar */}
+      <Sidebar
+        isCollapsed={isCollapsed}
+        setIsCollapsed={setIsCollapsed}
+        isDarkMode={isDarkMode}
+      />
 
-            </div >
+      {/* Main content */}
+      <div className="flex-1 flex flex-col">
+        <TopBar
+          isDarkMode={isDarkMode}
+          setIsDarkMode={setIsDarkMode}
+          userName="Mohamad Zakaria"
+          companyName="Partisan Protective Services"
+          userAvatarUrl="https://columbus.in.us/wp-content/uploads/2020/01/person-01.jpg"
+        />
 
-        </>
-    )
-
+        {/* Page content */}
+        <div
+          className={`p-6 flex-1 transition-colors duration-500 ${
+            isDarkMode ? "bg-[#000000e4] text-white" : "bg-[#f6f8fa]"
+          }`}
+        ></div>
+      </div>
+    </div>
+  );
 }
 export default AppLayout;
