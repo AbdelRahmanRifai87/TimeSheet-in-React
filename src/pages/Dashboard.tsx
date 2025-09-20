@@ -42,7 +42,7 @@ function Dashboard() {
                 </div>
             </div>
 
-            <div className="flex justify-between items-center w-full mb-8">
+            <div className="flex justify-between items-center w-full mb-6">
                 <div className="flex flex-col">
                     <h1 className="text-3xl font-semibold text-gray-800">Dashboard</h1>
 
@@ -90,7 +90,7 @@ function Dashboard() {
                     layouts={layouts}
                     breakpoints={breakpoints}
                     cols={cols}
-                    rowHeight={100}
+                    rowHeight={30}
                     onLayoutChange={updateLayouts}
                     isResizable
                     isDraggable
