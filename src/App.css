@@ -84,3 +84,11 @@ body {
   transition-duration: 0.6s;
   transition-timing-function: ease-in-out;
 }
+
+.menu-items-nav::-webkit-scrollbar {
+  width: 10px;
+}
+
+.menu-items-nav::-webkit-scrollbar-button {
+  display: none;
+}

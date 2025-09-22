@@ -69,9 +69,9 @@ const Sidebar: React.FC<SidebarProps> = ({
 
   return (
     <aside
-      className={`flex row-span-2 flex-col h-screen transition-colors duration-500 ease-in-out ${
+      className={` row-span-2 flex flex-col h-screen transition-colors duration-500 ease-in-out ${
         isDarkMode ? "bg-[#121212]" : "bg-[#2186d4]"
-      } overflow-hidden`}
+      }  overflow-hidden`}
     >
       {/* Company Logo Dropdown */}
       <div ref={dropdownRef} className="relative px-4 py-4">
@@ -153,7 +153,7 @@ const Sidebar: React.FC<SidebarProps> = ({
       </div>
 
       {/* Menu Items */}
-      <nav className="flex-1 overflow-y-auto overflow-x-hidden no-scrollbar">
+      <nav className=" menu-items-nav flex-1 overflow-y-auto overflow-x-hidden no-scrollbar">
         {menuItems.map((item) => (
           <React.Fragment key={item.label}>
             {(item.label === "Yours Details" ||

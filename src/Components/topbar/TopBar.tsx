@@ -49,6 +49,9 @@ const TopBar: React.FC<TopBarProps> = ({
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+  useEffect(() => {
+    document.body.style.backgroundColor = isDarkMode ? "#121212" : "#2186d4";
+  }, [isDarkMode]);
 
   const orderedCompanies = [
     selectedCompany,
