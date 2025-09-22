@@ -1,9 +1,10 @@
 import WidgetHeader from "./WidgetHeader";
 
 interface WidgetProps {
-    children: React.ReactNode;
-    title: string;
-    onRemove: () => void;
+  children: React.ReactNode;
+  title: string;
+  onRemove: () => void;
+  isDarkMode?: boolean;
 }
 // <header className = "flex items-center rounded-lg justify-between !px-4 !py-2 bg-[#1C75BC26] border-b border-gray-200 rounded-t-lg w-full mb-2 ">
 //             <span className="font-semibold text-[#05004E] text-lg">{title}</span>
@@ -26,7 +27,6 @@ interface WidgetProps {
 //                     <i className="fa-solid fa-angle-down text-xs"></i>
 //                 </button>
 
-
 //                 <button className="grabbable flex items-center justify-center w-7 h-10 rounded-lg bg-white border border-gray-200 shadow-sm text-gray-400 hover:shadow-[0_0_3px_0_#1C75BC] hover:border-[#5da2db] hover:text-[#1C75BC] focus:outline-none">
 //                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-4 h-8">
 //                         {/* First column of dots */}
@@ -40,23 +40,33 @@ interface WidgetProps {
 //                     </svg>
 //                 </button>
 
-function Widget({ children, title, onRemove }: WidgetProps) {
-    return (
-        <div className=" bg-white rounded-lg shadow-md border border-gray-200 h-full w-full flex flex-col items-center px-1 pt-1 ">
+function Widget({
+  children,
+  title,
+  onRemove,
+  isDarkMode = false,
+}: WidgetProps) {
+  return (
+    <div
+      className={`rounded-lg shadow-md border h-full w-full flex flex-col items-center px-1 pt-1 ${
+        isDarkMode
+          ? "bg-[#8b8a8a01] border-gray-700"
+          : "bg-white border-gray-200"
+      }`}
+    >
+      <WidgetHeader title={title} onRemove={onRemove} isDarkMode={isDarkMode} />
 
-            <WidgetHeader title={title} onRemove={onRemove} />
-
-
-            <div className="relative w-full h-full">
-                <div className="widget-content flex justify-center absolute inset-0 overflow-auto pt-2 px-3 ">
-
-                    {children}
-
-                </div>
-            </div>
-            <div className="w-full h-[20px]">
-
-            </div>
-
-        </div >)
-} export default Widget
+      <div className="relative w-full h-full">
+        <div
+          className={`widget-content flex justify-center absolute inset-0 overflow-auto pt-2 px-3 ${
+            isDarkMode ? "bg-[#1212128f]" : ""
+          }`}
+        >
+          {children}
+        </div>
+      </div>
+      <div className="w-full h-[20px]"></div>
+    </div>
+  );
+}
+export default Widget;

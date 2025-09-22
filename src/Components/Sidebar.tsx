@@ -69,9 +69,9 @@ const Sidebar: React.FC<SidebarProps> = ({
 
   return (
     <aside
-      className={`flex flex-col h-screen transition-colors duration-500 ease-in-out ${
+      className={`flex row-span-2 flex-col h-screen transition-colors duration-500 ease-in-out ${
         isDarkMode ? "bg-[#121212]" : "bg-[#2186d4]"
-      } ${isCollapsed ? "w-[72px]" : "w-[250px]"} overflow-hidden`}
+      } overflow-hidden`}
     >
       {/* Company Logo Dropdown */}
       <div ref={dropdownRef} className="relative px-4 py-4">
@@ -94,7 +94,7 @@ const Sidebar: React.FC<SidebarProps> = ({
           </div>
           {!isCollapsed && (
             <i
-              className={` fa-solid text-white fa-chevron-down text-xs opacity-65 transition-transform ml-4 duration-300 ${
+              className={`fa-solid text-white fa-chevron-down text-xs opacity-65 ml-4 transition-transform duration-[1500ms] transform ${
                 isCompanyDropdownOpen ? "rotate-180" : ""
               }`}
             />

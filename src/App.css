@@ -6,7 +6,7 @@
 }
 
 body {
-  background-color: #2186d4;
+  /* background-color: #2186d4; */
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
@@ -77,4 +77,10 @@ body {
   border-top: 10px solid transparent;
   border-bottom: 10px solid white;
   /* rounded line */
+}
+/* Optional: in global styles */
+* {
+  transition-property: background-color, color;
+  transition-duration: 0.6s;
+  transition-timing-function: ease-in-out;
 }

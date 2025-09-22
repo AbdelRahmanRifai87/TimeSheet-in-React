@@ -4,11 +4,14 @@ import "react-grid-layout/css/styles.css";
 import Widget from "../Components/widget/Widget";
 import { useDynamicGrid } from "../hooks/useDynamicGrid";
 import { DataList } from "../Components/DataList";
+import { useOutletContext } from "react-router-dom";
+type ContextType = { isDarkMode: boolean };
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
 function Dashboard() {
   // 1. Initialize state to manage the dropdown's visibility
+  const { isDarkMode } = useOutletContext<ContextType>();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const {
     layouts,
@@ -21,18 +24,26 @@ function Dashboard() {
   } = useDynamicGrid(3);
 
   return (
-    <div className="px-9 pt-3 font-sans">
+    <div className="px-9 pt-3 font-sans transition-colors bg-inherit">
       <p className="ml-3 text-sm mb-4 text-[#1C75BC]">
         {" "}
         <span className="font-bold mr-2"> Dashboard</span> / Your Details -
         General
       </p>
-      <div className="flex justify-between items-center px-6 py-7 rounded-xl bg-[#1C75BC26] mb-5  shadow-md">
+      <div
+        className={`flex justify-between items-center px-6 py-7 rounded-xl mb-5 shadow-md transition-colors  ${
+          isDarkMode ? "bg-[#1e1e1e]" : "bg-[#1C75BC26]"
+        }`}
+      >
         <div className="flex items-start space-x-3">
           {/* Bell icon */}
           <div className="flex-shrink-0 text">🔔</div>
           <div>
-            <h3 className="text-sm mb-2 font-semibold text-gray-800">
+            <h3
+              className={`text-sm mb-2 font-semibold ${
+                isDarkMode ? "text-white" : "text-gray-800"
+              }`}
+            >
               Planned Outage Delayed
             </h3>
             <p className="text-xs text-gray-500">
@@ -43,10 +54,18 @@ function Dashboard() {
 
         {/* Buttons on the right side */}
         <div className="flex space-x-2 items-center">
-          <button className="px-4 py-2 text-sm font-medium text-[#0B0B26]  rounded-lg hover:outline-1 hover:outline-[#6C668540]   ">
+          <button
+            className={`px-4 py-2 text-sm font-medium rounded-lg hover:outline-1 hover:outline-[#6C668540] ${
+              isDarkMode ? "text-white" : "text-[#0B0B26]"
+            }`}
+          >
             Allow push
           </button>
-          <button className="px-4 py-2 text-sm font-medium text-[#0B0B26]  rounded-lg hover:outline-1 hover:outline-[#6C668540]  ">
+          <button
+            className={`px-4 py-2 text-sm font-medium rounded-lg hover:outline-1 hover:outline-[#6C668540] ${
+              isDarkMode ? "text-white" : "text-[#0B0B26]"
+            }`}
+          >
             Dismiss
           </button>
         </div>
@@ -54,7 +73,13 @@ function Dashboard() {
 
       <div className="flex justify-between items-center w-full mb-8">
         <div className="flex flex-col">
-          <h1 className="text-3xl font-semibold text-gray-800">Dashboard</h1>
+          <h1
+            className={`text-3xl font-semibold px-2 py-1 rounded transition-colors duration-700 ${
+              isDarkMode ? " text-white" : "text-gray-800"
+            }`}
+          >
+            Dashboard
+          </h1>
 
           <div className="relative inline-block text-left mt-4">
             {/* 2. Add an onClick handler to the toggle div */}
@@ -141,10 +166,13 @@ function Dashboard() {
               <Widget
                 title={`${item.label}`}
                 onRemove={() => removeItem(item.i)}
+                isDarkMode={isDarkMode}
               >
-                {/* Render the correct list depending on the label */}
-
-                <DataList label={item.label} data={item.data} />
+                <DataList
+                  label={item.label}
+                  data={item.data}
+                  isDarkMode={isDarkMode}
+                />
               </Widget>
             </div>
           ))}
