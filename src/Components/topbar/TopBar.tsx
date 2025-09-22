@@ -59,16 +59,14 @@ const TopBar: React.FC<TopBarProps> = ({
   ];
   return (
     <div
-      className={`${topBarStyles.topbar} ${
-        isDarkMode ? "bg-[#121212]" : "bg-[#2186d4] "
-      }`}
+      className={`${topBarStyles.topbar} ${isDarkMode ? "bg-[#121212]" : "bg-[#2186d4] "
+        }`}
     >
       {/* Search (moved to left side, replacing company) */}
       {/* Global Search */}
       <div
-        className={`${topBarStyles.searchContainer} ${
-          isDarkMode ? "bg-gray-700" : ""
-        }`}
+        className={`${topBarStyles.searchContainer} ${isDarkMode ? "bg-gray-700" : ""
+          }`}
       >
         <FaSearch className={topBarStyles.searchIcon} />
         <input
