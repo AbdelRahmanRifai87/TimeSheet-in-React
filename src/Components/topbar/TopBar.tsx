@@ -50,10 +50,8 @@ const TopBar: React.FC<TopBarProps> = ({
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
   useEffect(() => {
-    document.body.style.backgroundColor = isDarkMode ? '#121212' : '#2186d4';
+    document.body.style.backgroundColor = isDarkMode ? "#121212" : "#2186d4";
   }, [isDarkMode]);
-
-
 
   const orderedCompanies = [
     selectedCompany,
@@ -61,7 +59,8 @@ const TopBar: React.FC<TopBarProps> = ({
   ];
   return (
     <div
-      className={`${topBarStyles.topbar} `}
+      className={`${topBarStyles.topbar} ${isDarkMode ? "bg-[#121212]" : "bg-[#2186d4] "
+        }`}
     >
       {/* Search (moved to left side, replacing company) */}
       {/* Global Search */}

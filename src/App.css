@@ -8,8 +8,19 @@
 
 }
 
+/* Hide scrollbars for all elements while maintaining scroll functionality */
+* {
+  /* -ms-overflow-style: none; IE and Edge */
+  /* scrollbar-width: none; Firefox */
+}
+
+/* Hide scrollbars for Chrome, Safari and Opera */
+.sideBar-menu::-webkit-scrollbar {
+  display: none;
+}
+
 body {
-  background-color: #2186d4;
+  /* background-color: #2186d4; */
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   transition: background-color 500ms;
 }
@@ -81,6 +92,12 @@ body {
   border-top: 10px solid transparent;
   border-bottom: 10px solid white;
   /* rounded line */
+}
+/* Optional: in global styles */
+* {
+  transition-property: background-color, color;
+  transition-duration: 0.6s;
+  transition-timing-function: ease-in-out;
 }
 
 .menu-items-nav::-webkit-scrollbar {
