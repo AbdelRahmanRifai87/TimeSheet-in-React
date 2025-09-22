@@ -14,7 +14,15 @@ const Sidebar: React.FC<{ isDarkMode: boolean }> = ({ isDarkMode }) => {
     >
       <div className="flex justify-center items-center py-4">
         {isCollapsed ? (
-          <img src="/image.png" alt="Logo" className="w-10 h-10" />
+          isDarkMode ? (
+            <img
+              src="/partisan logodarks.png"
+              alt="Logo"
+              className="w-10 h-10"
+            />
+          ) : (
+            <img src="/image.png" alt="Logo" className="w-10 h-10" />
+          )
         ) : (
           <img
             src="/partisan logo.png"
