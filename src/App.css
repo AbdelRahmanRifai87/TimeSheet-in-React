@@ -22,7 +22,7 @@
 body {
   /* background-color: #2186d4; */
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  transition: background-color 500ms;
+  /* transition: background-color 600ms; */
 }
 
 .react-grid-placeholder {
@@ -93,6 +93,7 @@ body {
   border-bottom: 10px solid white;
   /* rounded line */
 }
+
 /* Optional: in global styles */
 * {
   transition-property: background-color, color;
