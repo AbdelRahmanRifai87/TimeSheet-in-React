@@ -8,7 +8,7 @@ import Breadcrumb from "../Components/BreadCrumb";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
-function Dashboard() {
+function Details() {
   // 1. Initialize state to manage the dropdown's visibility
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const {
@@ -150,4 +150,4 @@ function Dashboard() {
     </div>
   );
 }
-export default Dashboard;
+export default Details;

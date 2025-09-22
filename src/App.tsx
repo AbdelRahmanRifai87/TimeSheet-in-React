@@ -1,28 +1,39 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import "./App.css";
-import Sidebar from "./Components/Sidebar";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
 import AppLayout from "./Components/AppLayout";
+import { SidebarProvider } from "./Context/SidebarContext";
+import Details from "./pages/Details";
+import General from "./pages/general";
+import SwitchToDetails from "./pages/SwitchToDetails";
+import TaskManager from "./pages/TaskManager";
+import Users from "./pages/Users";
 
 function App() {
-  const [count, setCount] = useState(0);
   useEffect(() => {
-    console.log("App component mounted", count);
     document.title = "Partisan Protective Services";
   }, []);
+
   return (
-    <>
-      {/* <Sidebar /> */}
+    <SidebarProvider>
       <BrowserRouter>
         <Routes>
           <Route element={<AppLayout />}>
             <Route index element={<Navigate replace to="dashboard" />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/details" element={<Details />} />
+            <Route path="/details/general" element={<General />} />
+            <Route path="/tasks-manager" element={<TaskManager />} />
+            <Route path="/users" element={<Users />} />
+            <Route
+              path="/details/switchtodetails"
+              element={<SwitchToDetails />}
+            />
           </Route>
         </Routes>
       </BrowserRouter>
-    </>
+    </SidebarProvider>
   );
 }
 

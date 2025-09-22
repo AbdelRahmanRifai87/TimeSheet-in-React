@@ -3,15 +3,31 @@
 * {
   transition: heigth 0.3s;
   box-sizing: border-box;
-
 }
 
+/* Hide scrollbars for all elements while maintaining scroll functionality */
+* {
+  /* -ms-overflow-style: none; IE and Edge */
+  /* scrollbar-width: none; Firefox */
+}
+
+/* Hide scrollbars for Chrome, Safari and Opera */
+.sideBar-menu::-webkit-scrollbar {
+  display: none;
+}
 
 body {
   background-color: #2186d4;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
+/* Remove the existing widget-content scrollbar styling since we're hiding scrollbars
+.widget-content::-webkit-scrollbar,
+.widget-content::-webkit-scrollbar-button,
+.widget-content::-webkit-scrollbar-thumb,
+.widget-content::-webkit-scrollbar-track {
+  display: none;
+} */
 
 .react-grid-placeholder {
   background: transparent !important;
@@ -38,7 +54,6 @@ body {
   scroll-padding-top: 10px;
 }
 
-
 .widget-content::-webkit-scrollbar {
   width: 3px;
   height: 3px;
@@ -50,27 +65,21 @@ body {
 }
 
 .widget-content::-webkit-scrollbar-thumb {
-  background-color: #1C75BC;
+  background-color: #1c75bc;
   border-radius: 10px;
   width: 10px;
   height: 10px;
   margin-top: 10px;
-
-
 }
 
 /* .widget::-webkit-scrollbar-thumb:horizontal {
  width: 3pc;
 } */
 
-
-
 .widget-content::-webkit-scrollbar-track {
-  background-color: #D9D9D980;
+  background-color: #d9d9d980;
   height: 10px;
   border-radius: 10px;
-
-
 }
 
 .compliance-view::after {
