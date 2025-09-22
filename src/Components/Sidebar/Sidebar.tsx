@@ -26,7 +26,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isDarkMode }) => {
   const companyLogos: Record<string, string> = {
     PARTISAN: "/partisan logo.png",
     GUARDIAN: "/guardian_global1.png",
-    SAFEWATCH: "/safewatch_logo.png",
+    SAFEWATCH: "/Safewatch2_logo.png",
   };
 
   const companySigns: Record<string, string> = {
