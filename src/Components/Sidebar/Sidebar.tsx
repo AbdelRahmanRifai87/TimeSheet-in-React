@@ -1,19 +1,17 @@
 import SidebarDivider from "./SidebarDivider";
 import SidebarMenu from "./SidebarMenu";
 import SidebarFooter from "./SidebarFooter";
-import type { Page } from "../../Types/Page";
 import { useSidebarContext } from "../../Context/SidebarContext";
-interface SidebarProps {
-  isCollapsed: boolean;
-  setIsCollapsed: React.Dispatch<React.SetStateAction<boolean>>;
-  menuPages?: Page[];
-}
 
-const Sidebar: React.FC = () => {
+const Sidebar: React.FC<{ isDarkMode: boolean }> = ({ isDarkMode }) => {
   const { isCollapsed, setIsCollapsed, menuPages } = useSidebarContext();
 
   return (
-    <aside className="row-span-2 bg-[#2186d4] flex flex-col">
+    <aside
+      className={`row-span-2 flex flex-col ${
+        isDarkMode ? "bg-[#121212]" : "bg-[#2186d4]"
+      }`}
+    >
       <div className="flex justify-center items-center py-4">
         {isCollapsed ? (
           <img src="/image.png" alt="Logo" className="w-10 h-10" />

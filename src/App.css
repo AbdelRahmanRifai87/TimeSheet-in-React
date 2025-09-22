@@ -17,17 +17,9 @@
 }
 
 body {
-  background-color: #2186d4;
+  /* background-color: #2186d4; */
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-
-/* Remove the existing widget-content scrollbar styling since we're hiding scrollbars
-.widget-content::-webkit-scrollbar,
-.widget-content::-webkit-scrollbar-button,
-.widget-content::-webkit-scrollbar-thumb,
-.widget-content::-webkit-scrollbar-track {
-  display: none;
-} */
 
 .react-grid-placeholder {
   background: transparent !important;
@@ -96,4 +88,18 @@ body {
   border-top: 10px solid transparent;
   border-bottom: 10px solid white;
   /* rounded line */
+}
+/* Optional: in global styles */
+* {
+  transition-property: background-color, color;
+  transition-duration: 0.6s;
+  transition-timing-function: ease-in-out;
+}
+
+.menu-items-nav::-webkit-scrollbar {
+  width: 10px;
+}
+
+.menu-items-nav::-webkit-scrollbar-button {
+  display: none;
 }

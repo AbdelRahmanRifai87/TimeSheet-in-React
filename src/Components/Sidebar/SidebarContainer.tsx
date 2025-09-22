@@ -3,7 +3,11 @@ import { ApiService } from "../../Api/ApiService";
 import Sidebar from "./Sidebar";
 import { useSidebarContext } from "../../Context/SidebarContext";
 
-const SidebarContainer: React.FC = () => {
+interface SidebarContainerProps {
+  isDarkMode: boolean;
+}
+
+const SidebarContainer: React.FC<SidebarContainerProps> = ({ isDarkMode }) => {
   const { menuPages, setMenuPages } = useSidebarContext();
 
   // Fetch menu pages from the ApiService
@@ -21,7 +25,7 @@ const SidebarContainer: React.FC = () => {
     fetchMenuPages();
   }, [setMenuPages]);
 
-  return <Sidebar />;
+  return <Sidebar isDarkMode={isDarkMode} />;
 };
 
 export default SidebarContainer;
