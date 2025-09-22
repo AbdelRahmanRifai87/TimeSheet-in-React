@@ -25,6 +25,7 @@ interface WidgetsGridLayoutProps {
     updateLayouts: (_: Layout[], allLayouts: Layouts) => void;
     breakpoints: Breakpoints;
     cols: Breakpoints;
+    isDarkMode: boolean
 }
 
 export default function WidgetsGridLayout({
@@ -34,6 +35,7 @@ export default function WidgetsGridLayout({
     updateLayouts,
     breakpoints,
     cols,
+    isDarkMode
 }: WidgetsGridLayoutProps) {
 
     console.log(layouts);
@@ -54,10 +56,10 @@ export default function WidgetsGridLayout({
             >
                 {allItems.map((item) => (
                     <div key={item.i}>
-                        <Widget title={`${item.label}`} onRemove={() => removeItem(item.i)}>
+                        <Widget isDarkMode={isDarkMode} title={`${item.label}`} onRemove={() => removeItem(item.i)}>
                             {/* Render the correct list depending on the label */}
 
-                            <DataList label={item.label} data={item.data} />
+                            <DataList isDarkMode={isDarkMode} label={item.label} data={item.data} />
 
                         </Widget>
                     </div>
