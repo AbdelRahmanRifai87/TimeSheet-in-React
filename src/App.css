@@ -1,13 +1,17 @@
 @import "tailwindcss";
 
 * {
-  transition: heigth 0.3s;
+
   box-sizing: border-box;
+  /* transition: color 0.5s;
+  transition: height 0.3s ease-in-out, color 0.5s ease-in-out, background-color 0.5s ease-in-out; */
+
 }
 
 body {
   background-color: #2186d4;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  transition: background-color 500ms;
 }
 
 .react-grid-placeholder {

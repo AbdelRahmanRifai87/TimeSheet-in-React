@@ -69,7 +69,7 @@ export interface DashboardItem extends Layout {
     data: any[];
 }
 
-const datasets: { label: DashboardItem["label"]; data: any[] }[] = [
+export const datasets: { label: DashboardItem["label"]; data: any[] }[] = [
     { label: "alerts", data: alertsData },
     { label: "blockouts", data: blockoutsData },
     { label: "reports", data: reportsData },

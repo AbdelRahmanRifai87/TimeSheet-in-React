@@ -1,19 +1,16 @@
 import { useState } from "react";
-import { Responsive, WidthProvider } from "react-grid-layout";
 import "react-grid-layout/css/styles.css";
-import Widget from "../Components/widget/Widget";
 import { useDynamicGrid } from "../hooks/useDynamicGrid";
-import { DataList } from "../Components/DataList";
+import WidgetsGridLayout from "../Components/widget/WdigetsGridLayout";
 
-const ResponsiveGridLayout = WidthProvider(Responsive);
 
 function Dashboard() {
     // 1. Initialize state to manage the dropdown's visibility
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const {
+        addItem,
         layouts,
         allItems,
-        addItem,
         removeItem,
         updateLayouts,
         breakpoints,
@@ -90,32 +87,12 @@ function Dashboard() {
 
 
 
-            <div style={{}}>
-
-                <ResponsiveGridLayout
-                    className="layout"
-                    layouts={layouts}
-                    breakpoints={breakpoints}
-                    cols={cols}
-                    rowHeight={30}
-                    onLayoutChange={updateLayouts}
-                    isResizable
-                    isDraggable
-                    draggableHandle=".grabbable"
-                >
-                    {allItems.map((item) => (
-                        <div key={item.i}>
-                            <Widget title={`${item.label}`} onRemove={() => removeItem(item.i)}>
-                                {/* Render the correct list depending on the label */}
-
-                                <DataList label={item.label} data={item.data} />
-
-                            </Widget>
-                        </div>
-
-                    ))}
-                </ResponsiveGridLayout>
-            </div>
+            <WidgetsGridLayout layouts={layouts}
+                allItems={allItems}
+                removeItem={removeItem}
+                updateLayouts={updateLayouts}
+                breakpoints={breakpoints}
+                cols={cols} />
 
 
         </div>

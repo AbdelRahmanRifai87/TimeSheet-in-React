@@ -69,8 +69,7 @@ const Sidebar: React.FC<SidebarProps> = ({
 
   return (
     <aside
-      className={` row-span-2 flex flex-col h-screen transition-colors duration-500 ease-in-out ${isDarkMode ? "bg-[#121212]" : "bg-[#2186d4]"
-        }  overflow-hidden`}
+      className={` row-span-2 flex flex-col h-screen transition-colors duration-500 ease-in-out   overflow-hidden`}
     >
       {/* Company Logo Dropdown */}
       <div ref={dropdownRef} className="relative px-4 py-4">

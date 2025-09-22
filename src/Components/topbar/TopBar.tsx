@@ -61,8 +61,7 @@ const TopBar: React.FC<TopBarProps> = ({
   ];
   return (
     <div
-      className={`${topBarStyles.topbar} ${isDarkMode ? "bg-[#121212]" : "bg-[#2186d4]"
-        }`}
+      className={`${topBarStyles.topbar} `}
     >
       {/* Search (moved to left side, replacing company) */}
       {/* Global Search */}
