@@ -53,10 +53,10 @@ const Sidebar: React.FC<SidebarProps> = ({
   const companyLogos: Record<string, string> = {
     PARTISAN: "/partisan logo.png",
     GUARDIAN: "/guardian_global1.png",
-    SAFEWATCH: "/safewatch_logo.png",
+    SAFEWATCH: "/Safewatch2_logo.png",
   };
   const companySigns: Record<string, string> = {
-    PARTISAN: "/image.png",
+    PARTISAN: "/partisan logodarks.png",
     GUARDIAN: "/guardianglobal22.png",
     SAFEWATCH: "/smallsafewatch.png",
   };
@@ -69,9 +69,8 @@ const Sidebar: React.FC<SidebarProps> = ({
 
   return (
     <aside
-      className={` row-span-2 flex flex-col h-screen transition-colors duration-500 ease-in-out ${
-        isDarkMode ? "bg-[#121212]" : "bg-[#2186d4]"
-      }  overflow-hidden`}
+      className={` row-span-2 flex flex-col h-screen transition-colors duration-500 ease-in-out ${isDarkMode ? "bg-[#121212]" : "bg-[#2186d4]"
+        }  overflow-hidden`}
     >
       {/* Company Logo Dropdown */}
       <div ref={dropdownRef} className="relative px-4 py-4">
@@ -87,16 +86,14 @@ const Sidebar: React.FC<SidebarProps> = ({
                   : companyLogos[selectedCompany]
               }
               alt={`${selectedCompany} Logo`}
-              className={`object-contain ${
-                isCollapsed ? "w-10 h-10" : "w-[700px] h-[70px]"
-              }`}
+              className={`object-contain ${isCollapsed ? "w-10 h-10" : "w-[700px] h-[70px]"
+                }`}
             />
           </div>
           {!isCollapsed && (
             <i
-              className={`fa-solid text-white fa-chevron-down text-xs opacity-65 ml-4 transition-transform duration-[1500ms] transform ${
-                isCompanyDropdownOpen ? "rotate-180" : ""
-              }`}
+              className={`fa-solid text-white fa-chevron-down text-xs opacity-65 ml-4 transition-transform duration-[1500ms] transform ${isCompanyDropdownOpen ? "rotate-180" : ""
+                }`}
             />
           )}
         </button>
@@ -104,9 +101,8 @@ const Sidebar: React.FC<SidebarProps> = ({
         {/* Company Dropdown Menu */}
         {isCompanyDropdownOpen && !isCollapsed && (
           <ul
-            className={`absolute z-50 mt-2 left-4 right-4 shadow-md rounded-md text-sm font-medium overflow-hidden ${
-              isDarkMode ? "bg-gray-800 text-white" : "bg-white text-[#060808]"
-            }`}
+            className={`absolute z-50 mt-2 left-4 right-4 shadow-md rounded-md text-sm font-medium overflow-hidden ${isDarkMode ? "bg-gray-800 text-white" : "bg-white text-[#060808]"
+              }`}
           >
             {orderedCompanies.map((company) => (
               <li
@@ -122,17 +118,15 @@ const Sidebar: React.FC<SidebarProps> = ({
                     return reordered;
                   });
                 }}
-                className={`px-4 py-2 cursor-pointer hover:bg-[#dbeeff] ${
-                  isDarkMode ? "hover:bg-gray-700" : ""
-                } ${
-                  selectedCompany === company
+                className={`px-4 py-2 cursor-pointer hover:bg-[#dbeeff] ${isDarkMode ? "hover:bg-gray-700" : ""
+                  } ${selectedCompany === company
                     ? isDarkMode
                       ? "text-[#81caff]"
                       : "text-[#248ee0]"
                     : isDarkMode
-                    ? "text-white/70"
-                    : "text-[#060808]"
-                }`}
+                      ? "text-white/70"
+                      : "text-[#060808]"
+                  }`}
               >
                 {company}
               </li>
@@ -144,11 +138,10 @@ const Sidebar: React.FC<SidebarProps> = ({
       {/* Divider */}
       <div className="px-4 my-4">
         <div
-          className={`h-px w-full ${
-            isDarkMode
-              ? "bg-gradient-to-r from-transparent via-gray-600/25 to-transparent"
-              : "bg-gradient-to-r from-white/5 via-white/30 to-white/5"
-          }`}
+          className={`h-px w-full ${isDarkMode
+            ? "bg-gradient-to-r from-transparent via-gray-600/25 to-transparent"
+            : "bg-gradient-to-r from-white/5 via-white/30 to-white/5"
+            }`}
         />
       </div>
 
@@ -160,31 +153,28 @@ const Sidebar: React.FC<SidebarProps> = ({
               item.label === "Locations" ||
               item.label === "Reports" ||
               item.label === "Documents") && (
-              <div className="px-4 my-4">
-                <div
-                  className={`h-px w-full ${
-                    isDarkMode
+                <div className="px-4 my-4">
+                  <div
+                    className={`h-px w-full ${isDarkMode
                       ? "bg-gradient-to-r from-white via-white-600/25 to-transparent"
                       : "bg-gradient-to-r from-white/5 via-white/30 to-white/5"
-                  }`}
-                />
-              </div>
-            )}
+                      }`}
+                  />
+                </div>
+              )}
 
             <div
-              className={`flex items-center cursor-pointer transition-colors duration-500 ${
-                item.label === "Dashboard"
-                  ? isDarkMode
-                    ? "mx-3 my-1 rounded-lg bg-blue-500 text-white"
-                    : "mx-3 my-1 rounded-lg bg-white text-[#2186d4]"
-                  : isDarkMode
+              className={`flex items-center cursor-pointer transition-colors duration-500 ${item.label === "Dashboard"
+                ? isDarkMode
+                  ? "mx-3 my-1 rounded-lg bg-blue-500 text-white"
+                  : "mx-3 my-1 rounded-lg bg-white text-[#2186d4]"
+                : isDarkMode
                   ? "mx-3 my-1 rounded-lg text-gray-300/65 hover:bg-gray-700"
                   : "mx-3 my-1 rounded-lg text-white/65 hover:bg-white/10"
-              } ${
-                isCollapsed
+                } ${isCollapsed
                   ? "justify-center px-1 py-3"
                   : "px-5 py-3 justify-between"
-              }`}
+                }`}
             >
               <div className="flex items-center overflow-hidden whitespace-nowrap">
                 <i
@@ -211,9 +201,8 @@ const Sidebar: React.FC<SidebarProps> = ({
       {/* Collapse Button */}
       <div className="mt-auto flex flex-col gap-3 py-4 px-4">
         <button
-          className={`flex items-center justify-center rounded-md transition-colors duration-500 ${
-            isDarkMode ? "bg-gray-800 text-blue-400" : "bg-white text-[#2186d4]"
-          } ${isCollapsed ? "w-10 h-10" : "w-full py-3 px-4"}`}
+          className={`flex items-center justify-center rounded-md transition-colors duration-500 ${isDarkMode ? "bg-gray-800 text-blue-400" : "bg-white text-[#2186d4]"
+            } ${isCollapsed ? "w-10 h-10" : "w-full py-3 px-4"}`}
           onClick={() => setIsCollapsed((prev) => !prev)}
         >
           {isCollapsed ? (
@@ -230,9 +219,8 @@ const Sidebar: React.FC<SidebarProps> = ({
       {/* Footer */}
       {!isCollapsed && (
         <div
-          className={`flex flex-col items-center pb-4 text-xs ${
-            isDarkMode ? "text-gray-400/65" : "text-white/65"
-          }`}
+          className={`flex flex-col items-center pb-4 text-xs ${isDarkMode ? "text-gray-400/65" : "text-white/65"
+            }`}
         >
           <div className="flex items-center gap-1 mt-1">
             <span>Powered by</span>

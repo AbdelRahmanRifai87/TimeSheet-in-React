@@ -18,6 +18,8 @@ export function BlockoutList({
   const containerRef = useRef<HTMLDivElement>(null);
   const [showLeftShadow, setShowLeftShadow] = useState(false);
   const [showRightShadow, setShowRightShadow] = useState(false);
+  const lightGradient = "rgba(255, 255, 255, 1)";
+  const darkGradient = "rgba(18, 18, 18, 1)";
 
   const handleScroll = () => {
     if (containerRef.current) {
@@ -61,7 +63,7 @@ export function BlockoutList({
         <>
           {/* Light Theme Left Shadow */}
           <div
-            className="absolute left-0 top-0 bottom-0 w-8 pointer-events-none"
+            className="absolute rounded-lg  left-0 top-0 bottom-0 w-8 pointer-events-none"
             style={{
               background: lightGradientLeft,
               opacity: isDarkMode ? 0 : 1,
@@ -70,7 +72,7 @@ export function BlockoutList({
           />
           {/* Dark Theme Left Shadow */}
           <div
-            className="absolute left-0 top-0 bottom-0 w-8 pointer-events-none"
+            className="absolute rounded-lg  left-0 top-0 bottom-0 w-8 pointer-events-none"
             style={{
               background: darkGradientLeft,
               opacity: isDarkMode ? 1 : 0,

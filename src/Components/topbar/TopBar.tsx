@@ -8,6 +8,7 @@ import {
   FaCog,
   FaBell,
   FaBuilding,
+  FaBullhorn,
   FaSearch,
 } from "react-icons/fa";
 import { topBarStyles } from "./TopBar.styles";
@@ -91,7 +92,7 @@ const TopBar: React.FC<TopBarProps> = ({
           <span className="sr-only">Toggle Dark Mode</span>
         </button>
         <button className={topBarStyles.iconButton} title="Quick Actions">
-          <FaBolt className={topBarStyles.icon} />
+          <FaBullhorn className={topBarStyles.icon} />
           <span className="sr-only">Quick Actions</span>
         </button>
         <button className={topBarStyles.iconButton} title="Help">

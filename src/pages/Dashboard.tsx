@@ -20,10 +20,18 @@ function Dashboard() {
         updateLayouts,
         breakpoints,
         cols,
+        toggleItemHeight
     } = useDynamicGrid(3);
+    const [isDraggingOrResizing, setIsDraggingOrResizing] = useState(false);
+
+
+
+    function editItems() {
+        setIsDraggingOrResizing((isDraggingOrResizing) => !isDraggingOrResizing)
+    }
 
     return (
-        <div className="px-9 pt-3 font-sans">
+        <div className="px-9 pt-3 ">
             <Breadcrumb />
             <div className="flex justify-between items-center px-6 py-7 rounded-xl bg-[#1C75BC26] mb-5  shadow-md">
                 <div className="flex items-start space-x-3">
@@ -31,12 +39,12 @@ function Dashboard() {
                     <div className="flex-shrink-0 text">🔔</div>
                     <div>
                         <h3
-                            className={`text-sm mb-2 font-semibold ${isDarkMode ? "text-white" : "text-gray-800"
+                            className={`text-base mb-2 font-semibold ${isDarkMode ? "text-white" : "text-gray-800"
                                 }`}
                         >
                             Planned Outage Delayed
                         </h3>
-                        <p className="text-xs text-gray-500">
+                        <p className="text-s text-gray-500">
                             All systems will be operating normally tonight
                         </p>
                     </div>
@@ -45,13 +53,13 @@ function Dashboard() {
                 {/* Buttons on the right side */}
                 <div className="flex space-x-2 items-center">
                     <button
-                        className={`px-4 py-2 text-sm font-medium rounded-lg hover:outline-1 hover:outline-[#6C668540] ${isDarkMode ? "text-white" : "text-[#0B0B26]"
+                        className={`px-4 py-2 text-sm font-semibold rounded-lg hover:outline-1 hover:outline-[#6C668540] ${isDarkMode ? "text-white" : "text-[#0B0B26]"
                             }`}
                     >
                         Allow push
                     </button>
                     <button
-                        className={`px-4 py-2 text-sm font-medium rounded-lg hover:outline-1 hover:outline-[#6C668540] ${isDarkMode ? "text-white" : "text-[#0B0B26]"
+                        className={`px-4 py-2 text-sm font-semibold rounded-lg hover:outline-1 hover:outline-[#6C668540] ${isDarkMode ? "text-white" : "text-[#0B0B26]"
                             }`}
                     >
                         Dismiss
@@ -59,19 +67,21 @@ function Dashboard() {
                 </div>
             </div>
 
-            <div className="flex justify-between items-center w-full mb-8">
+            <div className="flex justify-between items-center w-full mb-4">
                 <div className="flex flex-col">
                     <h1
-                        className={`text-3xl font-semibold px-2 py-1 rounded transition-colors duration-700 ${isDarkMode ? " text-white" : "text-gray-800"
+                        className={`text-3xl font-semibold px-0 py-1 rounded transition-colors duration-700 ${isDarkMode ? " text-white" : "text-gray-800"
                             }`}
                     >
                         Dashboard
+
+
                     </h1>
 
-                    <div className="relative inline-block text-left mt-4">
+                    <div className="relative inline-block text-left mt-2">
                         {/* 2. Add an onClick handler to the toggle div */}
                         <div
-                            className="flex items-center space-x-2 text-[#2B82BC] font-semibold cursor-pointer"
+                            className="flex items-center space-x-2 text-[#2B82BC] font-[600] cursor-pointer"
                             onClick={() => setIsMenuOpen(!isMenuOpen)} // Toggle the state
                         >
                             <span>Compliance View</span>
@@ -113,27 +123,23 @@ function Dashboard() {
                         )}
                     </div>
                 </div>
+                <div className="flex gap-5">
 
-                <button
-                    onClick={addItem}
-                    className="bg-[#1C75BC]  hover:bg-blue-700 text-white font-semibold py-4 px-15 rounded-lg shadow-md transition-colors duration-200 flex items-center space-x-2"
-                >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth="2"
-                        stroke="currentColor"
-                        className="w-5 h-5"
-                    >
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M12 4.5v15m7.5-7.5h-15"
-                        />
-                    </svg>
-                    <span>Add widget</span>
-                </button>
+
+                    {isDraggingOrResizing && <button
+                        onClick={addItem}
+                        className="bg-[#1C75BC]  hover:bg-[#155a8e] text-white font-semibold py-4 px-15 rounded-xl shadow-md transition-colors duration-200 flex items-center space-x-2 gap-1">
+
+                        <i className="fa-solid fa-plus"></i> <span className="text-sm font-medium" >Add widget </span>
+                    </button>}
+                    <button
+                        onClick={editItems}
+                        className="bg-[#1C75BC]  hover:bg-[#155a8e] text-white font-semibold py-4 px-15 rounded-xl shadow-md transition-colors duration-200 flex items-center space-x-2 gap-1">
+
+                        <img src="basil_edit-outline.png" alt="" /> <span className="text-sm font-medium" >Edit widget</span>
+                    </button>
+                </div>
+
             </div>
 
 
@@ -145,10 +151,12 @@ function Dashboard() {
                 breakpoints={breakpoints}
                 cols={cols}
                 isDarkMode={isDarkMode}
+                isDraggingOrResizing={isDraggingOrResizing}
+                toggleItemHeight={toggleItemHeight}
 
             />
 
-        </div>
+        </div >
     );
 }
 export default Dashboard;

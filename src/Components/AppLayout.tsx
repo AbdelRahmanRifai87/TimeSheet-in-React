@@ -80,11 +80,10 @@ function AppLayout() {
           userAvatarUrl="https://columbus.in.us/wp-content/uploads/2020/01/person-01.jpg"
         />
         <main
-          className={`col-span-1 row-span-1 rounded-lg min-h-[93.5vh] overflow-auto transition-colors duration-500 ${
-            isDarkMode ? "bg-[#0d0d0df3]" : "bg-[#F1F3F3]"
-          }`}
+          className={`col-span-1 row-span-1 rounded-lg min-h-[calc(93.5vh + 1px)] outline outline-black overflow-auto transition-colors duration-500 ${isDarkMode ? "bg-[#0d0d0df3]" : "bg-[#F1F3F3]"
+            }`}
         >
-          <div className="  mx-auto flex flex-col gap-[3.2rem]">
+          <div className="  mx-auto flex flex-col  ">
             <Outlet context={{ isDarkMode }} />
           </div>
         </main>

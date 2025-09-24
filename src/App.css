@@ -19,10 +19,29 @@
   display: none;
 }
 
+/* "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", */
 body {
   /* background-color: #2186d4; */
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: Helvetica !important;
   /* transition: background-color 600ms; */
+  /* font-weight: 300; */
+}
+
+.layout.show-grid {
+  background-color: #f0f0f0;
+  /* Base background for the empty space */
+  background-image:
+    /* Vertical lines: 1px lightgray, then transparent */
+    linear-gradient(to right, lightgray 1px, transparent 10px),
+    /* Horizontal lines: 1px lightgray, then transparent */
+    linear-gradient(to bottom, lightgray 1px, transparent 10px);
+
+
+  background-size: calc(var(--col-width)) calc(40px);
+
+  background-position: 0 0;
+
+  transition: background-image 0.2s ease-in-out;
 }
 
 .react-grid-placeholder {
