@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { ReportItem } from "./ReportItem";
+import { useDarkModeStore } from "../Theme/useDarkModeStore";
 
 interface Report {
   id: string;
@@ -8,13 +9,9 @@ interface Report {
   desc: string;
 }
 
-export function ReportList({
-  reports,
-  isDarkMode = false,
-}: {
-  reports: Report[];
-  isDarkMode?: boolean;
-}) {
+export function ReportList({ reports }: { reports: Report[] }) {
+  // Replace with your actual dark mode logic from global state or context
+  const isDarkMode = useDarkModeStore((state) => state.isDarkMode);
   const containerRef = useRef<HTMLDivElement>(null);
   const [showLeftShadow, setShowLeftShadow] = useState(false);
   const [showRightShadow, setShowRightShadow] = useState(false);
@@ -32,6 +29,7 @@ export function ReportList({
   useEffect(() => {
     handleScroll();
   }, [reports]);
+
   return (
     <div className="relative w-full h-fit">
       <div
@@ -48,7 +46,7 @@ export function ReportList({
             <ReportItem
               key={report.id}
               report={report}
-              isDarkMode={isDarkMode}
+              // removed isDarkMode prop here as well
             />
           ))}
         </div>

@@ -1,3 +1,5 @@
+import { useDarkModeStore } from "../Theme/useDarkModeStore"; // Adjust path if needed
+
 interface Blockout {
   id: string;
   date: string;
@@ -5,13 +7,10 @@ interface Blockout {
   subtext: string;
 }
 
-export default function BlockoutItem({
-  blockout,
-  isDarkMode = false,
-}: {
-  blockout: Blockout;
-  isDarkMode?: boolean;
-}) {
+export default function BlockoutItem({ blockout }: { blockout: Blockout }) {
+  // Get isDarkMode from Zustand store
+  const isDarkMode = useDarkModeStore((state) => state.isDarkMode);
+
   return (
     <div
       className={`flex flex-col justify-between border rounded-2xl min-w-[400px] shadow-lg w-full max-w-sm px-6 py-4 space-y-2 ${
@@ -61,8 +60,3 @@ export default function BlockoutItem({
     </div>
   );
 }
-
-// Make sure to install and use Tailwind CSS for the class names to work.
-// npm install -D tailwindcss
-// npx tailwindcss init
-// Then configure your tailwind.config.js and include the paths to your files.

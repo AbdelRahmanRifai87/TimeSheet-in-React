@@ -1,6 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
+// ✅ NEW: Import Zustand store
+import { useDarkModeStore } from "../Theme/useDarkModeStore"; // adjust path if needed
+
 const menuItems = [
   { label: "Dashboard", icon: "fas fa-home" },
   { label: "Yours Details", icon: "fas fa-id-card" },
@@ -20,14 +23,13 @@ const menuItems = [
 interface SidebarProps {
   isCollapsed: boolean;
   setIsCollapsed: React.Dispatch<React.SetStateAction<boolean>>;
-  isDarkMode: boolean;
+  // ✅ Removed isDarkMode from props
 }
 
-const Sidebar: React.FC<SidebarProps> = ({
-  isCollapsed,
-  setIsCollapsed,
-  isDarkMode,
-}) => {
+const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
+  // ✅ Use Zustand for dark mode
+  const isDarkMode = useDarkModeStore((state) => state.isDarkMode);
+
   const [isCompanyDropdownOpen, setIsCompanyDropdownOpen] = useState(false);
   const [selectedCompany, setSelectedCompany] = useState("PARTISAN");
 
@@ -37,6 +39,7 @@ const Sidebar: React.FC<SidebarProps> = ({
     "SAFEWATCH",
   ]);
   const dropdownRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -50,15 +53,24 @@ const Sidebar: React.FC<SidebarProps> = ({
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
   const companyLogos: Record<string, string> = {
     PARTISAN: "/partisan logo.png",
     GUARDIAN: "/guardian_global1.png",
     SAFEWATCH: "/safewatch_logo.png",
   };
-  const companySigns: Record<string, string> = {
-    PARTISAN: "/image.png",
-    GUARDIAN: "/guardianglobal22.png",
-    SAFEWATCH: "/smallsafewatch.png",
+
+  const getCompanySign = (company: string, isDarkMode: boolean): string => {
+    switch (company) {
+      case "PARTISAN":
+        return "/PPS-LOGO-GOLDEN-1.ai-1 1.png";
+      case "GUARDIAN":
+        return isDarkMode ? "/guardiandark.png" : "/guardianlogolight.png";
+      case "SAFEWATCH":
+        return "/smallsafewatch.png";
+      default:
+        return "";
+    }
   };
 
   useEffect(() => {
@@ -69,9 +81,9 @@ const Sidebar: React.FC<SidebarProps> = ({
 
   return (
     <aside
-      className={` row-span-2 flex flex-col h-screen transition-colors duration-500 ease-in-out ${
+      className={`row-span-2 flex flex-col h-screen transition-colors duration-500 ease-in-out ${
         isDarkMode ? "bg-[#121212]" : "bg-[#2186d4]"
-      }  overflow-hidden`}
+      } overflow-hidden`}
     >
       {/* Company Logo Dropdown */}
       <div ref={dropdownRef} className="relative px-4 py-4">
@@ -83,12 +95,14 @@ const Sidebar: React.FC<SidebarProps> = ({
             <img
               src={
                 isCollapsed
-                  ? companySigns[selectedCompany]
+                  ? getCompanySign(selectedCompany, isDarkMode)
                   : companyLogos[selectedCompany]
               }
               alt={`${selectedCompany} Logo`}
               className={`object-contain ${
-                isCollapsed ? "w-10 h-10" : "w-[700px] h-[70px]"
+                isCollapsed
+                  ? "w-10 h-10 transition-colors duration-1000 ease-in-out"
+                  : "w-[700px] h-[70px]"
               }`}
             />
           </div>
@@ -101,7 +115,7 @@ const Sidebar: React.FC<SidebarProps> = ({
           )}
         </button>
 
-        {/* Company Dropdown Menu */}
+        {/* Dropdown */}
         {isCompanyDropdownOpen && !isCollapsed && (
           <ul
             className={`absolute z-50 mt-2 left-4 right-4 shadow-md rounded-md text-sm font-medium overflow-hidden ${
@@ -153,7 +167,7 @@ const Sidebar: React.FC<SidebarProps> = ({
       </div>
 
       {/* Menu Items */}
-      <nav className=" menu-items-nav flex-1 overflow-y-auto overflow-x-hidden no-scrollbar">
+      <nav className="menu-items-nav flex-1 overflow-y-auto overflow-x-hidden no-scrollbar">
         {menuItems.map((item) => (
           <React.Fragment key={item.label}>
             {(item.label === "Yours Details" ||

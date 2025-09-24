@@ -1,3 +1,5 @@
+// TopBar.tsx
+
 import React, { useState, useRef, useEffect } from "react";
 import {
   FaMoon,
@@ -9,15 +11,17 @@ import {
   FaBell,
   FaBuilding,
   FaSearch,
+  FaBullhorn,
 } from "react-icons/fa";
 import { topBarStyles } from "./TopBar.styles";
 
+// ✅ NEW: Import Zustand store
+import { useDarkModeStore } from "../../Theme/useDarkModeStore";
+// ✅ Removed isDarkMode and setIsDarkMode from props
 interface TopBarProps {
   userName: string;
   companyName: string;
   userAvatarUrl?: string;
-  isDarkMode: boolean;
-  setIsDarkMode: (value: boolean) => void;
 }
 
 const companies = [
@@ -30,12 +34,14 @@ const TopBar: React.FC<TopBarProps> = ({
   userName,
   companyName,
   userAvatarUrl,
-  isDarkMode,
-  setIsDarkMode,
 }) => {
   const [selectedCompany, setSelectedCompany] = useState(companyName);
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // ✅ NEW: Use Zustand to get dark mode state and function
+  const isDarkMode = useDarkModeStore((state) => state.isDarkMode);
+  const toggleDarkMode = useDarkModeStore((state) => state.toggleDarkMode);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -49,6 +55,8 @@ const TopBar: React.FC<TopBarProps> = ({
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  // ✅ STILL VALID: Side effect to update background color
   useEffect(() => {
     document.body.style.backgroundColor = isDarkMode ? "#121212" : "#2186d4";
   }, [isDarkMode]);
@@ -57,6 +65,7 @@ const TopBar: React.FC<TopBarProps> = ({
     selectedCompany,
     ...companies.filter((c) => c !== selectedCompany),
   ];
+
   return (
     <div
       className={`${topBarStyles.topbar} ${
@@ -64,13 +73,16 @@ const TopBar: React.FC<TopBarProps> = ({
       }`}
     >
       {/* Search (moved to left side, replacing company) */}
-      {/* Global Search */}
       <div
         className={`${topBarStyles.searchContainer} ${
           isDarkMode ? "bg-gray-700" : ""
         }`}
       >
-        <FaSearch className={topBarStyles.searchIcon} />
+        <img
+          src="/Frame.png"
+          alt="Quick Actions"
+          className="w-6 h-6 object-contain"
+        />
         <input
           type="text"
           placeholder="Global search"
@@ -80,38 +92,69 @@ const TopBar: React.FC<TopBarProps> = ({
 
       {/* Right Icons */}
       <div className={topBarStyles.topbarRight}>
+        {/* ✅ UPDATED: Use toggleDarkMode from Zustand */}
         <button
-          onClick={() => setIsDarkMode(!isDarkMode)}
+          onClick={toggleDarkMode}
           className={topBarStyles.iconButton}
           title="Toggle Dark Mode"
         >
           {isDarkMode ? (
             <FaSun className={topBarStyles.icon} />
           ) : (
-            <FaMoon className={topBarStyles.icon} />
+            <img
+              src="/Mode.png"
+              alt="Quick Actions"
+              className="w-8 h-8 object-contain"
+            />
           )}
           <span className="sr-only">Toggle Dark Mode</span>
         </button>
+
         <button className={topBarStyles.iconButton} title="Quick Actions">
-          <FaBolt className={topBarStyles.icon} />
+          <img
+            src="/falbullhorn.png"
+            alt="Quick Actions"
+            className="w-6 h-6 object-contain"
+          />
           <span className="sr-only">Quick Actions</span>
         </button>
+
         <button className={topBarStyles.iconButton} title="Help">
-          <FaQuestionCircle className={topBarStyles.icon} />
+          <img
+            src="/lets-icons_question-light (1).png"
+            alt="Quick Actions"
+            className="w-7 h-7 object-contain"
+          />
           <span className="sr-only">Help</span>
         </button>
+
         <button className={topBarStyles.iconButton} title="Bookmarks">
-          <FaBookmark className={topBarStyles.icon} />
+          <img
+            src="/stash_save-ribbon.png"
+            alt="Quick Actions"
+            className="w-7 h-7 object-contain"
+          />
           <span className="sr-only">Bookmarks</span>
         </button>
+
         <button className={topBarStyles.iconButton} title="Settings">
-          <FaCog className={topBarStyles.icon} />
+          <img
+            src="/weui_setting-outlined.png"
+            alt="Quick Actions"
+            className="w-6 h-6 object-contain"
+          />
           <span className="sr-only">Settings</span>
         </button>
+
         <button className={topBarStyles.iconButton} title="Notifications">
-          <FaBell className={topBarStyles.icon} />
+          <img
+            src="/hugeicons_notification-01.png"
+            alt="Quick Actions"
+            className="w-6 h-6 object-contain"
+          />
           <span className="sr-only">Notifications</span>
         </button>
+
         {userAvatarUrl && (
           <img
             src={userAvatarUrl}

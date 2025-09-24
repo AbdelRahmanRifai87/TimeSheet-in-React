@@ -1,3 +1,4 @@
+import { useDarkModeStore } from "../Theme/useDarkModeStore";
 interface Report {
   id: string;
   title: string;
@@ -5,13 +6,11 @@ interface Report {
   desc: string;
 }
 
-export function ReportItem({
-  report,
-  isDarkMode = false,
-}: {
-  report: Report;
-  isDarkMode?: boolean;
-}) {
+export function ReportItem({ report }: { report: Report }) {
+  // Example: you can replace this with your Zustand store or context hook
+  // const isDarkMode = useStore((state) => state.isDarkMode);
+  // Replace with your actual dark mode logic
+  const isDarkMode = useDarkModeStore((state) => state.isDarkMode);
   return (
     <div
       className={`flex flex-col justify-between border rounded-2xl shadow-lg min-w-[400px] w-full max-w-sm px-6 py-4 space-y-4 ${

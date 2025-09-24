@@ -4,15 +4,16 @@ import "react-grid-layout/css/styles.css";
 import Widget from "../Components/widget/Widget";
 import { useDynamicGrid } from "../hooks/useDynamicGrid";
 import { DataList } from "../Components/DataList";
-import { useOutletContext } from "react-router-dom";
-type ContextType = { isDarkMode: boolean };
-
+import { useDarkModeStore } from "../Theme/useDarkModeStore";
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
 function Dashboard() {
-  // 1. Initialize state to manage the dropdown's visibility
-  const { isDarkMode } = useOutletContext<ContextType>();
+  // TODO: Replace this with your actual global dark mode state (e.g., Zustand, Context)
+  const isDarkMode = useDarkModeStore((state) => state.isDarkMode);
+
+  // Dropdown menu visibility state
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   const {
     layouts,
     allItems,
@@ -30,13 +31,13 @@ function Dashboard() {
         <span className="font-bold mr-2"> Dashboard</span> / Your Details -
         General
       </p>
+
       <div
-        className={`flex justify-between items-center px-6 py-7 rounded-xl mb-5 shadow-md transition-colors  ${
+        className={`flex justify-between items-center px-6 py-7 rounded-xl mb-5 shadow-md transition-colors ${
           isDarkMode ? "bg-[#1e1e1e]" : "bg-[#1C75BC26]"
         }`}
       >
         <div className="flex items-start space-x-3">
-          {/* Bell icon */}
           <div className="flex-shrink-0 text">🔔</div>
           <div>
             <h3
@@ -52,7 +53,6 @@ function Dashboard() {
           </div>
         </div>
 
-        {/* Buttons on the right side */}
         <div className="flex space-x-2 items-center">
           <button
             className={`px-4 py-2 text-sm font-medium rounded-lg hover:outline-1 hover:outline-[#6C668540] ${
@@ -75,17 +75,16 @@ function Dashboard() {
         <div className="flex flex-col">
           <h1
             className={`text-3xl font-semibold px-2 py-1 rounded transition-colors duration-700 ${
-              isDarkMode ? " text-white" : "text-gray-800"
+              isDarkMode ? "text-white" : "text-gray-800"
             }`}
           >
             Dashboard
           </h1>
 
           <div className="relative inline-block text-left mt-4">
-            {/* 2. Add an onClick handler to the toggle div */}
             <div
               className="flex items-center space-x-2 text-[#2B82BC] font-semibold cursor-pointer"
-              onClick={() => setIsMenuOpen(!isMenuOpen)} // Toggle the state
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               <span>Compliance View</span>
               <svg
@@ -102,23 +101,22 @@ function Dashboard() {
               </svg>
             </div>
 
-            {/* 3. Conditionally render the dropdown menu */}
             {isMenuOpen && (
               <div className="absolute z-10 mt-2 w-48 bg-white rounded-lg shadow-lg compliance-view">
                 <ul className="list-none m-0 p-0">
-                  <li className="px-4 py-2 text-[#1C75BC] font-semibold hover:bg-gray-100  cursor-pointer">
+                  <li className="px-4 py-2 text-[#1C75BC] font-semibold hover:bg-gray-100 cursor-pointer">
                     Compliance View
                   </li>
-                  <li className="px-4 py-2 text-gray-700 hover:bg-gray-100  cursor-pointer">
+                  <li className="px-4 py-2 text-gray-700 hover:bg-gray-100 cursor-pointer">
                     Accounts View
                   </li>
-                  <li className="px-4 py-2 text-gray-700 hover:bg-gray-100  cursor-pointer">
+                  <li className="px-4 py-2 text-gray-700 hover:bg-gray-100 cursor-pointer">
                     Operations View
                   </li>
-                  <li className="px-4 py-2 text-gray-700 hover:bg-gray-100  cursor-pointer">
+                  <li className="px-4 py-2 text-gray-700 hover:bg-gray-100 cursor-pointer">
                     NCC View
                   </li>
-                  <li className="px-4 py-2 text-gray-700 hover:bg-gray-100  cursor-pointer">
+                  <li className="px-4 py-2 text-gray-700 hover:bg-gray-100 cursor-pointer">
                     Custom View
                   </li>
                 </ul>
@@ -129,7 +127,7 @@ function Dashboard() {
 
         <button
           onClick={addItem}
-          className="bg-[#1C75BC]  hover:bg-blue-700 text-white font-semibold py-4 px-15 rounded-lg shadow-md transition-colors duration-200 flex items-center space-x-2"
+          className="bg-[#1C75BC] hover:bg-blue-700 text-white font-semibold py-4 px-15 rounded-lg shadow-md transition-colors duration-200 flex items-center space-x-2"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -149,7 +147,7 @@ function Dashboard() {
         </button>
       </div>
 
-      <div style={{}}>
+      <div>
         <ResponsiveGridLayout
           className="layout"
           layouts={layouts}
@@ -166,13 +164,8 @@ function Dashboard() {
               <Widget
                 title={`${item.label}`}
                 onRemove={() => removeItem(item.i)}
-                isDarkMode={isDarkMode}
               >
-                <DataList
-                  label={item.label}
-                  data={item.data}
-                  isDarkMode={isDarkMode}
-                />
+                <DataList label={item.label} data={item.data} />
               </Widget>
             </div>
           ))}
@@ -181,4 +174,5 @@ function Dashboard() {
     </div>
   );
 }
+
 export default Dashboard;

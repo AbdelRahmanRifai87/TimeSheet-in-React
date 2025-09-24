@@ -92,3 +92,8 @@ body {
 .menu-items-nav::-webkit-scrollbar-button {
   display: none;
 }
+/* .img {
+  transition-duration: 0.6s;
+  transition-property: background-color, color;
+  transition-timing-function: ease-in-out;
+} */

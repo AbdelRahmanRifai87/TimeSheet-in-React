@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import BlockoutItem from "./Blockout";
+import { useDarkModeStore } from "../Theme/useDarkModeStore"; // Adjust path as needed
 
 interface Blockout {
   id: string;
@@ -8,13 +9,9 @@ interface Blockout {
   subtext: string;
 }
 
-export function BlockoutList({
-  blockouts,
-  isDarkMode = false,
-}: {
-  blockouts: Blockout[];
-  isDarkMode?: boolean;
-}) {
+export function BlockoutList({ blockouts }: { blockouts: Blockout[] }) {
+  const isDarkMode = useDarkModeStore((state) => state.isDarkMode);
+
   const containerRef = useRef<HTMLDivElement>(null);
   const [showLeftShadow, setShowLeftShadow] = useState(false);
   const [showRightShadow, setShowRightShadow] = useState(false);
@@ -30,9 +27,11 @@ export function BlockoutList({
   useEffect(() => {
     handleScroll();
   }, [blockouts]);
+
   const lightGradient =
     "linear-gradient(to right, rgba(255,255,255,1), rgba(255,255,255,0))";
   const darkGradient = "linear-gradient(to right, #121212, rgba(18,18,18,0))";
+
   return (
     <div className="relative w-full h-fit">
       <div
@@ -46,11 +45,7 @@ export function BlockoutList({
       >
         <div className="flex flex-row space-x-3 w-max h-full p-2">
           {blockouts.map((blockout) => (
-            <BlockoutItem
-              key={blockout.id}
-              blockout={blockout}
-              isDarkMode={isDarkMode}
-            />
+            <BlockoutItem key={blockout.id} blockout={blockout} />
           ))}
         </div>
       </div>
