@@ -21,21 +21,15 @@ interface TopBarProps {
   setIsDarkMode: (value: boolean) => void;
 }
 
-const companies = [
-  "Partisan Protective Services",
-  "Guardian Global",
-  "SafeWatch Security",
-];
-
 const TopBar: React.FC<TopBarProps> = ({
   userName,
-  companyName,
+  // companyName,
   userAvatarUrl,
   isDarkMode,
   setIsDarkMode,
 }) => {
-  const [selectedCompany, setSelectedCompany] = useState(companyName);
-  const [isOpen, setIsOpen] = useState(false);
+  // const [selectedCompany] = useState(companyName);
+  const [_, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -54,10 +48,6 @@ const TopBar: React.FC<TopBarProps> = ({
     document.body.style.backgroundColor = isDarkMode ? "#121212" : "#2186d4";
   }, [isDarkMode]);
 
-  const orderedCompanies = [
-    selectedCompany,
-    ...companies.filter((c) => c !== selectedCompany),
-  ];
   return (
     <div
       className={`${topBarStyles.topbar} ${isDarkMode ? "bg-[#121212]" : "bg-[#2186d4] "

@@ -8,7 +8,7 @@ interface SidebarContainerProps {
 }
 
 const SidebarContainer: React.FC<SidebarContainerProps> = ({ isDarkMode }) => {
-  const { menuPages, setMenuPages } = useSidebarContext();
+  const { setMenuPages } = useSidebarContext();
 
   // Fetch menu pages from the ApiService
   useEffect(() => {

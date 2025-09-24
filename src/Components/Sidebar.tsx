@@ -209,7 +209,7 @@ const Sidebar: React.FC<SidebarProps> = ({
             <i className="fas fa-angle-right" />
           ) : (
             <>
-              <span className="text-sm font-medium mr-2">Collapse Menu</span>
+              <span className="text-sm font-medium mr-2 ">trst Menu</span>
               <i className="fas fa-angle-left" />
             </>
           )}
@@ -222,14 +222,14 @@ const Sidebar: React.FC<SidebarProps> = ({
           className={`flex flex-col items-center pb-4 text-xs ${isDarkMode ? "text-gray-400/65" : "text-white/65"
             }`}
         >
-          <div className="flex items-center gap-1 mt-1">
+          {/* <div className="flex items-center gap-1 mt-1">
             <span>Powered by</span>
             <img
               src="/sec250.png"
               alt="Securecy Logo"
               className="h-5 object-contain"
             />
-          </div>
+          </div> */}
         </div>
       )}
     </aside>
