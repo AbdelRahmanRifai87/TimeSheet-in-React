@@ -7,7 +7,7 @@ import {
   FaBookmark,
   FaCog,
   FaBell,
-  FaBuilding,
+  // FaBuilding,
   FaSearch,
 } from "react-icons/fa";
 import { topBarStyles } from "./TopBar.styles";
@@ -20,21 +20,15 @@ interface TopBarProps {
   setIsDarkMode: (value: boolean) => void;
 }
 
-const companies = [
-  "Partisan Protective Services",
-  "Guardian Global",
-  "SafeWatch Security",
-];
-
 const TopBar: React.FC<TopBarProps> = ({
   userName,
-  companyName,
+  // companyName,
   userAvatarUrl,
   isDarkMode,
   setIsDarkMode,
 }) => {
-  const [selectedCompany, setSelectedCompany] = useState(companyName);
-  const [isOpen, setIsOpen] = useState(false);
+  // const [selectedCompany] = useState(companyName);
+  const [_, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -53,20 +47,18 @@ const TopBar: React.FC<TopBarProps> = ({
     document.body.style.backgroundColor = isDarkMode ? "#121212" : "#2186d4";
   }, [isDarkMode]);
 
-  const orderedCompanies = [
-    selectedCompany,
-    ...companies.filter((c) => c !== selectedCompany),
-  ];
   return (
     <div
-      className={`${topBarStyles.topbar} ${isDarkMode ? "bg-[#121212]" : "bg-[#2186d4] "
-        }`}
+      className={`${topBarStyles.topbar} ${
+        isDarkMode ? "bg-[#121212]" : "bg-[#2186d4] "
+      }`}
     >
       {/* Search (moved to left side, replacing company) */}
       {/* Global Search */}
       <div
-        className={`${topBarStyles.searchContainer} ${isDarkMode ? "bg-gray-700" : ""
-          }`}
+        className={`${topBarStyles.searchContainer} ${
+          isDarkMode ? "bg-gray-700" : ""
+        }`}
       >
         <FaSearch className={topBarStyles.searchIcon} />
         <input

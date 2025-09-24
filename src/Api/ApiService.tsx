@@ -210,7 +210,9 @@ export const ApiService = {
       return new Promise((resolve) => {
         //admin see all pages, other sees limited
         const pages =
-          roleId === 1 ? mockPages : mockPages.filter((p, index) => index < 10); //first 10 pages
+          roleId === 1
+            ? mockPages
+            : mockPages.filter((_p, index) => index < 10); //first 10 pages
         setTimeout(() => resolve(pages), 300); // Simulate network delay
       });
     }

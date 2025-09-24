@@ -36,20 +36,31 @@ const SidebarMenuItem: React.FC<SidebarMenuItemProps> = ({
   return (
     <Link
       to={page.path}
-      className={`flex items-center px-4 py-3 mb-1 rounded transition-colors
-    ${isChild ? "pl-10" : ""}
+      className={`flex items-center py-3 mb-1 rounded transition-colors
+    ${
+      isChild
+        ? isCollapsed
+          ? "px-2 justify-center" // Collapsed subitem: centered icon only
+          : "pl-10 px-4" // Expanded subitem: normal indentation
+        : "px-4"
+    } // Parent item styling
     ${
       isActive
         ? isChild
-          ? "text-white font-bold hover:bg-white/10" // Active subitem: bold white text, no bg
-          : hasChildren
-          ? "text-white font-medium mx-2 rounded-md px-2" // Active parent: white bg
-          : "bg-white text-[#2186d4] mt-1 mx-2 rounded-md px-2" // Active item with no children: white bg
-        : "text-white/70 hover:bg-white/10  "
+          ? "text-white font-bold"
+          : "bg-white text-[#2186d4] font-medium mx-2 rounded-md px-2"
+        : "text-white hover:bg-white/10"
     }`}
       onClick={hasChildren ? handleClick : undefined}
     >
-      <i className={`${page.icon} w-6`}></i>
+      <i
+        className={`${page.icon} w-6 ${
+          isCollapsed && isChild
+            ? `text-center ${isActive ? "font-black text-white" : ""}`
+            : ""
+        }`}
+      ></i>
+      {/* Only show text when sidebar is not collapsed */}
       {!isCollapsed && <span className="ml-2">{page.name}</span>}
       {!isCollapsed && !isChild && hasChildren && (
         <i

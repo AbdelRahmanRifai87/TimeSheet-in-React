@@ -30,7 +30,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isDarkMode }) => {
   };
 
   const companySigns: Record<string, string> = {
-    PARTISAN: "/image.png",
+    PARTISAN: isDarkMode ? "/image-dark.png" : "/image.png", // Dynamic based on dark mode
     GUARDIAN: "/guardianglobal22.png",
     SAFEWATCH: "/smallsafewatch.png",
   };
@@ -135,7 +135,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isDarkMode }) => {
       <SidebarMenu pages={menuPages || []} isCollapsed={isCollapsed} />
       <div className="mt-auto flex flex-col gap-3">
         <button
-          className={`flex items-center justify-center my-8 bg-white text-[#2186d4] rounded-md mx-auto ${
+          className={`flex items-center justify-center my-8 bg-[#EDEDED80] text-[#F5F5DC] rounded-md mx-auto ${
             isCollapsed ? "w-10 h-10" : "w-[80%] py-3 px-4"
           }`}
           onClick={() => setIsCollapsed((prev) => !prev)}

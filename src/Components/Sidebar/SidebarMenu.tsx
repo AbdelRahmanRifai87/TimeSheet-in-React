@@ -29,7 +29,7 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ pages, isCollapsed }) => {
     }
   }, [location.pathname, pages]);
 
-  // Toggle parent expansion
+  // Toggle parent expansion - works for both collapsed and expanded sidebar
   const toggleParentExpansion = (parentId: number) => {
     setExpandedParents((prev) =>
       prev.includes(parentId)
@@ -61,8 +61,17 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ pages, isCollapsed }) => {
       childrenMap[page.parentId!].push(page);
     });
 
+  // Check if a parent has an active child
+  const hasActiveChild = (parentId: number) => {
+    return childrenMap[parentId]?.some(
+      (child) =>
+        location.pathname === child.path ||
+        (child.path !== "/" && location.pathname.startsWith(child.path))
+    );
+  };
+
   return (
-    <nav className="sideBar-menu flex-1 overflow-y-auto scrollbar-hide scroll-smooth ease-in-out relativeease-in-out relative">
+    <nav className="sideBar-menu flex-1 overflow-y-auto scrollbar-hide scroll-smooth">
       {parentItems.length > 0 ? (
         parentItems.map((page) => (
           <React.Fragment key={page.id}>
@@ -74,39 +83,57 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ pages, isCollapsed }) => {
               isExpanded={expandedParents.includes(page.id)}
             />
 
-            {/* Wrapper div with transition for children items */}
-            <div
-              className={`relative overflow-hidden transition-all duration-300 ease-in-out ${
-                !isCollapsed &&
-                expandedParents.includes(page.id) &&
-                childrenMap[page.id]
-                  ? "max-h-40 opacity-100"
-                  : "max-h-0 opacity-0"
-              }`}
-            >
-              {childrenMap[page.id] && (
-                <>
-                  {/* Vertical divider line beside subitems */}
-                  <div
-                    className="absolute left-8 top-0 bottom-0 w-px bg-white/30"
-                    style={{ zIndex: 0 }}
-                  />
+            {/* Show subitems inline when:
+                1. Parent is expanded (for both collapsed and expanded sidebar), OR
+                2. Sidebar is collapsed and parent has an active child */}
+            {childrenMap[page.id] &&
+              (expandedParents.includes(page.id) ||
+                (isCollapsed && hasActiveChild(page.id))) && (
+                <div
+                  className={`transition-all duration-300 ease-in-out overflow-hidden ${
+                    isCollapsed ? "bg-[#1659a3]/30 mx-1 rounded-md" : "relative"
+                  }`}
+                  style={{
+                    maxHeight:
+                      expandedParents.includes(page.id) ||
+                      (isCollapsed && hasActiveChild(page.id))
+                        ? `${
+                            childrenMap[page.id]?.length *
+                              (isCollapsed ? 44 : 48) +
+                            8
+                          }px`
+                        : "0px",
+                    opacity:
+                      expandedParents.includes(page.id) ||
+                      (isCollapsed && hasActiveChild(page.id))
+                        ? 1
+                        : 0,
+                  }}
+                >
+                  {/* Vertical line only for expanded sidebar */}
+                  {!isCollapsed && (
+                    <div
+                      className="absolute left-8 top-0 bottom-0 w-px bg-white/30"
+                      style={{ zIndex: 0 }}
+                    />
+                  )}
+
                   {childrenMap[page.id].map((childPage) => {
                     const isActiveChild =
                       location.pathname === childPage.path ||
                       (childPage.path !== "/" &&
                         location.pathname.startsWith(childPage.path));
+
                     return (
                       <div key={childPage.id} className="relative">
-                        {/* White highlight for active subitem's vertical line portion */}
-                        {isActiveChild && (
+                        {/* White highlight for active subitem (only when sidebar is expanded) */}
+                        {!isCollapsed && isActiveChild && (
                           <div
                             className="absolute left-8 w-px bg-white"
-                            style={{ top: "0", height: "50px", zIndex: 1 }}
+                            style={{ top: "0", height: "48px", zIndex: 1 }}
                           />
                         )}
                         <SidebarMenuItem
-                          key={childPage.id}
                           page={childPage}
                           isCollapsed={isCollapsed}
                           isChild={true}
@@ -114,9 +141,8 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ pages, isCollapsed }) => {
                       </div>
                     );
                   })}
-                </>
+                </div>
               )}
-            </div>
 
             {/* Add divider after specific items */}
             {dividerAfterItems.includes(page.name) && <SidebarDivider />}

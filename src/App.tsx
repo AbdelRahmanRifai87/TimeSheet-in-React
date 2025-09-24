@@ -5,7 +5,7 @@ import Dashboard from "./pages/Dashboard";
 import AppLayout from "./Components/AppLayout";
 import { SidebarProvider } from "./Context/SidebarContext";
 import Details from "./pages/Details";
-import General from "./pages/general";
+import General from "./pages/General";
 import SwitchToDetails from "./pages/SwitchToDetails";
 import TaskManager from "./pages/TaskManager";
 import Users from "./pages/Users";
