@@ -6,8 +6,8 @@ interface WidgetProps {
   title: string;
   onRemove: () => void;
   isDarkMode?: boolean;
-  isDraggingOrResizing: boolean
-  currentHeight: number,
+  isDraggingOrResizing: boolean;
+  currentHeight: number;
   onToggleHeight: (newH: number) => void;
 }
 function Widget({
@@ -18,9 +18,7 @@ function Widget({
   isDraggingOrResizing,
   currentHeight,
   onToggleHeight,
-
 }: WidgetProps) {
-
   // The collapsed height is a fixed value.
   const COLLAPSED_HEIGHT = 2;
 
@@ -34,7 +32,6 @@ function Widget({
       originalHeightRef.current = currentHeight;
     }
   }, [currentHeight]);
-
 
   const handleToggle = () => {
     if (isExpanded) {
@@ -50,15 +47,22 @@ function Widget({
 
   return (
     <div
-      className={`rounded-[8px] shadow-md border h-full w-full flex flex-col items-center  ${isDarkMode
-        ? "bg-[#1212128f] border-gray-700"
-        : "bg-white border-gray-200"
-        }`}
+      className={`rounded-[8px] shadow-md border h-full w-full flex flex-col items-center  ${
+        isDarkMode
+          ? "bg-[#1212128f] border-gray-700"
+          : "bg-white border-gray-200"
+      }`}
     >
-      <WidgetHeader isDraggingOrResizing={isDraggingOrResizing} title={title} onRemove={onRemove} isDarkMode={isDarkMode} onToggle={handleToggle}
-        isExpanded={isExpanded} />
+      <WidgetHeader
+        isDraggingOrResizing={isDraggingOrResizing}
+        title={title}
+        onRemove={onRemove}
+        isDarkMode={isDarkMode}
+        onToggle={handleToggle}
+        isExpanded={isExpanded}
+      />
 
-      <div className={`relative w-full h-full ${isExpanded ? "" : "hidden"} `} >
+      <div className={`relative w-full h-full ${isExpanded ? "" : "hidden"} `}>
         <div
           className={`widget-content flex justify-center absolute inset-0 overflow-auto pt-2 px-3 `}
         >

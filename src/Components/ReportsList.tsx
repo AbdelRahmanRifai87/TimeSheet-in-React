@@ -18,8 +18,6 @@ export function ReportList({
   const containerRef = useRef<HTMLDivElement>(null);
   const [showLeftShadow, setShowLeftShadow] = useState(false);
   const [showRightShadow, setShowRightShadow] = useState(false);
-  const lightGradient = "rgba(255, 255, 255, 1)";
-  const darkGradient = "rgba(18, 18, 18, 1)";
 
   const handleScroll = () => {
     if (containerRef.current) {
@@ -33,10 +31,14 @@ export function ReportList({
     handleScroll();
   }, [reports]);
 
-  const lightGradientLeft = "linear-gradient(to right, rgba(255,255,255,1), rgba(255,255,255,0))";
-  const darkGradientLeft = "linear-gradient(to right, #121212, rgba(18,18,18,0))";
-  const lightGradientRight = "linear-gradient(to left, rgba(255,255,255,1), rgba(255,255,255,0))";
-  const darkGradientRight = "linear-gradient(to left, #121212, rgba(18,18,18,0))";
+  const lightGradientLeft =
+    "linear-gradient(to right, rgba(255,255,255,1), rgba(255,255,255,0))";
+  const darkGradientLeft =
+    "linear-gradient(to right, #121212, rgba(18,18,18,0))";
+  const lightGradientRight =
+    "linear-gradient(to left, rgba(255,255,255,1), rgba(255,255,255,0))";
+  const darkGradientRight =
+    "linear-gradient(to left, #121212, rgba(18,18,18,0))";
 
   return (
     <div className="relative w-full h-fit">
