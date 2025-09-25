@@ -47,13 +47,15 @@
 // export default AppLayout;
 
 // AppLayout.tsx
+import { useDarkModeStore } from "../Theme/useDarkModeStore";
 import { Outlet } from "react-router-dom";
-import Sidebar from "./Sidebar";
-import TopBar from "./topbar/TopBar";
 import { useEffect, useState } from "react";
-
+import SidebarContainer from "./Sidebar/SidebarContainer";
+import TopBar from "./topbar/TopBar";
+import { useSidebarContext } from "../Context/SidebarContext";
+import Sidebar from "./Sidebar";
 // ✅ Import Zustand store for dark mode
-import { useDarkModeStore } from "../Theme/useDarkModeStore"; // adjust path if needed
+// adjust path if needed
 
 function AppLayout() {
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -78,6 +80,7 @@ function AppLayout() {
       <Sidebar
         isCollapsed={isCollapsed}
         setIsCollapsed={setIsCollapsed}
+
         // keep this only if Sidebar uses it
       />
 

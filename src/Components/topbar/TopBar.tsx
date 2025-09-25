@@ -4,14 +4,13 @@ import React, { useState, useRef, useEffect } from "react";
 import {
   FaMoon,
   FaSun,
-  FaBolt,
   FaQuestionCircle,
   FaBookmark,
   FaCog,
   FaBell,
-  FaBuilding,
-  FaSearch,
   FaBullhorn,
+  FaSearch,
+  
 } from "react-icons/fa";
 import { topBarStyles } from "./TopBar.styles";
 
@@ -24,19 +23,13 @@ interface TopBarProps {
   userAvatarUrl?: string;
 }
 
-const companies = [
-  "Partisan Protective Services",
-  "Guardian Global",
-  "SafeWatch Security",
-];
-
 const TopBar: React.FC<TopBarProps> = ({
   userName,
-  companyName,
+  // companyName,
   userAvatarUrl,
 }) => {
-  const [selectedCompany, setSelectedCompany] = useState(companyName);
-  const [isOpen, setIsOpen] = useState(false);
+  // const [selectedCompany] = useState(companyName);
+  const [_, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   // ✅ NEW: Use Zustand to get dark mode state and function
@@ -61,11 +54,11 @@ const TopBar: React.FC<TopBarProps> = ({
     document.body.style.backgroundColor = isDarkMode ? "#121212" : "#2186d4";
   }, [isDarkMode]);
 
-  const orderedCompanies = [
+  /* const orderedCompanies = [
     selectedCompany,
     ...companies.filter((c) => c !== selectedCompany),
   ];
-
+ */
   return (
     <div
       className={`${topBarStyles.topbar} ${

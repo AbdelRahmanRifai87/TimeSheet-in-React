@@ -31,9 +31,17 @@ export function BlockoutList({ blockouts }: { blockouts: Blockout[] }) {
   const lightGradient =
     "linear-gradient(to right, rgba(255,255,255,1), rgba(255,255,255,0))";
   const darkGradient = "linear-gradient(to right, #121212, rgba(18,18,18,0))";
+  const lightGradientLeft =
+    "linear-gradient(to right, rgba(255,255,255,1), rgba(255,255,255,0))";
+  const darkGradientLeft =
+    "linear-gradient(to right, #121212, rgba(18,18,18,0))";
+  const lightGradientRight =
+    "linear-gradient(to left, rgba(255,255,255,1), rgba(255,255,255,0))";
+  const darkGradientRight =
+    "linear-gradient(to left, #121212, rgba(18,18,18,0))";
 
   return (
-    <div className="relative w-full h-fit">
+    <div className="relative w-full h-fit rounded-lg">
       <div
         ref={containerRef}
         onScroll={handleScroll}
@@ -50,22 +58,48 @@ export function BlockoutList({ blockouts }: { blockouts: Blockout[] }) {
         </div>
       </div>
       {showLeftShadow && (
-        <div
-          className="absolute left-0 top-0 bottom-0 w-8 pointer-events-none"
-          style={{
-            background: isDarkMode ? darkGradient : lightGradient,
-          }}
-        />
+        <>
+          {/* Light Theme Left Shadow */}
+          <div
+            className="absolute rounded-lg  left-0 top-0 bottom-0 w-8 pointer-events-none"
+            style={{
+              background: lightGradientLeft,
+              opacity: isDarkMode ? 0 : 1,
+              transition: "opacity 500ms ease-in-out",
+            }}
+          />
+          {/* Dark Theme Left Shadow */}
+          <div
+            className="absolute rounded-lg  left-0 top-0 bottom-0 w-8 pointer-events-none"
+            style={{
+              background: darkGradientLeft,
+              opacity: isDarkMode ? 1 : 0,
+              transition: "opacity 500ms ease-in-out",
+            }}
+          />
+        </>
       )}
       {showRightShadow && (
-        <div
-          className="absolute right-0 top-0 bottom-0 w-8 pointer-events-none"
-          style={{
-            background: isDarkMode
-              ? "linear-gradient(to left, #121212, rgba(18,18,18,0))"
-              : "linear-gradient(to left, rgba(255,255,255,1), rgba(255,255,255,0))",
-          }}
-        />
+        <>
+          {/* Light Theme Right Shadow */}
+          <div
+            className="absolute rounded-lg right-0 top-0 bottom-0 w-8 pointer-events-none"
+            style={{
+              background: lightGradientRight,
+              opacity: isDarkMode ? 0 : 1,
+              transition: "opacity 500ms ease-in-out",
+            }}
+          />
+          {/* Dark Theme Right Shadow */}
+          <div
+            className="absolute rounded-lg right-0 top-0 bottom-0 w-8 pointer-events-none"
+            style={{
+              background: darkGradientRight,
+              opacity: isDarkMode ? 1 : 0,
+              transition: "opacity 500ms ease-in-out",
+            }}
+          />
+        </>
       )}
     </div>
   );

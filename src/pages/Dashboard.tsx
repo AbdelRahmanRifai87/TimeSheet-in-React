@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { Responsive, WidthProvider } from "react-grid-layout";
 import "react-grid-layout/css/styles.css";
-import Widget from "../Components/widget/Widget";
 import { useDynamicGrid } from "../hooks/useDynamicGrid";
 import { DataList } from "../Components/DataList";
+import { Responsive, WidthProvider } from "react-grid-layout";
+
 import { useDarkModeStore } from "../Theme/useDarkModeStore";
+
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
 function Dashboard() {
@@ -161,12 +162,12 @@ function Dashboard() {
         >
           {allItems.map((item) => (
             <div key={item.i}>
-              <Widget
+              {/* <Widget
                 title={`${item.label}`}
                 onRemove={() => removeItem(item.i)}
               >
                 <DataList label={item.label} data={item.data} />
-              </Widget>
+              </Widget> */}
             </div>
           ))}
         </ResponsiveGridLayout>

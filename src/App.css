@@ -1,13 +1,47 @@
 @import "tailwindcss";
 
 * {
-  transition: heigth 0.3s;
   box-sizing: border-box;
+  /* transition: color 0.5s;
+  transition: height 0.3s ease-in-out, color 0.5s ease-in-out, background-color 0.5s ease-in-out; */
 }
 
+/* Hide scrollbars for all elements while maintaining scroll functionality */
+* {
+  /* -ms-overflow-style: none; IE and Edge */
+  /* scrollbar-width: none; Firefox */
+}
+
+/* Hide scrollbars for Chrome, Safari and Opera */
+.sideBar-menu::-webkit-scrollbar {
+  display: none;
+}
+
+/* "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", */
 body {
   /* background-color: #2186d4; */
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: Helvetica !important;
+  /* transition: background-color 600ms; */
+  /* font-weight: 300; */
+}
+
+.layout.show-grid {
+  background-color: #f0f0f0;
+  /* Base background for the empty space */
+  background-image:
+    /* Vertical lines: 1px lightgray, then transparent */ linear-gradient(
+      to right,
+      lightgray 1px,
+      transparent 10px
+    ),
+    /* Horizontal lines: 1px lightgray, then transparent */
+      linear-gradient(to bottom, lightgray 1px, transparent 10px);
+
+  background-size: calc(var(--col-width)) calc(40px);
+
+  background-position: 0 0;
+
+  transition: background-image 0.2s ease-in-out;
 }
 
 .react-grid-placeholder {
@@ -78,6 +112,7 @@ body {
   border-bottom: 10px solid white;
   /* rounded line */
 }
+
 /* Optional: in global styles */
 * {
   transition-property: background-color, color;

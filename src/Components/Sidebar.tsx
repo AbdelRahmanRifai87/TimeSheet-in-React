@@ -57,7 +57,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
   const companyLogos: Record<string, string> = {
     PARTISAN: "/partisan logo.png",
     GUARDIAN: "/guardian_global1.png",
-    SAFEWATCH: "/safewatch_logo.png",
+    SAFEWATCH: "/Safewatch2_logo.png",
   };
 
   const getCompanySign = (company: string, isDarkMode: boolean): string => {
@@ -81,9 +81,9 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
 
   return (
     <aside
-      className={`row-span-2 flex flex-col h-screen transition-colors duration-500 ease-in-out ${
+      className={` row-span-2 flex flex-col h-screen transition-colors duration-500 ease-in-out ${
         isDarkMode ? "bg-[#121212]" : "bg-[#2186d4]"
-      } overflow-hidden`}
+      }  overflow-hidden`}
     >
       {/* Company Logo Dropdown */}
       <div ref={dropdownRef} className="relative px-4 py-4">
@@ -234,7 +234,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
             <i className="fas fa-angle-right" />
           ) : (
             <>
-              <span className="text-sm font-medium mr-2">Collapse Menu</span>
+              <span className="text-sm font-medium mr-2 ">trst Menu</span>
               <i className="fas fa-angle-left" />
             </>
           )}
@@ -248,14 +248,14 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
             isDarkMode ? "text-gray-400/65" : "text-white/65"
           }`}
         >
-          <div className="flex items-center gap-1 mt-1">
+          {/* <div className="flex items-center gap-1 mt-1">
             <span>Powered by</span>
             <img
               src="/sec250.png"
               alt="Securecy Logo"
               className="h-5 object-contain"
             />
-          </div>
+          </div> */}
         </div>
       )}
     </aside>
