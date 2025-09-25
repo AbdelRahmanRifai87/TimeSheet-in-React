@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { ApiService } from "../../Api/ApiService";
-import Sidebar from "./Sidebar";
+import Sidebar from "../Sidebar/Sidebar";
 import { useSidebarContext } from "../../Context/SidebarContext";
 
 interface SidebarContainerProps {
@@ -25,7 +25,7 @@ const SidebarContainer: React.FC<SidebarContainerProps> = ({ isDarkMode }) => {
     fetchMenuPages();
   }, [setMenuPages]);
 
-  return <Sidebar isDarkMode={isDarkMode} />;
+  return <Sidebar />;
 };
 
 export default SidebarContainer;
