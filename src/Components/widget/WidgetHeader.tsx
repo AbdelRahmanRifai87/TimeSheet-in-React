@@ -3,9 +3,18 @@ import { useDarkModeStore } from "../../Theme/useDarkModeStore";
 interface WidgetHeaderProps {
   title: string;
   onRemove: () => void;
+  isDraggingOrResizing: boolean;
+  onToggle: () => void;
+  isCollapsed: boolean;
 }
 
-export default function WidgetHeader({ title, onRemove }: WidgetHeaderProps) {
+export default function WidgetHeader({
+  title,
+  onRemove,
+  isDraggingOrResizing,
+  onToggle,
+  isCollapsed,
+}: WidgetHeaderProps) {
   // Pull effectiveTheme from the store
   const effectiveTheme = useDarkModeStore((state) => state.effectiveTheme);
 
@@ -26,6 +35,8 @@ export default function WidgetHeader({ title, onRemove }: WidgetHeaderProps) {
         {/* Remove button */}
         <button
           className={`flex items-center justify-center px-3 rounded-lg border shadow-sm hover:shadow-[0_0_3px_0_#1C75BC] focus:outline-none ${
+            isDraggingOrResizing ? "" : "hidden"
+          } ${
             isDarkMode
               ? "bg-gray-800 border-gray-600 text-white hover:text-gray-200"
               : "bg-white border-gray-200 text-[#1C75BC] hover:text-gray-700"
@@ -39,20 +50,29 @@ export default function WidgetHeader({ title, onRemove }: WidgetHeaderProps) {
         {/* Toggle / collapse button */}
         <button
           type="button"
-          title="Toggle dropdown"
-          className={`flex items-center justify-center px-2 rounded-lg border shadow-sm hover:shadow-[0_0_3px_0_#1C75BC] focus:outline-none ${
+          title={isCollapsed ? "Expand Widget" : "Collapse Widget"}
+          // ⭐️ CRITICAL: Wire up the click handler
+          onClick={onToggle}
+          className={`flex items-center justify-center px-2 rounded-lg w-10 h-10 border shadow-sm hover:shadow-[0_0_3px_0_#1C75BC] focus:outline-none ${
             isDarkMode
               ? "bg-gray-800 border-gray-600 text-white hover:text-gray-200"
               : "bg-white border-gray-200 text-[#1C75BC] hover:text-gray-700"
           }`}
         >
-          <i className="fa-solid fa-angle-down text-xs"></i>
+          {/* ⭐️ CRITICAL: Dynamic icon based on state */}
+          <i
+            className={`fa-solid ${
+              isCollapsed ? "fa-angle-down" : "fa-angle-up"
+            } text-xs`}
+          ></i>
         </button>
 
         {/* Drag handle */}
         <button
           title="Drag widget"
           className={`grabbable flex items-center justify-center w-7 h-10 rounded-lg border shadow-sm focus:outline-none ${
+            isDraggingOrResizing ? "" : "hidden"
+          } ${
             isDarkMode
               ? "bg-gray-800 border-gray-600 text-gray-400 hover:text-white"
               : "bg-white border-gray-200 text-gray-400 hover:text-[#1C75BC]"
