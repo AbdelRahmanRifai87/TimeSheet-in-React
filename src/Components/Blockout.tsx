@@ -1,4 +1,4 @@
-import { useThemeStore } from "../Theme/useThemeStore"; // ✅ uncomment
+import { useDarkModeStore } from "../Theme/useDarkModeStore"; // ✅ uncomment
 
 interface Blockout {
   id: string;
@@ -9,7 +9,7 @@ interface Blockout {
 
 export default function BlockoutItem({ blockout }: { blockout: Blockout }) {
   // Convert theme → boolean (dark/night vs light/system)
-  const theme = useThemeStore((state) => state.theme);
+  const theme = useDarkModeStore((state) => state.theme);
   const isDark =
     theme === "dark" ||
     theme === "night" ||
