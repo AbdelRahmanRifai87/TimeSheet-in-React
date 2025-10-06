@@ -21,4 +21,9 @@ export const topBarStyles = {
   avatar: "w-[32px] h-[32px] rounded-full ml-[12px]",
   userName:
     "ml-[8px] text-[14px] font-normal lowercase opacity-90 hidden md:inline",
+
+  // ✅ Added for theme select dropdown
+  themeSelectContainer: "flex items-center ml-2 space-x-1",
+  selectTheme:
+    "bg-white/10 dark:bg-gray-700 text-white dark:text-white text-[14px] rounded px-2 py-1 outline-none cursor-pointer transition-colors duration-500",
 };

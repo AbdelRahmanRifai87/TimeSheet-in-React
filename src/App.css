@@ -25,6 +25,28 @@ body {
   /* font-weight: 300; */
 }
 
+.layout.show-grid.darkmode {
+  background-color: #161515;
+  /* Base background for the empty space */
+  background-image:
+    /* Vertical lines: 1px lightgray, then transparent */ linear-gradient(
+      to right,
+      rgb(111, 106, 106) 1px,
+      transparent 10px
+    ),
+    /* Horizontal lines: 1px lightgray, then transparent */
+      linear-gradient(to bottom, rgb(93, 88, 88) 1px, transparent 10px);
+
+  background-size: calc(var(--col-width)) calc(40px);
+
+  background-position: 0 0;
+
+  transition: background-image 0.2s ease-in-out;
+  transition-property: background-color, color;
+  transition-duration: 0.6s;
+  transition-timing-function: ease-in-out;
+}
+
 .layout.show-grid {
   background-color: #f0f0f0;
   /* Base background for the empty space */
@@ -42,6 +64,9 @@ body {
   background-position: 0 0;
 
   transition: background-image 0.2s ease-in-out;
+  transition-property: background-color, color;
+  transition-duration: 0.6s;
+  transition-timing-function: ease-in-out;
 }
 
 .react-grid-placeholder {

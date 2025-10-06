@@ -1,4 +1,4 @@
-import { useDarkModeStore } from "../Theme/useDarkModeStore"; // Adjust path if needed
+import { useDarkModeStore } from "../Theme/useDarkModeStore"; // ✅ uncomment
 
 interface Blockout {
   id: string;
@@ -8,19 +8,24 @@ interface Blockout {
 }
 
 export default function BlockoutItem({ blockout }: { blockout: Blockout }) {
-  // Get isDarkMode from Zustand store
-  const isDarkMode = useDarkModeStore((state) => state.isDarkMode);
+  // Convert theme → boolean (dark/night vs light/system)
+  const theme = useDarkModeStore((state) => state.theme);
+  const isDark =
+    theme === "dark" ||
+    theme === "night" ||
+    (theme === "system" &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches);
 
   return (
     <div
       className={`flex flex-col justify-between border rounded-2xl min-w-[400px] shadow-lg w-full max-w-sm px-6 py-4 space-y-2 ${
-        isDarkMode ? "bg-[#1e1e1e] border-gray-700" : "bg-white border-gray-200"
+        isDark ? "bg-[#1e1e1e] border-gray-700" : "bg-white border-gray-200"
       }`}
     >
       {/* Date range */}
       <div
         className={`text-left text-sm font-light ${
-          isDarkMode ? "text-[#7BB4EA]" : "text-[#1C75BC]"
+          isDark ? "text-[#7BB4EA]" : "text-[#1C75BC]"
         }`}
       >
         {blockout.date}
@@ -30,7 +35,7 @@ export default function BlockoutItem({ blockout }: { blockout: Blockout }) {
       <div className="text-left">
         <p
           className={`text-xl font-semibold ${
-            isDarkMode ? "text-white" : "text-[#1E0E06]"
+            isDark ? "text-white" : "text-[#1E0E06]"
           }`}
         >
           {blockout.user}
@@ -39,11 +44,7 @@ export default function BlockoutItem({ blockout }: { blockout: Blockout }) {
 
       {/* Subtext */}
       <div className="text-left">
-        <p
-          className={`text-sm ${
-            isDarkMode ? "text-gray-300" : "text-gray-800"
-          }`}
-        >
+        <p className={`text-sm ${isDark ? "text-gray-300" : "text-gray-800"}`}>
           {blockout.subtext}
         </p>
       </div>

@@ -1,4 +1,5 @@
 import { useDarkModeStore } from "../Theme/useDarkModeStore";
+
 interface Report {
   id: string;
   title: string;
@@ -7,20 +8,23 @@ interface Report {
 }
 
 export function ReportItem({ report }: { report: Report }) {
-  // Example: you can replace this with your Zustand store or context hook
-  // const isDarkMode = useStore((state) => state.isDarkMode);
-  // Replace with your actual dark mode logic
-  const isDarkMode = useDarkModeStore((state) => state.isDarkMode);
+  const effectiveTheme = useDarkModeStore((state) => state.effectiveTheme);
+
+  // dark OR night → dark background
+  const isDarkOrNight = effectiveTheme === "dark" || effectiveTheme === "night";
+
   return (
     <div
       className={`flex flex-col justify-between border rounded-2xl shadow-lg min-w-[400px] w-full max-w-sm px-6 py-4 space-y-4 ${
-        isDarkMode ? "bg-[#1e1e1e] border-gray-700" : "bg-white border-gray-200"
+        isDarkOrNight
+          ? "bg-[#1e1e1e] border-gray-700"
+          : "bg-white border-gray-200"
       }`}
     >
       {/* Last report filed... */}
       <div
         className={`text-left text-sm font-light ${
-          isDarkMode ? "text-[#7BB4EA]" : "text-[#1C75BC]"
+          isDarkOrNight ? "text-[#7BB4EA]" : "text-[#1C75BC]"
         }`}
       >
         Last report filed {report.time}
@@ -30,7 +34,7 @@ export function ReportItem({ report }: { report: Report }) {
       <div className="text-left">
         <p
           className={`text-xl font-semibold ${
-            isDarkMode ? "text-white" : "text-[#1E0E06]"
+            isDarkOrNight ? "text-white" : "text-[#1E0E06]"
           }`}
         >
           {report.title}
@@ -41,7 +45,7 @@ export function ReportItem({ report }: { report: Report }) {
       <div className="text-left">
         <p
           className={`text-sm ${
-            isDarkMode ? "text-gray-300" : "text-gray-800"
+            isDarkOrNight ? "text-gray-300" : "text-gray-800"
           }`}
         >
           {report.desc}

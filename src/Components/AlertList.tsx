@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { AlertItem } from "./Alert";
-import { useDarkModeStore } from "../Theme/useDarkModeStore"; // ✅ adjust path if needed
+import { useDarkModeStore } from "../Theme/useDarkModeStore";
 
 interface Alert {
   id: string;
@@ -11,16 +11,17 @@ interface Alert {
 }
 
 export function AlertList({ alerts }: { alerts: Alert[] }) {
-  const isDarkMode = useDarkModeStore((state) => state.isDarkMode);
+  const effectiveTheme = useDarkModeStore((state) => state.effectiveTheme);
+  const isDarkOrNight = effectiveTheme === "dark" || effectiveTheme === "night";
 
-  // Use a sorting order map for clear prioritization
+  // Order map for prioritization
   const severityOrder = {
     high: 1,
     medium: 2,
     low: 3,
   };
 
-  // Sort the alerts based on the severity order
+  // Sort the alerts
   const sortedAlerts = useMemo(() => {
     return [...alerts].sort((a, b) => {
       return severityOrder[a.severity] - severityOrder[b.severity];
@@ -28,7 +29,11 @@ export function AlertList({ alerts }: { alerts: Alert[] }) {
   }, [alerts]);
 
   return (
-    <div className="flex flex-col space-y-2 w-full">
+    <div
+      className={`flex flex-col space-y-2 w-full ${
+        isDarkOrNight ? "bg-dark" : "bg-white"
+      }`}
+    >
       {sortedAlerts.map((alert, index) => (
         <AlertItem key={alert.id} order={index} alert={alert} />
       ))}

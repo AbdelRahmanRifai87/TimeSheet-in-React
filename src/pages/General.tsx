@@ -149,7 +149,6 @@ function General() {
         updateLayouts={updateLayouts}
         breakpoints={breakpoints}
         cols={cols}
-        isDarkMode={isDarkMode}
         isDraggingOrResizing={isDraggingOrResizing}
         toggleItemHeight={toggleItemHeight}
       />
