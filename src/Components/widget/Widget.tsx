@@ -24,7 +24,7 @@ function Widget({
 
   return (
     <div
-      className={`rounded-lg shadow-md border h-full w-full flex flex-col items-center px-1 pt-1 ${
+      className={`rounded-lg shadow-md border h-full w-full flex flex-col items-center  ${
         isDarkMode ? "bg-[#272323] border-gray-700" : "bg-white border-gray-200"
       }`}
     >

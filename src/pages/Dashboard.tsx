@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import "react-grid-layout/css/styles.css";
 import { useDynamicGrid } from "../hooks/useDynamicGrid";
@@ -7,12 +6,11 @@ import Breadcrumb from "../Components/BreadCrumb";
 import { useDarkModeStore } from "../Theme/useDarkModeStore";
 
 function Dashboard() {
-  
   const theme = useDarkModeStore((s) => s.theme);
   const effectiveTheme = useDarkModeStore((s) => s.effectiveTheme);
 
-  
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [dismiss, setDismiss] = useState(false);
 
   const {
     layouts,
@@ -31,7 +29,6 @@ function Dashboard() {
     setIsDraggingOrResizing((prev) => !prev);
   }
 
-  
   const getBgColor = () => {
     switch (effectiveTheme) {
       case "dark":
@@ -54,12 +51,18 @@ function Dashboard() {
     }
   };
 
+  function DismissHandler() {
+    setDismiss((d) => !d);
+  }
+
   return (
-    <div className={`px-9 pt-3 font-sans transition-colors ${getBgColor()}`}>
+    <div className={`  transition-colors `}>
       <Breadcrumb />
 
       <div
-        className={`flex justify-between items-center px-6 py-7 rounded-xl mb-5 shadow-md transition-colors ${getCardColor()}`}
+        className={`flex justify-between items-center px-6 py-7 rounded-xl mb-5 shadow-md transition-colors ${getCardColor()} ${
+          dismiss ? "hidden" : ""
+        }`}
       >
         <div className="flex items-start space-x-3">
           <div className="flex-shrink-0 text">🔔</div>
@@ -77,7 +80,10 @@ function Dashboard() {
           <button className="px-4 py-2 text-sm font-semibold rounded-lg hover:outline-1 hover:outline-[#6C668540]">
             Allow push
           </button>
-          <button className="px-4 py-2 text-sm font-semibold rounded-lg hover:outline-1 hover:outline-[#6C668540]">
+          <button
+            onClick={DismissHandler}
+            className="px-4 py-2 text-sm font-semibold rounded-lg hover:outline-1 hover:outline-[#6C668540] cursor-pointer"
+          >
             Dismiss
           </button>
         </div>

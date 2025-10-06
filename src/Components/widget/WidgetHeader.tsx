@@ -14,7 +14,7 @@ export default function WidgetHeader({ title, onRemove }: WidgetHeaderProps) {
 
   return (
     <header
-      className={`flex items-center justify-between w-full mb-2 rounded-t-lg px-4 py-2 border-b ${
+      className={`flex items-center justify-between w-full  rounded-t-lg px-4 py-2 border-b ${
         isDarkMode
           ? "bg-[#272323] border-gray-700 text-white"
           : "bg-[#1C75BC26] border-gray-200 text-[#05004E]"
