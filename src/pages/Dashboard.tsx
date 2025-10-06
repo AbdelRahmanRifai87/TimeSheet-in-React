@@ -1,18 +1,17 @@
+
 import { useState } from "react";
 import "react-grid-layout/css/styles.css";
 import { useDynamicGrid } from "../hooks/useDynamicGrid";
-import { DataList } from "../Components/DataList";
-import { Responsive, WidthProvider } from "react-grid-layout";
-
+import WidgetsGridLayout from "../Components/widget/WdigetsGridLayout";
+import Breadcrumb from "../Components/BreadCrumb";
 import { useDarkModeStore } from "../Theme/useDarkModeStore";
 
-const ResponsiveGridLayout = WidthProvider(Responsive);
-
 function Dashboard() {
-  // TODO: Replace this with your actual global dark mode state (e.g., Zustand, Context)
-  const isDarkMode = useDarkModeStore((state) => state.isDarkMode);
+  
+  const theme = useDarkModeStore((s) => s.theme);
+  const effectiveTheme = useDarkModeStore((s) => s.effectiveTheme);
 
-  // Dropdown menu visibility state
+  
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const {
@@ -23,68 +22,76 @@ function Dashboard() {
     updateLayouts,
     breakpoints,
     cols,
+    toggleItemHeight,
   } = useDynamicGrid(3);
 
+  const [isDraggingOrResizing, setIsDraggingOrResizing] = useState(false);
+
+  function editItems() {
+    setIsDraggingOrResizing((prev) => !prev);
+  }
+
+  
+  const getBgColor = () => {
+    switch (effectiveTheme) {
+      case "dark":
+        return "bg-[#3a5567] text-white";
+      case "night":
+        return "bg-[#1f1f1f] text-white";
+      default:
+        return "bg-[#1C75BC26] text-gray-800"; // light
+    }
+  };
+
+  const getCardColor = () => {
+    switch (effectiveTheme) {
+      case "dark":
+        return "bg-[#3a5567] text-white";
+      case "night":
+        return "bg-[#1f1f1f] text-white";
+      default:
+        return "bg-[#1C75BC26] text-gray-800"; // light
+    }
+  };
+
   return (
-    <div className="px-9 pt-3 font-sans transition-colors bg-inherit">
-      <p className="ml-3 text-sm mb-4 text-[#1C75BC]">
-        {" "}
-        <span className="font-bold mr-2"> Dashboard</span> / Your Details -
-        General
-      </p>
+    <div className={`px-9 pt-3 font-sans transition-colors ${getBgColor()}`}>
+      <Breadcrumb />
 
       <div
-        className={`flex justify-between items-center px-6 py-7 rounded-xl mb-5 shadow-md transition-colors ${
-          isDarkMode ? "bg-[#1e1e1e]" : "bg-[#1C75BC26]"
-        }`}
+        className={`flex justify-between items-center px-6 py-7 rounded-xl mb-5 shadow-md transition-colors ${getCardColor()}`}
       >
         <div className="flex items-start space-x-3">
           <div className="flex-shrink-0 text">🔔</div>
           <div>
-            <h3
-              className={`text-sm mb-2 font-semibold ${
-                isDarkMode ? "text-white" : "text-gray-800"
-              }`}
-            >
+            <h3 className="text-base mb-2 font-semibold">
               Planned Outage Delayed
             </h3>
-            <p className="text-xs text-gray-500">
+            <p className="text-s text-gray-500">
               All systems will be operating normally tonight
             </p>
           </div>
         </div>
 
         <div className="flex space-x-2 items-center">
-          <button
-            className={`px-4 py-2 text-sm font-medium rounded-lg hover:outline-1 hover:outline-[#6C668540] ${
-              isDarkMode ? "text-white" : "text-[#0B0B26]"
-            }`}
-          >
+          <button className="px-4 py-2 text-sm font-semibold rounded-lg hover:outline-1 hover:outline-[#6C668540]">
             Allow push
           </button>
-          <button
-            className={`px-4 py-2 text-sm font-medium rounded-lg hover:outline-1 hover:outline-[#6C668540] ${
-              isDarkMode ? "text-white" : "text-[#0B0B26]"
-            }`}
-          >
+          <button className="px-4 py-2 text-sm font-semibold rounded-lg hover:outline-1 hover:outline-[#6C668540]">
             Dismiss
           </button>
         </div>
       </div>
 
-      <div className="flex justify-between items-center w-full mb-8">
+      <div className="flex justify-between items-center w-full mb-4">
         <div className="flex flex-col">
-          <h1
-            className={`text-3xl font-semibold px-2 py-1 rounded transition-colors duration-700 ${
-              isDarkMode ? "text-white" : "text-gray-800"
-            }`}
-          >
+          <h1 className="text-3xl font-semibold px-0 py-1 rounded transition-colors duration-700">
             Dashboard
           </h1>
 
-          <div className="relative inline-block text-left mt-4">
+          <div className="relative inline-block text-left mt-2">
             <div
-              className="flex items-center space-x-2 text-[#2B82BC] font-semibold cursor-pointer"
+              className="flex items-center space-x-2 text-[#2B82BC] font-[600] cursor-pointer"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               <span>Compliance View</span>
@@ -103,21 +110,29 @@ function Dashboard() {
             </div>
 
             {isMenuOpen && (
-              <div className="absolute z-10 mt-2 w-48 bg-white rounded-lg shadow-lg compliance-view">
+              <div
+                className={`absolute z-10 mt-2 w-48 rounded-lg shadow-lg compliance-view ${
+                  effectiveTheme === "dark"
+                    ? "bg-[#3a5567] text-white"
+                    : effectiveTheme === "night"
+                    ? "bg-[#1f1f1f] text-white"
+                    : "bg-white text-gray-800"
+                }`}
+              >
                 <ul className="list-none m-0 p-0">
-                  <li className="px-4 py-2 text-[#1C75BC] font-semibold hover:bg-gray-100 cursor-pointer">
+                  <li className="px-4 py-2 font-semibold hover:bg-gray-100 cursor-pointer">
                     Compliance View
                   </li>
-                  <li className="px-4 py-2 text-gray-700 hover:bg-gray-100 cursor-pointer">
+                  <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
                     Accounts View
                   </li>
-                  <li className="px-4 py-2 text-gray-700 hover:bg-gray-100 cursor-pointer">
+                  <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
                     Operations View
                   </li>
-                  <li className="px-4 py-2 text-gray-700 hover:bg-gray-100 cursor-pointer">
+                  <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
                     NCC View
                   </li>
-                  <li className="px-4 py-2 text-gray-700 hover:bg-gray-100 cursor-pointer">
+                  <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
                     Custom View
                   </li>
                 </ul>
@@ -126,52 +141,37 @@ function Dashboard() {
           </div>
         </div>
 
-        <button
-          onClick={addItem}
-          className="bg-[#1C75BC] hover:bg-blue-700 text-white font-semibold py-4 px-15 rounded-lg shadow-md transition-colors duration-200 flex items-center space-x-2"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="2"
-            stroke="currentColor"
-            className="w-5 h-5"
+        <div className="flex gap-5">
+          {isDraggingOrResizing && (
+            <button
+              onClick={addItem}
+              className="bg-[#1C75BC] hover:bg-[#155a8e] text-white font-semibold py-4 px-15 rounded-xl shadow-md transition-colors duration-200 flex items-center space-x-2 gap-1"
+            >
+              <i className="fa-solid fa-plus"></i>{" "}
+              <span className="text-sm font-medium">Add widget </span>
+            </button>
+          )}
+          <button
+            onClick={editItems}
+            className="bg-[#1C75BC] hover:bg-[#155a8e] text-white font-semibold py-4 px-15 rounded-xl shadow-md transition-colors duration-200 flex items-center space-x-2 gap-1"
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M12 4.5v15m7.5-7.5h-15"
-            />
-          </svg>
-          <span>Add widget</span>
-        </button>
+            <img src="basil_edit-outline.png" alt="" />{" "}
+            <span className="text-sm font-medium">Edit widget</span>
+          </button>
+        </div>
       </div>
 
-      <div>
-        <ResponsiveGridLayout
-          className="layout"
-          layouts={layouts}
-          breakpoints={breakpoints}
-          cols={cols}
-          rowHeight={100}
-          onLayoutChange={updateLayouts}
-          isResizable
-          isDraggable
-          draggableHandle=".grabbable"
-        >
-          {allItems.map((item) => (
-            <div key={item.i}>
-              {/* <Widget
-                title={`${item.label}`}
-                onRemove={() => removeItem(item.i)}
-              >
-                <DataList label={item.label} data={item.data} />
-              </Widget> */}
-            </div>
-          ))}
-        </ResponsiveGridLayout>
-      </div>
+      <WidgetsGridLayout
+        layouts={layouts}
+        allItems={allItems}
+        removeItem={removeItem}
+        updateLayouts={updateLayouts}
+        breakpoints={breakpoints}
+        cols={cols}
+        isDraggingOrResizing={isDraggingOrResizing}
+        toggleItemHeight={toggleItemHeight}
+        theme={effectiveTheme} // optional, pass theme to grid if needed
+      />
     </div>
   );
 }

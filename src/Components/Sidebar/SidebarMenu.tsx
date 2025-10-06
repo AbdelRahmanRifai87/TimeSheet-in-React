@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+
+import React, { useState, useEffect } from "react";
 import SidebarMenuItem from "./SidebarMenuItem";
 import SidebarDivider from "./SidebarDivider";
 import type { Page } from "../../Types/Page";
 import { useLocation } from "react-router-dom";
+import { useDarkModeStore } from "../../Theme/useDarkModeStore";
 
 interface SidebarMenuProps {
   pages: Page[];
@@ -12,9 +14,11 @@ interface SidebarMenuProps {
 const SidebarMenu: React.FC<SidebarMenuProps> = ({ pages, isCollapsed }) => {
   const location = useLocation();
   const [expandedParents, setExpandedParents] = useState<number[]>([]);
+  const effectiveTheme = useDarkModeStore((state) => state.effectiveTheme);
+  const isDarkMode = effectiveTheme === "dark" || effectiveTheme === "night";
 
   // Find which parent should be expanded based on current path
-  React.useEffect(() => {
+  useEffect(() => {
     const currentPath = location.pathname;
     const activeChildPage = pages.find(
       (page) => page.path === currentPath && page.parentId
@@ -29,7 +33,7 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ pages, isCollapsed }) => {
     }
   }, [location.pathname, pages]);
 
-  // Toggle parent expansion - works for both collapsed and expanded sidebar
+  // Toggle parent expansion
   const toggleParentExpansion = (parentId: number) => {
     setExpandedParents((prev) =>
       prev.includes(parentId)
@@ -38,7 +42,6 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ pages, isCollapsed }) => {
     );
   };
 
-  // Define the menu items after which a divider should appear
   const dividerAfterItems = [
     "Dashboard",
     "Users",
@@ -47,10 +50,8 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ pages, isCollapsed }) => {
     "Documents",
   ];
 
-  // Group items by parent ID
   const parentItems = pages.filter((page) => !page.parentId);
 
-  // Create map of parent IDs to child items
   const childrenMap: Record<number, Page[]> = {};
   pages
     .filter((page) => page.parentId)
@@ -61,7 +62,6 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ pages, isCollapsed }) => {
       childrenMap[page.parentId!].push(page);
     });
 
-  // Check if a parent has an active child
   const hasActiveChild = (parentId: number) => {
     return childrenMap[parentId]?.some(
       (child) =>
@@ -83,15 +83,16 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ pages, isCollapsed }) => {
               isExpanded={expandedParents.includes(page.id)}
             />
 
-            {/* Show subitems inline when:
-                1. Parent is expanded (for both collapsed and expanded sidebar), OR
-                2. Sidebar is collapsed and parent has an active child */}
             {childrenMap[page.id] &&
               (expandedParents.includes(page.id) ||
                 (isCollapsed && hasActiveChild(page.id))) && (
                 <div
                   className={`transition-all duration-300 ease-in-out overflow-hidden ${
-                    isCollapsed ? "bg-[#1659a3]/30 mx-1 rounded-md" : "relative"
+                    isCollapsed
+                      ? isDarkMode
+                        ? "bg-gray-800 mx-1 rounded-md"
+                        : "bg-[#1659a3] mx-1 rounded-md"
+                      : "relative"
                   }`}
                   style={{
                     maxHeight:
@@ -110,7 +111,6 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ pages, isCollapsed }) => {
                         : 0,
                   }}
                 >
-                  {/* Vertical line only for expanded sidebar */}
                   {!isCollapsed && (
                     <div
                       className="absolute left-8 top-0 bottom-0 w-px bg-white/30"
@@ -126,7 +126,6 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ pages, isCollapsed }) => {
 
                     return (
                       <div key={childPage.id} className="relative">
-                        {/* White highlight for active subitem (only when sidebar is expanded) */}
                         {!isCollapsed && isActiveChild && (
                           <div
                             className="absolute left-8 w-px bg-white"
@@ -144,12 +143,15 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ pages, isCollapsed }) => {
                 </div>
               )}
 
-            {/* Add divider after specific items */}
             {dividerAfterItems.includes(page.name) && <SidebarDivider />}
           </React.Fragment>
         ))
       ) : (
-        <div className="text-white/70 p-4 text-center">
+        <div
+          className={`p-4 text-center ${
+            isDarkMode ? "text-white/70" : "text-white/70"
+          }`}
+        >
           Loading menu items...
         </div>
       )}
