@@ -36,8 +36,7 @@ function AppLayout() {
       <SidebarContainer />
 
       <TopBar
-        userName="Mohamad Zakaria"
-        
+        userName="User name"
         userAvatarUrl="https://columbus.in.us/wp-content/uploads/2020/01/person-01.jpg"
       />
 
