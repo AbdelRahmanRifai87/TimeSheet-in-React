@@ -30,7 +30,7 @@ export function AlertList({ alerts }: { alerts: Alert[] }) {
 
   return (
     <div
-      className={`flex flex-col space-y-2 w-full ${
+      className={`flex flex-col gap-4 w-full ${
         isDarkOrNight ? "bg-dark" : "bg-white"
       }`}
     >

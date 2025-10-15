@@ -162,7 +162,10 @@ function Dashboard() {
             className="bg-[#1C75BC] hover:bg-[#155a8e] text-white font-semibold py-4 px-15 rounded-xl shadow-md transition-colors duration-200 flex items-center space-x-2 gap-1"
           >
             <img src="basil_edit-outline.png" alt="" />{" "}
-            <span className="text-sm font-medium">Edit widget</span>
+            <span className="text-sm font-medium">
+              {" "}
+              {isDraggingOrResizing ? "Done" : "Edit widget"}
+            </span>
           </button>
         </div>
       </div>

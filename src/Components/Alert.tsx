@@ -1,5 +1,3 @@
-
-
 import React from "react";
 import { useDarkModeStore } from "../Theme/useDarkModeStore"; // ✅ Zustand store
 import { MdArrowForwardIos } from "react-icons/md";
@@ -13,14 +11,13 @@ interface Alert {
 }
 
 export function AlertItem({ alert, order }: { alert: Alert; order: number }) {
-  
   const effectiveTheme = useDarkModeStore((state) => state.effectiveTheme);
   const isDarkOrNight = effectiveTheme === "dark" || effectiveTheme === "night";
 
   const severityColors = {
     high: isDarkOrNight
-      ? "border-[#D32F2F] bg-[#3a0e0e]" 
-      : "border-[#D32F2F] bg-[#D32F2F1A]", 
+      ? "border-[#D32F2F] bg-[#3a0e0e]"
+      : "border-[#D32F2F] bg-[#D32F2F1A]",
     medium: isDarkOrNight
       ? "border-[#FFA000] bg-[#4a3200]"
       : "border-[#FFA000] bg-[#FFA0001A]",
@@ -43,7 +40,7 @@ export function AlertItem({ alert, order }: { alert: Alert; order: number }) {
 
   return (
     <div
-      className={`flex relative items-start border-t-2 rounded-lg p-3 gap-3 mb-2 shadow-sm w-full ${
+      className={`flex relative items-center border-t-2 rounded-lg p-3 gap-3 mb-2 shadow-sm w-full ${
         severityColors[alert.severity]
       }`}
     >
@@ -58,31 +55,33 @@ export function AlertItem({ alert, order }: { alert: Alert; order: number }) {
             alt="User profile"
           />
         ) : (
-          <img
-            src={`/person not found icon/${iconSeverity[alert.severity]}`}
-            className="w-[30px] h-[30px]"
-            alt={`Alert severity: ${alert.severity}`}
-          />
+          <div className="flex items-center justify-center w-[40px] h-[40px] rounded-full">
+            <img
+              src={`/person not found icon/${iconSeverity[alert.severity]}`}
+              className="w-[30px] h-[30px]"
+              alt={`Alert severity: ${alert.severity}`}
+            />
+          </div>
         )}
       </div>
 
       {/* Title & Message */}
       <div className="ml-3">
         <h4
-          className={`font-medium ${order === 0 ? "text-lg" : "text-sm"} ${
+          className={`font-medium  text-sm ${
             isDarkOrNight ? "text-white" : "text-[#1E0E06]"
           }`}
         >
-          ATTENTION REQUIRED - {alert.title}
+          ATTENTION REQUIRED - {alert.title} - {alert.message}
         </h4>
 
-        <p
-          className={`${order === 0 ? "text-lg" : "text-sm"} ${
+        {/* <p
+          className={` text-sm ${
             isDarkOrNight ? "text-white" : "text-[#1E0E06]"
           } mt-1`}
         >
-          {alert.message}
-        </p>
+          
+        </p> */}
       </div>
 
       {/* Arrow */}

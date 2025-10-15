@@ -14,11 +14,41 @@ interface Breakpoints {
 
 // Blockouts
 const blockoutsData = [
-    { id: "1", user: "John Doe", date: "2025-09-21", subtext: "Requested for a personal appointment." },
-    { id: "2", user: "Jane Smith", date: "2025-09-25", subtext: "Blockout for a family vacation." },
-    { id: "3", user: "Peter Jones", date: "2025-09-28", subtext: "Needs the day off for a doctor's visit." },
-    { id: "4", user: "Mary Lee", date: "2025-10-02", subtext: "Personal day request." },
-    { id: "5", user: "David Chen", date: "2025-10-05", subtext: "Requested to attend a conference." },
+  {
+    id: "1",
+    user: "John Doe",
+    from: "2025-09-21",
+    to: "2025-09-22",
+    subtext: "Requested for a personal appointment.",
+  },
+  {
+    id: "2",
+    user: "Jane Smith",
+    from: "2025-09-25",
+    to: "2025-09-26",
+    subtext: "Blockout for a family vacation.",
+  },
+  {
+    id: "3",
+    user: "Peter Jones",
+    from: "2025-09-28",
+    to: "2025-10-01",
+    subtext: "Needs the day off for a doctor's visit.",
+  },
+  {
+    id: "4",
+    user: "Mary Lee",
+    from: "2025-10-02",
+    to: "2025-10-03",
+    subtext: "Personal day request.",
+  },
+  {
+    id: "5",
+    user: "David Chen",
+    from: "2025-10-05",
+    to: "2025-10-07",
+    subtext: "Requested to attend a conference.",
+  },
 ];
 
 // Alerts
@@ -28,38 +58,35 @@ const alertsData = [
         title: "License expired",
         message: "Security license expired for John Doe",
         severity: "high" as const,
-        img: 'person.png'
+    img: "person.png",
     },
     {
         id: "2",
         title: "Contractor expiring soon",
         message: "License for contractor Jane Smith will expire",
         severity: "medium" as const,
-        img: 'person.png'
-
+    img: "person.png",
     },
     {
         id: "3",
         title: "Upcoming training",
         message: "Mandatory safety training for all staff on October 10th",
         severity: "low" as const,
-        img: null
-
+    img: null,
     },
     {
         id: "4",
         title: "System update scheduled",
         message: "System maintenance scheduled for 2 AM tonight",
         severity: "medium" as const,
-        img: null
-
+    img: null,
     },
     {
         id: "5",
         title: "Equipment check overdue",
         message: "Fire extinguisher check on floor 3 is overdue",
         severity: "high" as const,
-        img: null
+    img: null,
     },
 ];
 
