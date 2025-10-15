@@ -27,7 +27,7 @@ function AppLayout() {
     <div
       className="grid grid-rows-[auto_1fr] h-screen"
       style={{
-        gridTemplateColumns: isCollapsed ? "60px 1fr" : "17rem 1fr",
+        gridTemplateColumns: isCollapsed ? "3rem 1fr" : "13rem 1fr",
         transition: "all 350ms ease-in-out",
       }}
     >
@@ -35,7 +35,7 @@ function AppLayout() {
 
       <TopBar
         userName="Mohamad Zakaria"
-        companyName="Partisan Protective Services"
+        
         userAvatarUrl="https://columbus.in.us/wp-content/uploads/2020/01/person-01.jpg"
       />
 

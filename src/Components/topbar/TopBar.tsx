@@ -109,9 +109,9 @@ const TopBar: React.FC<TopBarProps> = ({ userName, userAvatarUrl }) => {
               className={`absolute right-0 mt-2 w-40 rounded-lg shadow-lg p-2 z-50
     ${
       effectiveTheme === "light"
-        ? "bg-[#625d5d4a] text-black"
+        ? "bg-[#625d5d] text-black"
         : effectiveTheme === "dark"
-        ? "bg-[#8e8e8e4a] text-white" //bg-black/10
+        ? "bg-[#8e8e8e] text-white" //bg-black/10
         : effectiveTheme === "night"
         ? "bg-[#312f2f] text-white"
         : "bg-gray-200 text-black"

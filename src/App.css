@@ -157,3 +157,6 @@ body {
   transition-property: background-color, color;
   transition-timing-function: ease-in-out;
 } */
+div::-webkit-scrollbar {
+  display: none;
+}

@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import "react-grid-layout/css/styles.css";
 import { useDynamicGrid } from "../hooks/useDynamicGrid";
@@ -7,11 +6,9 @@ import Breadcrumb from "../Components/BreadCrumb";
 import { useDarkModeStore } from "../Theme/useDarkModeStore";
 
 function Dashboard() {
-  
   const theme = useDarkModeStore((s) => s.theme);
   const effectiveTheme = useDarkModeStore((s) => s.effectiveTheme);
 
-  
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const {
@@ -31,7 +28,6 @@ function Dashboard() {
     setIsDraggingOrResizing((prev) => !prev);
   }
 
-  
   const getBgColor = () => {
     switch (effectiveTheme) {
       case "dark":
