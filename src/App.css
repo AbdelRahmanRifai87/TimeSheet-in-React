@@ -20,7 +20,7 @@
 /* "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", */
 body {
   /* background-color: #2186d4; */
-  font-family: Helvetica !important;
+  font-family: "Open Sans", sans-serif;
   /* transition: background-color 600ms; */
   /* font-weight: 300; */
 }
@@ -47,17 +47,17 @@ body {
   transition-timing-function: ease-in-out;
 }
 
-.layout.show-grid {
+/* .layout.show-grid {
   background-color: #f0f0f0;
   /* Base background for the empty space */
-  background-image:
-    /* Vertical lines: 1px lightgray, then transparent */ linear-gradient(
+/* background-image:
+    Vertical lines: 1px lightgray, then transparent linear-gradient(
       to right,
       lightgray 1px,
       transparent 10px
-    ),
-    /* Horizontal lines: 1px lightgray, then transparent */
-      linear-gradient(to bottom, lightgray 1px, transparent 10px);
+    ), */
+/* Horizontal lines: 1px lightgray, then transparent */
+/* linear-gradient(to bottom, lightgray 1px, transparent 10px);
 
   background-size: calc(var(--col-width)) calc(40px);
 
@@ -66,8 +66,8 @@ body {
   transition: background-image 0.2s ease-in-out;
   transition-property: background-color, color;
   transition-duration: 0.6s;
-  transition-timing-function: ease-in-out;
-}
+  transition-timing-function: ease-in-out; */
+/* }  */
 
 .react-grid-placeholder {
   background: transparent !important;

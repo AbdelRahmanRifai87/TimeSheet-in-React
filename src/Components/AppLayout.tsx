@@ -40,7 +40,7 @@ function AppLayout() {
       />
 
       <main
-        className={`col-span-1 row-span-1 rounded-tl-lg  min-h-[calc(93.5vh + 1px)] outline outline-black overflow-auto transition-colors duration-500 ${
+        className={`px-5 pt-1 col-span-1 row-span-1 rounded-tl-lg  min-h-[calc(93.5vh + 1px)] outline outline-black overflow-auto transition-colors duration-500 ${
           effectiveTheme === "dark" || effectiveTheme === "night"
             ? "bg-[#0d0d0df3] text-white"
             : "bg-[#F1F3F3] text-black"
