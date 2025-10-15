@@ -54,7 +54,7 @@ export default function GridOverlay({
       // The start of the cell (widget content area) is:
       // Y = PADDING_Y (10) + (r * rowHeight) + (r * margin)
       const topPosition = paddingTop + r * rowHeight + r * margin;
-
+      // ${cellColor}
       gridCells.push(
         <div
           key={`cell-${c}-${r}`}
@@ -65,7 +65,7 @@ export default function GridOverlay({
             // The size of the cell matches the content area of a 1x1 widget
             width: `${unitWidth}px`,
             height: `${rowHeight}px`,
-            border: `1px solid ${cellColor}`,
+            border: `1px solid #a9acac`,
             boxSizing: "border-box",
             borderRadius: "4px",
 
