@@ -29,7 +29,9 @@ export default function WidgetHeader({
           : "bg-[#1C75BC26] border-gray-200 text-[#05004E]"
       }`}
     >
-      <span className="font-semibold text-lg">{title}</span>
+      <span className="font-semibold text-lg">
+        {title.charAt(0).toUpperCase() + title.slice(1)}
+      </span>
 
       <div className="flex space-x-2">
         {/* Remove button */}
