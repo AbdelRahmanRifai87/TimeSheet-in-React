@@ -23,7 +23,7 @@ export default function WidgetHeader({
 
   return (
     <header
-      className={`flex items-center justify-between w-full  rounded-t-lg px-4 py-2 border-b ${
+      className={`grabbable flex items-center justify-between w-full  rounded-t-lg px-4 py-2 border-b ${
         isDarkMode
           ? "bg-[#272323] border-gray-700 text-white"
           : "bg-[#1C75BC26] border-gray-200 text-[#05004E]"
@@ -70,9 +70,9 @@ export default function WidgetHeader({
         </button>
 
         {/* Drag handle */}
-        <button
+        {/* <button
           title="Drag widget"
-          className={`grabbable flex items-center justify-center w-7 h-10 rounded-lg border shadow-sm focus:outline-none ${
+          className={` flex items-center justify-center w-7 h-10 rounded-lg border shadow-sm focus:outline-none ${
             isDraggingOrResizing ? "" : "hidden"
           } ${
             isDarkMode
@@ -86,16 +86,14 @@ export default function WidgetHeader({
             fill="currentColor"
             className="w-4 h-8"
           >
-            {/* First column of dots */}
             <circle cx="3" cy="0" r="1.5" />
             <circle cx="3" cy="8" r="1.5" />
             <circle cx="3" cy="16" r="1.5" />
-            {/* Second column of dots */}
             <circle cx="13" cy="0" r="1.5" />
             <circle cx="13" cy="8" r="1.5" />
             <circle cx="13" cy="16" r="1.5" />
           </svg>
-        </button>
+        </button> */}
       </div>
     </header>
   );
