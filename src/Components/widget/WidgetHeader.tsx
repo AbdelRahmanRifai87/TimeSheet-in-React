@@ -370,6 +370,11 @@ export default function WidgetHeader({
         borderColor: styles.widgetBorder,
       }}
     >
+      <div
+        className={`absolute w-[90%] left-0 h-[100%] bg-transparent grabbable ${
+          isDraggingOrResizing ? "" : "hidden"
+        } `}
+      ></div>
       <span className="font-semibold text-lg">
         {title.charAt(0).toUpperCase() + title.slice(1)}
       </span>
@@ -390,6 +395,7 @@ export default function WidgetHeader({
         <button
           type="button"
           title="Toggle dropdown"
+        onClick={onToggle}
           className="flex items-center justify-center px-2 rounded-lg border shadow-sm focus:outline-none hover:opacity-90 transition"
           style={{
             color: styles.widgetText,
