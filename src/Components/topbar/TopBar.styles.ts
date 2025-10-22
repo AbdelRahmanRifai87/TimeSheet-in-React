@@ -8,7 +8,7 @@ export const topBarStyles = {
     "bg-none border-none text-[#248ee0] font-semibold text-[14px] pr-[18px] appearance-none cursor-pointer focus:outline-none transition-colors duration-500",
   topbarCenter: "flex flex-1 justify-center",
   searchContainer:
-    "flex items-center w-full max-w-[350px] bg-white/10 rounded-[6px] px-[12px] py-[6px] transition-colors duration-500",
+    "flex items-center w-full max-w-[350px] bg-orange rounded-[6px] px-[12px] py-[6px] transition-colors duration-500",
   searchIcon: "text-[#e0e0e0] mr-[8px] transition-colors duration-500",
   searchInput:
     "w-full bg-transparent border-none text-dark text-[13.5px] outline-none placeholder-white opacity-70 pl-2",

@@ -1,7 +1,5 @@
-
-
 import React from "react";
-import { useDarkModeStore } from "../Theme/useDarkModeStore"; // ✅ Zustand store
+import { useDarkModeStore } from "../Theme/useDarkModeStore";
 import { MdArrowForwardIos } from "react-icons/md";
 
 interface Alert {
@@ -13,26 +11,21 @@ interface Alert {
 }
 
 export function AlertItem({ alert, order }: { alert: Alert; order: number }) {
-  
-  const effectiveTheme = useDarkModeStore((state) => state.effectiveTheme);
-  const isDarkOrNight = effectiveTheme === "dark" || effectiveTheme === "night";
+  const styles = useDarkModeStore((state) => state.styles);
 
   const severityColors = {
-    high: isDarkOrNight
-      ? "border-[#D32F2F] bg-[#3a0e0e]" 
-      : "border-[#D32F2F] bg-[#D32F2F1A]", 
-    medium: isDarkOrNight
-      ? "border-[#FFA000] bg-[#4a3200]"
-      : "border-[#FFA000] bg-[#FFA0001A]",
-    low: isDarkOrNight
-      ? "border-[#E9D820] bg-[#474700]"
-      : "border-[#E9D820] bg-[#E9D8201A]",
-  };
-
-  const arrowColor = {
-    high: "#D32F2F",
-    medium: "#FFA000",
-    low: "#E9D820",
+    high: {
+      border: styles.alertHighBorder,
+      bg: styles.alertHighBg,
+    },
+    medium: {
+      border: styles.alertMediumBorder,
+      bg: styles.alertMediumBg,
+    },
+    low: {
+      border: styles.alertLowBorder,
+      bg: styles.alertLowBg,
+    },
   };
 
   const iconSeverity = {
@@ -43,9 +36,11 @@ export function AlertItem({ alert, order }: { alert: Alert; order: number }) {
 
   return (
     <div
-      className={`flex relative items-start border-t-2 rounded-lg p-3 gap-3 mb-2 shadow-sm w-full ${
-        severityColors[alert.severity]
-      }`}
+      className="flex relative items-start border-t-2 rounded-lg p-3 gap-3 mb-2 shadow-sm w-full"
+      style={{
+        borderColor: severityColors[alert.severity].border,
+        backgroundColor: severityColors[alert.severity].bg,
+      }}
     >
       {/* Icon */}
       <div className="flex-shrink-0 mt-1">
@@ -69,17 +64,15 @@ export function AlertItem({ alert, order }: { alert: Alert; order: number }) {
       {/* Title & Message */}
       <div className="ml-3">
         <h4
-          className={`font-medium ${order === 0 ? "text-lg" : "text-sm"} ${
-            isDarkOrNight ? "text-white" : "text-[#1E0E06]"
-          }`}
+          className={`font-medium ${order === 0 ? "text-lg" : "text-sm"}`}
+          style={{ color: styles.mainText }}
         >
           ATTENTION REQUIRED - {alert.title}
         </h4>
 
         <p
-          className={`${order === 0 ? "text-lg" : "text-sm"} ${
-            isDarkOrNight ? "text-white" : "text-[#1E0E06]"
-          } mt-1`}
+          className={`${order === 0 ? "text-lg" : "text-sm"} mt-1`}
+          style={{ color: styles.mainText }}
         >
           {alert.message}
         </p>
@@ -87,7 +80,9 @@ export function AlertItem({ alert, order }: { alert: Alert; order: number }) {
 
       {/* Arrow */}
       <div className="absolute bottom-2 right-2">
-        <MdArrowForwardIos style={{ color: arrowColor[alert.severity] }} />
+        <MdArrowForwardIos
+          style={{ color: severityColors[alert.severity].border }}
+        />
       </div>
     </div>
   );

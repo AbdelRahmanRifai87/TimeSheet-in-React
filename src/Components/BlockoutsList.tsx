@@ -10,7 +10,7 @@ interface Blockout {
 }
 
 export function BlockoutList({ blockouts }: { blockouts: Blockout[] }) {
-  const isDarkMode = useDarkModeStore((state) => state.isDarkMode);
+  const styles = useDarkModeStore((state) => state.styles);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const [showLeftShadow, setShowLeftShadow] = useState(false);
@@ -28,17 +28,9 @@ export function BlockoutList({ blockouts }: { blockouts: Blockout[] }) {
     handleScroll();
   }, [blockouts]);
 
-  const lightGradient =
-    "linear-gradient(to right, rgba(255,255,255,1), rgba(255,255,255,0))";
-  const darkGradient = "linear-gradient(to right, #121212, rgba(18,18,18,0))";
-  const lightGradientLeft =
-    "linear-gradient(to right, rgba(255,255,255,1), rgba(255,255,255,0))";
-  const darkGradientLeft =
-    "linear-gradient(to right, #121212, rgba(18,18,18,0))";
-  const lightGradientRight =
-    "linear-gradient(to left, rgba(255,255,255,1), rgba(255,255,255,0))";
-  const darkGradientRight =
-    "linear-gradient(to left, #121212, rgba(18,18,18,0))";
+  // Use store colors for gradient, fallback to light/dark
+  const leftGradient = `linear-gradient(to right, ${styles.mainBg}, rgba(255,255,255,0))`;
+  const rightGradient = `linear-gradient(to left, ${styles.mainBg}, rgba(255,255,255,0))`;
 
   return (
     <div className="relative w-full h-fit rounded-lg">
@@ -57,49 +49,24 @@ export function BlockoutList({ blockouts }: { blockouts: Blockout[] }) {
           ))}
         </div>
       </div>
+
       {showLeftShadow && (
-        <>
-          {/* Light Theme Left Shadow */}
-          <div
-            className="absolute rounded-lg  left-0 top-0 bottom-0 w-8 pointer-events-none"
-            style={{
-              background: lightGradientLeft,
-              opacity: isDarkMode ? 0 : 1,
-              transition: "opacity 500ms ease-in-out",
-            }}
-          />
-          {/* Dark Theme Left Shadow */}
-          <div
-            className="absolute rounded-lg  left-0 top-0 bottom-0 w-8 pointer-events-none"
-            style={{
-              background: darkGradientLeft,
-              opacity: isDarkMode ? 1 : 0,
-              transition: "opacity 500ms ease-in-out",
-            }}
-          />
-        </>
+        <div
+          className="absolute rounded-lg left-0 top-0 bottom-0 w-8 pointer-events-none"
+          style={{
+            background: leftGradient,
+            transition: "opacity 500ms ease-in-out",
+          }}
+        />
       )}
       {showRightShadow && (
-        <>
-          {/* Light Theme Right Shadow */}
-          <div
-            className="absolute rounded-lg right-0 top-0 bottom-0 w-8 pointer-events-none"
-            style={{
-              background: lightGradientRight,
-              opacity: isDarkMode ? 0 : 1,
-              transition: "opacity 500ms ease-in-out",
-            }}
-          />
-          {/* Dark Theme Right Shadow */}
-          <div
-            className="absolute rounded-lg right-0 top-0 bottom-0 w-8 pointer-events-none"
-            style={{
-              background: darkGradientRight,
-              opacity: isDarkMode ? 1 : 0,
-              transition: "opacity 500ms ease-in-out",
-            }}
-          />
-        </>
+        <div
+          className="absolute rounded-lg right-0 top-0 bottom-0 w-8 pointer-events-none"
+          style={{
+            background: rightGradient,
+            transition: "opacity 500ms ease-in-out",
+          }}
+        />
       )}
     </div>
   );

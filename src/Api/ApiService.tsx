@@ -613,7 +613,7 @@ const mockPages: Page[] = [
   },
   {
     id: 21,
-    name: "General",
+    name: "My details",
     path: "/details/general",
     icon: "fas fa-user",
     order: 1,

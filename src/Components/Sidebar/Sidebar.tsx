@@ -1,4 +1,4 @@
-// import SidebarDivider from "./SidebarDivider";
+
 import SidebarMenu from "./SidebarMenu";
 import SidebarFooter from "./SidebarFooter";
 import { useSidebarContext } from "../../Context/SidebarContext";
@@ -8,35 +8,33 @@ import { useDarkModeStore } from "../../Theme/useDarkModeStore"; // zustand stor
 const Sidebar: React.FC = () => {
   const { isCollapsed, setIsCollapsed, menuPages } = useSidebarContext();
 
-  const effectiveTheme = useDarkModeStore((state) => state.effectiveTheme);
+  const styles = useDarkModeStore((state) => state.styles);
+  const theme = useDarkModeStore((state) => state.theme);
+  const customTheme = useDarkModeStore((state) => state.customTheme);
 
-  // Company dropdown state
+  
   const [isCompanyDropdownOpen, setIsCompanyDropdownOpen] = useState(false);
-  const [selectedCompany, setSelectedCompany] = useState("ULTIMATE");
+  const [selectedCompany, setSelectedCompany] = useState("SECURECY");
   const [orderedCompanies, setOrderedCompanies] = useState([
-    "ULTIMATE",
+    "SECURECY",
     "GUARDIAN",
     "SAFEWATCH",
   ]);
-
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // Logos
   const companyLogos: Record<string, string> = {
-    ULTIMATE: "/ultimatesecurity2.png",
+    SECURECY: "/logo_white copy.png",
     GUARDIAN: "/guardian_global1.png",
     SAFEWATCH: "/Safewatch2_logo.png",
   };
+
   const companySigns: Record<string, string> = {
-    ULTIMATE:
-      effectiveTheme === "dark" || effectiveTheme === "night"
-        ? "/logo_white.png"
-        : "/logo_color1.png",
+    SECURECY: "/logo_color1.png",
     GUARDIAN: "/logo_color1.png",
     SAFEWATCH: "/logo_color1.png",
   };
 
-  // Click outside dropdown
+  
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -50,28 +48,24 @@ const Sidebar: React.FC = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  
   useEffect(() => {
     setOrderedCompanies([
       selectedCompany,
       ...orderedCompanies.filter((c) => c !== selectedCompany),
     ]);
+    
   }, []);
-
-  const sidebarBg =
-    effectiveTheme === "light"
-      ? "bg-[#235e8b]"
-      : effectiveTheme === "dark"
-      ? "bg-[#0f2739]"
-      : effectiveTheme === "night"
-      ? "bg-[#0f0f0f]"
-      : "bg-[#235e8b]";
 
   return (
     <aside
-      className={`row-span-2 flex flex-col transition-all duration-300   ${sidebarBg}`}
+      className="row-span-2 flex flex-col transition-all duration-300"
+      style={{
+        backgroundColor: styles.sidebarBg,
+        color: styles.sidebarText,
+      }}
     >
       {/* Company Logo */}
-
       <div
         ref={dropdownRef}
         className="relative px-3 py-1 flex mb-2 justify-start cursor-pointer"
@@ -85,69 +79,77 @@ const Sidebar: React.FC = () => {
           }
           alt={`${selectedCompany} Logo`}
           className={`object-contain transition-all duration-300 ${
-            isCollapsed ? "w-10 h-10" : "w-[500px] h-[45px]"
+            isCollapsed ? "w-10 h-10" : "w-[400px] h-[35px]"
           }`}
         />
         {!isCollapsed && (
-          // <i
-          //   className={`fas fa-chevron-down absolute bottom-3 right-0.25 text-white transition-transform duration-300 ${
-          //     isCompanyDropdownOpen ? "rotate-180" : ""
-          //   }`}
-          // />
           <i
-            className={`fas fa-chevron-down absolute bottom-3 right-1 text-white text-xs transition-transform duration-300 ${
+            className={`fas fa-chevron-down absolute bottom-2 opacity-70  right-4 text-xs transition-transform duration-300 ${
               isCompanyDropdownOpen ? "rotate-180" : ""
             }`}
           />
         )}
+
         {/* Dropdown list */}
         {isCompanyDropdownOpen && !isCollapsed && (
           <div
-            className={`absolute top-full mt-2 w-[200px] shadow-lg rounded-md z-50 ${
-              effectiveTheme === "light"
-                ? "bg-[#625d5d] text-black"
-                : effectiveTheme === "dark"
-                ? "bg-[#8e8e8e] text-white"
-                : effectiveTheme === "night"
-                ? "bg-[#312f2f] text-white"
-                : "bg-gray-200 text-black"
-            }`}
+            className="absolute top-full mt-2 w-[200px] shadow-lg rounded-md z-50"
+            style={{
+              backgroundColor: styles.sidebarBg,
+              color: styles.sidebarText,
+            }}
           >
             {orderedCompanies.map((company) => (
               <div
                 key={company}
-                className="px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer"
+                className="flex items-center gap-2 px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer"
                 onClick={() => {
                   setSelectedCompany(company);
                   setIsCompanyDropdownOpen(false);
                 }}
               >
-                {company}
+                <img
+                  src={companyLogos[company]}
+                  alt={`${company} logo`}
+                  className="w-24 h-auto object-contain"
+                />
               </div>
             ))}
           </div>
         )}
       </div>
-      <div className="flex-1 overflow-y-auto overflow-x-hidden  no-scrollbar ">
-        <SidebarMenu pages={menuPages || []} isCollapsed={isCollapsed} />
-      </div>
-      {/* <SidebarDivider /> */}
 
-      {/* Menu */}
+      {/* Sidebar Menu */}
+      <div className="flex-1 overflow-y-auto overflow-x-hidden no-scrollbar">
+        <SidebarMenu
+          pages={menuPages || []}
+          isCollapsed={isCollapsed}
+          customTheme={{
+            background: styles.sidebarBg,
+            text: styles.sidebarText,
+            button: styles.sidebarBtn,
+            hover: styles.sidebarHover,
+          }}
+        />
+      </div>
 
       {/* Collapse Button */}
-      <div className="mt-auto  flex flex-col gap-3 ">
+      <div className="mt-auto flex flex-col gap-3">
         <button
-          className={`flex items-center justify-center  bg-[#EDEDED80] text-[#F5F5DC] rounded-md mx-auto transition-all duration-300 ${
+          className={`flex items-center justify-center rounded-md mx-auto transition-all duration-300 ${
             isCollapsed ? "w-10 h-10" : "w-[80%] py-3 px-4"
           }`}
           onClick={() => setIsCollapsed((prev) => !prev)}
+          style={{
+            backgroundColor: styles.sidebarBtn,
+            color: styles.sidebarText,
+          }}
         >
           {isCollapsed ? (
             <i className="fas fa-angle-right"></i>
           ) : (
             <>
-              <span className="text-sm font-medium mr-2 ">Collapse Menu</span>
+              <span className="text-sm font-medium mr-2">Collapse Menu</span>
               <i className="fas fa-angle-left"></i>
             </>
           )}

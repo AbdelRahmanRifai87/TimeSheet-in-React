@@ -19,7 +19,7 @@ const SidebarContainer: React.FC = () => {
     fetchMenuPages();
   }, [setMenuPages]);
 
-  return <Sidebar />; // ✅ Sidebar now reads theme from Zustand directly
+  return <Sidebar />;
 };
 
 export default SidebarContainer;

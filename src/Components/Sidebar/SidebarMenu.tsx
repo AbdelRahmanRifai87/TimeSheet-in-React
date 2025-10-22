@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import SidebarMenuItem from "./SidebarMenuItem";
 import SidebarDivider from "./SidebarDivider";
@@ -8,14 +9,26 @@ import { useDarkModeStore } from "../../Theme/useDarkModeStore";
 interface SidebarMenuProps {
   pages: Page[];
   isCollapsed: boolean;
+  customTheme?: {
+    background: string;
+    text: string;
+    button: string;
+    hover?: string;
+  };
 }
 
-const SidebarMenu: React.FC<SidebarMenuProps> = ({ pages, isCollapsed }) => {
+const SidebarMenu: React.FC<SidebarMenuProps> = ({
+  pages,
+  isCollapsed,
+  customTheme,
+}) => {
   const location = useLocation();
-  const effectiveTheme = useDarkModeStore((state) => state.effectiveTheme);
-  const isDarkMode = effectiveTheme === "dark" || effectiveTheme === "night";
 
-  // Centralized expansion state
+  // --------------------
+  // Get sidebar styles from store
+  // --------------------
+  const styles = useDarkModeStore((state) => state.styles);
+
   const [expandedMap, setExpandedMap] = useState<Record<number, boolean>>({});
 
   const toggleExpand = (id: number) => {
@@ -31,7 +44,7 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ pages, isCollapsed }) => {
     }
   });
 
-  // Expand parents if current path is nested
+  // Expand parents of active page
   useEffect(() => {
     const expandParents = (pageId?: number) => {
       if (!pageId) return;
@@ -46,7 +59,11 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ pages, isCollapsed }) => {
     if (activePage) expandParents(activePage.id);
   }, [location.pathname, pages]);
 
-  const parentItems = pages.filter((page) => !page.parentId);
+  // const parentItems = pages.filter((page) => !page.parentId);
+  const parentItems = pages.filter(
+    (page) =>
+      !page.parentId && page.id !== 2 && page.id !== 15 && page.id !== 14
+  );
 
   const dividerAfterItems = [
     "Dashboard",
@@ -57,9 +74,12 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ pages, isCollapsed }) => {
   ];
 
   return (
-    <nav className="sideBar-menu flex-1 scroll-smooth">
+    <nav
+      className="sideBar-menu flex-1 scroll-smooth"
+      style={{ backgroundColor: customTheme?.background || styles.sidebarBg }}
+    >
       {parentItems.length > 0 ? (
-        parentItems.map((page) => (
+        parentItems.map((page, index) => (
           <React.Fragment key={page.id}>
             <SidebarMenuItem
               page={page}
@@ -67,16 +87,33 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ pages, isCollapsed }) => {
               childrenMap={childrenMap}
               expandedMap={expandedMap}
               onToggleExpand={toggleExpand}
+              customTheme={
+                customTheme || {
+                  background: styles.sidebarBg,
+                  text: styles.sidebarText,
+                  button: styles.sidebarBtn,
+                  hover: styles.sidebarHover,
+                }
+              }
             />
-
-            {dividerAfterItems.includes(page.name) && <SidebarDivider />}
+            {index < parentItems.length - 1 && (
+              <hr
+                style={{
+                  border: "none",
+                  borderTop: `1px solid ${styles.sidebarBtn}`, // use button color for subtle line
+                  // spacing
+                  opacity: 0.3,
+                }}
+              />
+            )}
           </React.Fragment>
         ))
       ) : (
         <div
-          className={`p-4 text-center ${
-            isDarkMode ? "text-white/70" : "text-black/70"
-          }`}
+          className="p-4 text-center"
+          style={{
+            color: customTheme?.text || styles.sidebarText,
+          }}
         >
           Loading menu items...
         </div>
