@@ -138,3 +138,46 @@ body {
 div::-webkit-scrollbar {
   display: none;
 }
+.toggle-btn {
+  background-color: #b7b9ba;
+  border: 1px solid #aaa;
+  border-radius: 99px;
+  width: 50px; /* narrower for vertical */
+  height: 28px; /* taller for vertical */
+  transition: background-color 0.1s ease, border-color 0.2s ease;
+  cursor: pointer;
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.748);
+  position: relative;
+}
+
+.toggle-btn .thumb {
+  width: 17px;
+  height: 17px;
+  background-color: #fff;
+  border-radius: 99px;
+  position: absolute;
+  top: 50%;
+  left: 3px;
+  transform: translateY(-50%);
+  transition: left 0.15s ease;
+}
+
+.toggle-btn.toggled {
+  background-color: #232625;
+}
+
+.toggle-btn.toggled .thumb {
+  left: calc(50px - 22px); /* move thumb to bottom */
+}
+
+.toggle-btn:hover {
+  border-color: #6f6f6f;
+}
+.vertical-toggle-text {
+  writing-mode: vertical-rl; /* letters go top-to-bottom */
+  /* letters stay upright */
+}
+/* in TopBar.css or a global CSS file */
+.searchInput::placeholder {
+  color: var(--search-text);
+}

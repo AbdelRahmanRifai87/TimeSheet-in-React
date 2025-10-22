@@ -126,12 +126,26 @@ const reportsData = [
 export interface DashboardItem extends Layout {
   label: "alerts" | "blockouts" | "reports";
   data: any[];
+  resizeHandles?: ResizeHandle[];
 }
 
 export const datasets: { label: DashboardItem["label"]; data: any[] }[] = [
   { label: "alerts", data: alertsData },
   { label: "blockouts", data: blockoutsData },
   { label: "reports", data: reportsData },
+];
+
+export type ResizeHandle = "s" | "w" | "e" | "n" | "sw" | "nw" | "se" | "ne";
+
+const availableHandles: ResizeHandle[] = [
+  "s",
+  "w",
+  "e",
+  "n",
+  "sw",
+  "nw",
+  "se",
+  "ne",
 ];
 
 const breakpoints: Breakpoints = {
@@ -164,6 +178,7 @@ const widths: Breakpoints = { xlg: 2, lg: 2, md: 3, sm: 6, xs: 4, xxs: 2 };
 
 function generateInitialLayouts(count: number): Layouts {
   const times = Array.from({ length: count });
+
   return Object.keys(breakpoints).reduce((memo: Layouts, bp: string) => {
     const width = widths[bp as keyof Breakpoints];
     const col = cols[bp as keyof Breakpoints];
@@ -181,10 +196,11 @@ function generateInitialLayouts(count: number): Layouts {
         minW = 5;
         minH = 6;
       } else if (dataset.label === "blockouts") {
-        w = 6;
+        w = 5;
         h = 8;
-        minW = 5;
-        minH = 6;
+        minW = 4;
+        minH = 8;
+        maxH = 9;
       } else if (dataset.label === "reports") {
         w = 5;
         h = 9;
@@ -201,6 +217,7 @@ function generateInitialLayouts(count: number): Layouts {
         h,
         minW,
         minH,
+        resizeHandles: availableHandles,
       };
 
       if (maxH !== undefined) {
@@ -288,6 +305,7 @@ export function useDynamicGrid(initialCount = 3): DynamicGridHook {
           h,
           minW,
           minH,
+          resizeHandles: availableHandles,
         };
 
         if (maxH !== undefined) {

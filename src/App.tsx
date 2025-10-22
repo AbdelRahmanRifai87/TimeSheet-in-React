@@ -12,7 +12,7 @@ import Users from "./pages/Users";
 
 function App() {
   useEffect(() => {
-    document.title = "Partisan Protective Services";
+    document.title = "Securecy";
   }, []);
 
   return (

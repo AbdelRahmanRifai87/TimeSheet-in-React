@@ -28,7 +28,7 @@ interface WidgetsGridLayoutProps {
   cols: Breakpoints;
   isDraggingOrResizing: boolean;
   toggleItemHeight: (itemId: string, newH: number) => void;
-  theme: "light" | "dark" | "night";
+  // theme: "light" | "dark" | "night";
 }
 
 const ROW_HEIGHT = 30;
@@ -46,7 +46,6 @@ export default function WidgetsGridLayout({
   cols,
   toggleItemHeight,
   isDraggingOrResizing,
-  theme,
 }: WidgetsGridLayoutProps) {
   const [containerWidth, setContainerWidth] = useState(0);
   // const [currentBreakpoint, setCurrentBreakpoint] = useState("lg");
