@@ -10,8 +10,9 @@ interface Report {
 }
 
 export function ReportList({ reports }: { reports: Report[] }) {
-  // Replace with your actual dark mode logic from global state or context
-  const isDarkMode = useDarkModeStore((state) => state.isDarkMode);
+  const effectiveTheme = useDarkModeStore((state) => state.effectiveTheme);
+  const isDarkMode = effectiveTheme === "dark" || effectiveTheme === "night";
+
   const containerRef = useRef<HTMLDivElement>(null);
   const [showLeftShadow, setShowLeftShadow] = useState(false);
   const [showRightShadow, setShowRightShadow] = useState(false);

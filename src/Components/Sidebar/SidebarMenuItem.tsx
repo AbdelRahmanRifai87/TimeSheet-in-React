@@ -1,8 +1,6 @@
-
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import type { Page } from "../../Types/Page";
-import { useDarkModeStore } from "../../Theme/useDarkModeStore";
 
 interface SidebarMenuItemProps {
   page: Page;
@@ -11,7 +9,13 @@ interface SidebarMenuItemProps {
   childrenMap?: Record<number, Page[]>;
   expandedMap: Record<number, boolean>;
   onToggleExpand: (id: number) => void;
-  level?: number; // <-- depth of the item
+  level?: number; // depth of the item
+  customTheme?: {
+    background: string;
+    text: string;
+    button: string;
+    hover?: string;
+  };
 }
 
 const SidebarMenuItem: React.FC<SidebarMenuItemProps> = ({
@@ -21,11 +25,10 @@ const SidebarMenuItem: React.FC<SidebarMenuItemProps> = ({
   childrenMap,
   expandedMap,
   onToggleExpand,
-  level = 0, // default root level
+  level = 0,
+  customTheme,
 }) => {
   const location = useLocation();
-  const effectiveTheme = useDarkModeStore((state) => state.effectiveTheme);
-  const isDarkMode = effectiveTheme === "dark" || effectiveTheme === "night";
 
   const hasChildren = childrenMap && childrenMap[page.id]?.length > 0;
   const isExpanded = expandedMap[page.id] || false;
@@ -38,14 +41,12 @@ const SidebarMenuItem: React.FC<SidebarMenuItemProps> = ({
     null
   );
 
-  // Update popup position
   const updateCoords = () => {
     const rect = triggerRef.current?.getBoundingClientRect();
     if (!rect) return;
     setCoords({ left: Math.ceil(rect.right), top: Math.ceil(rect.top) });
   };
 
-  // Close popup when mouse leaves both trigger & popup
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       if (
@@ -65,23 +66,15 @@ const SidebarMenuItem: React.FC<SidebarMenuItemProps> = ({
     location.pathname === page.path ||
     (page.path !== "/" && location.pathname.startsWith(page.path));
 
-  const activeClasses = isActive
-    ? isChild
-      ? `text-white font-bold ${
-          isCollapsed ? "flex justify-center items-center" : ""
-        }`
-      : `${
-          isDarkMode ? "bg-gray-700 text-white" : "bg-white text-[#2186d4]"
-        } font-medium   px-2 ${
-          isCollapsed ? "flex justify-center items-center" : ""
-        }`
-    : isDarkMode
-    ? `text-white hover:bg-gray-600/30 ${
-        isCollapsed ? "flex justify-center items-center" : ""
-      }`
-    : `text-white hover:bg-white/10 ${
-        isCollapsed ? "flex justify-center items-center" : ""
-      }`;
+  // -------------------------------
+  // Use theme from props
+  // -------------------------------
+  const textColor = customTheme?.text || "#ffffff";
+  const btnBg = customTheme?.button || "rgba(255,255,255,0.1)";
+  const hoverBg = "rgba(255,255,255,0.1)";
+  const activeBg = isActive ? hoverBg : "transparent";
+  const activeText = isActive ? textColor : textColor;
+  const hoverEffect = isHovered ? hoverBg : activeBg;
 
   return (
     <div
@@ -100,8 +93,10 @@ const SidebarMenuItem: React.FC<SidebarMenuItemProps> = ({
         ref={triggerRef}
         to={page.path}
         className={`group flex w-full items-center rounded transition-colors ${
-          isChild ? "border-b border-gray-600" : "border-b border-gray-400/40"
-        } ${activeClasses}`}
+          isChild
+            ? "border-b border-gray-400/40"
+            : "border-b border-gray-400/40"
+        }`}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         onClick={(e) => {
@@ -111,36 +106,47 @@ const SidebarMenuItem: React.FC<SidebarMenuItemProps> = ({
             if (isCollapsed) setIsPopupOpen((prev) => !prev);
           }
         }}
-        style={
-          isCollapsed
-            ? { padding: "11px 12px" }
-            : {
-                paddingTop: isChild ? "3px" : "7px",
-                paddingBottom: isChild ? "3px" : "7px",
-                paddingLeft: `${15 + level * 16}px`, // <-- indentation for hierarchy
-                paddingRight: "15px",
-              }
-        }
+        style={{
+          backgroundColor: hoverEffect, // ← use hoverEffect
+          color: activeText, // always follow theme
+          paddingLeft: `${15 + level * 16}px`,
+          paddingRight: "15px",
+          paddingTop: isChild ? "3px" : "7px",
+          paddingBottom: isChild ? "3px" : "7px",
+        }}
       >
-        {isChild ? (
+        {/* Icon / Dash */}
+        {level === 0 ? (
+          // Parent: show main icon
+          <div className="flex items-center w-6 justify-center">
+            <i className={`${page.icon} w-4 text-sm`}></i>
+          </div>
+        ) : level === 1 ? (
+          // First-level child: dash, change to caret on hover
           <span className="w-6 text-center text-gray-400">
             {isHovered ? (
               <i
                 className="fas fa-caret-right text-gray-300"
                 style={{ fontSize: "12px" }}
-              ></i>
+              />
             ) : (
               "-"
             )}
           </span>
         ) : (
-          <div className="flex items-center">
-            <i className={`${page.icon} w-4 text-sm`}></i>
-          </div>
+          // Levels >= 2: always show caret-right icon
+          <span className="w-6 text-center text-gray-400">
+            <i
+              className="fas fa-caret-right text-gray-300"
+              style={{ fontSize: "12px" }}
+            />
+          </span>
         )}
+
         {!isCollapsed && (
           <span className="ml-2 text-[13.5px]">{page.name}</span>
         )}
+
         {!isCollapsed && hasChildren && (
           <i
             className={`fas ${
@@ -161,19 +167,24 @@ const SidebarMenuItem: React.FC<SidebarMenuItemProps> = ({
             minWidth: "160px",
             maxHeight: "300px",
             overflowY: "auto",
+            backgroundColor: customTheme?.background || "#235e8b",
+            color: customTheme?.text || "#ffffff",
+            zIndex: 40,
+            padding: "0.5rem",
           }}
-          className="z-40 shadow-lg bg-[#235e8b] p-2"
+          className="shadow-lg "
         >
           {childrenMap?.[page.id]?.map((child) => (
             <SidebarMenuItem
               key={child.id}
               page={child}
               isChild={true}
-              isCollapsed={false} // style like expanded
+              isCollapsed={false}
               childrenMap={childrenMap}
               expandedMap={expandedMap}
               onToggleExpand={onToggleExpand}
-              level={level + 1} // pass depth for popup too
+              level={level + 1}
+              customTheme={customTheme}
             />
           ))}
         </div>
@@ -182,25 +193,32 @@ const SidebarMenuItem: React.FC<SidebarMenuItemProps> = ({
       {/* Expanded children in main sidebar */}
       {!isCollapsed && hasChildren && isExpanded && (
         <div className="relative w-full">
-          {/* Vertical line for direct children */}
           {!isChild && (
             <div
-              className="absolute left-9.5  top-0 bottom-0 w-[2px] bg-white/20"
-              // shift line according to level
+              className="absolute left-9.5 top-0 bottom-0 w-[2px]"
+              style={{ backgroundColor: hoverBg }}
             />
           )}
-
           <div className="flex flex-col">
             {childrenMap?.[page.id]?.map((child) => (
-              <div key={child.id} className="w-full">
+              <div key={child.id} className="w-full relative">
+                <hr
+                  style={{
+                    border: "none",
+                    borderTop: `1px solid ${hoverBg}`,
+                    opacity: 0.3,
+                    margin: 0,
+                  }}
+                />
                 <SidebarMenuItem
+                  customTheme={customTheme}
                   page={child}
                   isChild={true}
                   isCollapsed={false}
                   childrenMap={childrenMap}
                   expandedMap={expandedMap}
                   onToggleExpand={onToggleExpand}
-                  level={level + 1} // pass depth
+                  level={level + 1}
                 />
               </div>
             ))}

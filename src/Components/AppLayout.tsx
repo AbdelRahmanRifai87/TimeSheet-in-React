@@ -20,11 +20,6 @@ function AppLayout() {
     return () => mq.removeEventListener("change", handler);
   }, [theme, setTheme]);
 
-  const separatorColor =
-    effectiveTheme === "dark" || effectiveTheme === "night"
-      ? "#0f2739"
-      : "#235e8b";
-
   return (
     <div
       className="grid grid-rows-[auto_1fr] h-screen"
