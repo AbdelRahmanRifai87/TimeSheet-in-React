@@ -1,6 +1,4 @@
-
 import { create } from "zustand";
-
 
 type Theme = "light" | "dark" | "night" | "system" | "custom";
 
@@ -63,7 +61,6 @@ interface ThemeState {
   setCustomTheme: (theme: Partial<CustomTheme>) => void;
 }
 
-
 export const useDarkModeStore = create<ThemeState>((set, get) => {
   const savedTheme = (localStorage.getItem("theme") as Theme) || "system";
   const savedCustomTheme = JSON.parse(
@@ -83,12 +80,10 @@ export const useDarkModeStore = create<ThemeState>((set, get) => {
       ? "dark"
       : "light";
 
-  
   const computeStyles = (
     applied: "light" | "dark" | "night" | "custom",
     customTheme: CustomTheme
   ): Styles & { widgetHeaderBg?: string } => {
-    
     const lightenColor = (hex: string, percent: number) => {
       const cleanHex = hex.replace("#", "");
       const hexFull =
@@ -195,7 +190,7 @@ export const useDarkModeStore = create<ThemeState>((set, get) => {
           ? "#3a5567"
           : applied === "night"
           ? "#1f1f1f"
-          : "#1C75BC26",
+          : "#ffffff",
       mainText:
         applied === "custom"
           ? customTheme.main.text
@@ -227,7 +222,7 @@ export const useDarkModeStore = create<ThemeState>((set, get) => {
           ? "#444444"
           : "#cccccc",
 
-      widgetHeaderBg, 
+      widgetHeaderBg,
       widgetIconBg:
         applied === "custom"
           ? "#000000"
@@ -244,7 +239,6 @@ export const useDarkModeStore = create<ThemeState>((set, get) => {
     };
   };
 
-  
   const applyTheme = (theme: Theme, customTheme: CustomTheme) => {
     let applied: "light" | "dark" | "night" | "custom";
 
@@ -273,7 +267,7 @@ export const useDarkModeStore = create<ThemeState>((set, get) => {
       );
       root.style.setProperty("--main-text", customTheme.main.text);
       root.style.setProperty("--main-btn", customTheme.main.button);
-      
+
       root.style.setProperty("--widget-bg", customTheme.widget.background);
       root.style.setProperty("--widget-text", customTheme.widget.text);
       root.style.setProperty("--widget-border", customTheme.widget.button);
@@ -318,7 +312,6 @@ export const useDarkModeStore = create<ThemeState>((set, get) => {
     },
   };
 });
-
 
 window
   .matchMedia("(prefers-color-scheme: dark)")

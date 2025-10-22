@@ -148,7 +148,7 @@ function Widget({
 
   return (
     <div
-      className="rounded-lg shadow-md border h-full w-full flex flex-col items-center px-1 pt-1 transition-colors duration-200"
+      className="rounded-lg shadow-md  h-full w-full flex flex-col items-center transition-colors duration-200"
       style={{
         backgroundColor: styles.widgetBg, // 🎨 use widget background
         color: styles.widgetText, // 🎨 use widget text color
