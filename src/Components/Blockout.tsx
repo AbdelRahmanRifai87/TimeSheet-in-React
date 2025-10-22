@@ -29,7 +29,7 @@ export default function BlockoutItem({ blockout }: { blockout: Blockout }) {
           <div className="flex items-center gap-2">
             <div className="text-left">
               <p
-                className={`text-xl font-semibold ${
+                className={`text-lg font-semibold ${
                   isDark ? "text-white" : "text-[#1E0E06]"
                 }`}
               >
