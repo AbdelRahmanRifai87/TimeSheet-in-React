@@ -23,12 +23,17 @@ export default function WidgetHeader({
 
   return (
     <header
-      className={`grabbable flex items-center justify-between w-full  rounded-t-lg px-4 py-2 border-b ${
+      className={`flex items-center justify-between w-full relative rounded-t-lg px-4 py-2 border-b z-0 ${
         isDarkMode
           ? "bg-[#272323] border-gray-700 text-white"
           : "bg-[#1C75BC26] border-gray-200 text-[#05004E]"
       }`}
     >
+      <div
+        className={`absolute w-[90%] left-0 h-[100%] bg-transparent grabbable ${
+          isDraggingOrResizing ? "" : "hidden"
+        } `}
+      ></div>
       <span className="font-semibold text-lg">
         {title.charAt(0).toUpperCase() + title.slice(1)}
       </span>
@@ -55,7 +60,7 @@ export default function WidgetHeader({
           title={isCollapsed ? "Expand Widget" : "Collapse Widget"}
           // ⭐️ CRITICAL: Wire up the click handler
           onClick={onToggle}
-          className={`flex items-center justify-center px-2 rounded-lg w-10 h-10 border shadow-sm hover:shadow-[0_0_3px_0_#1C75BC] focus:outline-none ${
+          className={`flex items-center z-10 justify-center px-2 rounded-lg w-10 h-10 border shadow-sm hover:shadow-[0_0_3px_0_#1C75BC] focus:outline-none ${
             isDarkMode
               ? "bg-gray-800 border-gray-600 text-white hover:text-gray-200"
               : "bg-white border-gray-200 text-[#1C75BC] hover:text-gray-700"
