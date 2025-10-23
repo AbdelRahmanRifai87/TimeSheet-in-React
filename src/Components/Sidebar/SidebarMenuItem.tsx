@@ -70,7 +70,7 @@ const SidebarMenuItem: React.FC<SidebarMenuItemProps> = ({
   // Use theme from props
   // -------------------------------
   const textColor = customTheme?.text || "#ffffff";
-  const btnBg = customTheme?.button || "rgba(255,255,255,0.1)";
+  // const btnBg = customTheme?.button || "rgba(255,255,255,0.1)";
   const hoverBg = "rgba(255,255,255,0.1)";
   const activeBg = isActive ? hoverBg : "transparent";
   const activeText = isActive ? textColor : textColor;

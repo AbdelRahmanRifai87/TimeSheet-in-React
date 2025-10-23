@@ -1,4 +1,3 @@
-import React from "react";
 import { useDarkModeStore } from "../Theme/useDarkModeStore";
 import { MdArrowForwardIos } from "react-icons/md";
 
@@ -10,7 +9,7 @@ interface Alert {
   img: string | null;
 }
 
-export function AlertItem({ alert, order }: { alert: Alert; order: number }) {
+export function AlertItem({ alert }: { alert: Alert; order: number }) {
   const styles = useDarkModeStore((state) => state.styles);
 
   const severityColors = {

@@ -1,7 +1,6 @@
-
 import React, { useState, useEffect } from "react";
 import SidebarMenuItem from "./SidebarMenuItem";
-import SidebarDivider from "./SidebarDivider";
+// import SidebarDivider from "./SidebarDivider";
 import type { Page } from "../../Types/Page";
 import { useLocation } from "react-router-dom";
 import { useDarkModeStore } from "../../Theme/useDarkModeStore";
@@ -65,13 +64,13 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
       !page.parentId && page.id !== 2 && page.id !== 15 && page.id !== 14
   );
 
-  const dividerAfterItems = [
-    "Dashboard",
-    "Users",
-    "Supported living",
-    "IR's & Logs",
-    "Documents",
-  ];
+  // const dividerAfterItems = [
+  //   "Dashboard",
+  //   "Users",
+  //   "Supported living",
+  //   "IR's & Logs",
+  //   "Documents",
+  // ];
 
   return (
     <nav

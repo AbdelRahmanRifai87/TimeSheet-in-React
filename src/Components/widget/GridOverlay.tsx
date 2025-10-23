@@ -1,7 +1,5 @@
 // GridOverlay.jsx
 
-import React from "react";
-
 interface GridOverlayProps {
   isVisible: boolean;
   unitWidth: number;
@@ -35,8 +33,6 @@ export default function GridOverlay({
     maxRows * rowHeight +
     (maxRows > 0 ? maxRows - 1 : 0) * margin +
     paddingTop;
-
-  const cellColor = "rgba(0, 0, 0, 0.1)";
 
   const gridCells = [];
 

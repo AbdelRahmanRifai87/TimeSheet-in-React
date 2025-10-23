@@ -371,7 +371,7 @@ export default function WidgetHeader({
       }}
     >
       <div
-        className={`absolute w-[82%] left-0 h-[16%] bg-transparent grabbable ${
+        className={`absolute w-[82%] left-0 h-[11%] bg-transparent grabbable ${
           isDraggingOrResizing ? "" : "hidden"
         } `}
       ></div>
@@ -381,7 +381,9 @@ export default function WidgetHeader({
 
       <div className="flex space-x-2">
         <button
-          className="flex items-center justify-center px-3 rounded-lg border shadow-sm focus:outline-none hover:opacity-90 transition"
+          className={`flex items-center justify-center px-3 rounded-lg border shadow-sm focus:outline-none hover:opacity-90 transition  cursor-pointer ${
+            isDraggingOrResizing ? "" : "hidden"
+          }`}
           style={{
             color: styles.widgetText,
             borderColor: styles.widgetBorder,
@@ -396,7 +398,7 @@ export default function WidgetHeader({
           type="button"
           title="Toggle dropdown"
           onClick={onToggle}
-          className="flex items-center justify-center px-2 h-10 rounded-lg border shadow-sm focus:outline-none hover:opacity-90 transition"
+          className="flex items-center justify-center px-2 h-10 rounded-lg border shadow-sm focus:outline-none hover:opacity-90 transition cursor-pointer"
           style={{
             color: styles.widgetText,
             borderColor: styles.widgetBorder,

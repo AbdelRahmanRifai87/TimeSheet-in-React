@@ -1,4 +1,3 @@
-
 import SidebarMenu from "./SidebarMenu";
 import SidebarFooter from "./SidebarFooter";
 import { useSidebarContext } from "../../Context/SidebarContext";
@@ -9,10 +8,7 @@ const Sidebar: React.FC = () => {
   const { isCollapsed, setIsCollapsed, menuPages } = useSidebarContext();
 
   const styles = useDarkModeStore((state) => state.styles);
-  const theme = useDarkModeStore((state) => state.theme);
-  const customTheme = useDarkModeStore((state) => state.customTheme);
 
-  
   const [isCompanyDropdownOpen, setIsCompanyDropdownOpen] = useState(false);
   const [selectedCompany, setSelectedCompany] = useState("SECURECY");
   const [orderedCompanies, setOrderedCompanies] = useState([
@@ -34,7 +30,6 @@ const Sidebar: React.FC = () => {
     SAFEWATCH: "/logo_color1.png",
   };
 
-  
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -48,13 +43,11 @@ const Sidebar: React.FC = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  
   useEffect(() => {
     setOrderedCompanies([
       selectedCompany,
       ...orderedCompanies.filter((c) => c !== selectedCompany),
     ]);
-    
   }, []);
 
   return (

@@ -198,9 +198,8 @@ function generateInitialLayouts(count: number): Layouts {
       } else if (dataset.label === "blockouts") {
         w = 5;
         h = 8;
-        minW = 4;
+        minW = 5;
         minH = 8;
-        maxH = 9;
       } else if (dataset.label === "reports") {
         w = 5;
         h = 9;

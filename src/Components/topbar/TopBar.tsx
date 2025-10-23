@@ -115,10 +115,10 @@ const TopBar: React.FC<TopBarProps> = ({ userName, userAvatarUrl }) => {
         return null;
     }
   };
-  const placeholderStyle = {
-    color: styles.searchText,
-    opacity: 0.7, // match previous placeholder opacity
-  };
+  // const placeholderStyle = {
+  //   color: styles.searchText,
+  //   opacity: 0.7, // match previous placeholder opacity
+  // };
 
   return (
     <>

@@ -616,13 +616,13 @@ function Dashboard() {
         <div className="flex space-x-2 items-center">
           <button
             style={{ backgroundColor: styles.mainBtn, color: styles.mainText }}
-            className="px-4 py-2 text-sm font-semibold rounded-lg shadow-md hover:outline-1 hover:outline-[#6C668540] transition-colors"
+            className=" cursor-pointer px-4 py-2 text-sm font-semibold rounded-lg shadow-md hover:outline-1 hover:outline-[#6C668540] transition-colors"
           >
             Allow push
           </button>
           <button
             style={{ backgroundColor: styles.mainBtn, color: styles.mainText }}
-            className="px-4 py-2 text-sm font-semibold rounded-lg shadow-md hover:outline-1 hover:outline-[#6C668540] transition-colors"
+            className=" cursor-pointer px-4 py-2 text-sm font-semibold rounded-lg shadow-md hover:outline-1 hover:outline-[#6C668540] transition-colors"
             onClick={DismissHandler}
           >
             Dismiss
@@ -699,7 +699,7 @@ function Dashboard() {
                 backgroundColor: styles.mainBtn,
                 color: styles.mainText,
               }}
-              className="font-semibold py-4 px-6 rounded-xl shadow-md transition-colors duration-200 flex items-center space-x-2 gap-1"
+              className=" cursor-pointer font-semibold py-4 px-6 rounded-xl shadow-md transition-colors duration-200 flex items-center space-x-2 gap-1"
             >
               <i className="fa-solid fa-plus"></i>
               <span className="text-sm font-medium">Add widget</span>
@@ -708,7 +708,7 @@ function Dashboard() {
           <button
             onClick={editItems}
             style={{ backgroundColor: styles.mainBtn, color: styles.mainText }}
-            className="font-semibold py-4 px-6 rounded-xl shadow-md transition-colors duration-200 flex items-center space-x-2 gap-1"
+            className="  cursor-pointer font-semibold py-4 px-6 rounded-xl shadow-md transition-colors duration-200 flex items-center space-x-2 gap-1"
           >
             <img src="basil_edit-outline.png" alt="" />{" "}
             <span className="text-sm font-medium">
