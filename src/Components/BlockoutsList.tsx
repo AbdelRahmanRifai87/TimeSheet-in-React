@@ -110,7 +110,8 @@ import { useDarkModeStore } from "../Theme/useDarkModeStore"; // Adjust path as 
 
 interface Blockout {
   id: string;
-  date: string;
+  from: string;
+  to: string;
   user: string;
   subtext: string;
 }
@@ -143,13 +144,13 @@ export function BlockoutList({ blockouts }: { blockouts: Blockout[] }) {
       <div
         ref={containerRef}
         onScroll={handleScroll}
-        className="flex gap-3 w-full h-full overflow-x-auto overflow-y-hidden"
+        className="flex gap-3  w-full h-full overflow-x-auto overflow-y-hidden"
         style={{
           scrollbarWidth: "none",
           msOverflowStyle: "none",
         }}
       >
-        <div className="flex flex-row space-x-3 w-max h-full p-2">
+        <div className="flex flex-col gap-2  space-x-3 w-full h-full p-2">
           {blockouts.map((blockout) => (
             <BlockoutItem key={blockout.id} blockout={blockout} />
           ))}

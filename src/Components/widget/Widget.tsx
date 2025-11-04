@@ -100,6 +100,7 @@
 
 import WidgetHeader from "./WidgetHeader";
 import { useDarkModeStore } from "../../Theme/useDarkModeStore";
+import { useEffect, useState } from "react";
 
 interface WidgetProps {
   children: React.ReactNode;
@@ -110,9 +111,40 @@ interface WidgetProps {
   onToggleHeight: (newH: number) => void;
 }
 
-function Widget({ children, title, onRemove }: WidgetProps) {
+const COLLAPSED_HEIGHT = 2;
+
+function Widget({
+  children,
+  title,
+  onRemove,
+  isDraggingOrResizing,
+  currentHeight,
+  onToggleHeight,
+}: WidgetProps) {
   // ✅ Pull precomputed widget styles from Zustand
   const styles = useDarkModeStore((state) => state.styles);
+
+  const [expandedHeight, setExpandedHeight] = useState(currentHeight);
+
+  useEffect(() => {
+    if (currentHeight !== COLLAPSED_HEIGHT) {
+      setExpandedHeight(currentHeight);
+    }
+  }, [currentHeight]);
+
+  const handleToggle = () => {
+    let newHeight;
+    if (currentHeight === COLLAPSED_HEIGHT) {
+      newHeight = expandedHeight;
+    } else {
+      newHeight = COLLAPSED_HEIGHT;
+    }
+
+    onToggleHeight(newHeight);
+  };
+
+  // Check if the widget is currently in the collapsed state
+  const isCollapsed = currentHeight === COLLAPSED_HEIGHT;
 
   return (
     <div
@@ -123,14 +155,23 @@ function Widget({ children, title, onRemove }: WidgetProps) {
         borderColor: styles.widgetBorder, // 🎨 use widget border color
       }}
     >
-      <WidgetHeader title={title} onRemove={onRemove} />
+      <WidgetHeader
+        isDraggingOrResizing={isDraggingOrResizing}
+        title={title}
+        onRemove={onRemove}
+        isCollapsed={isCollapsed}
+        onToggle={handleToggle}
+      />
 
-      <div className="relative w-full h-full">
-        <div className="widget-content flex justify-center absolute inset-0 overflow-auto pt-2 px-3 rounded transition-colors duration-200">
-          {children}
+      {!isCollapsed && (
+        <div className="relative w-full h-full">
+          <div
+            className={`widget-content flex justify-center absolute inset-0 overflow-auto pt-2 px-3 `}
+          >
+            {children}
+          </div>
         </div>
-      </div>
-
+      )}
       <div className="w-full h-[20px]"></div>
     </div>
   );

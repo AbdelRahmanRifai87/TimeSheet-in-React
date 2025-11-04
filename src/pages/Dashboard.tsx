@@ -570,6 +570,8 @@ function Dashboard() {
   const styles = useDarkModeStore((s) => s.styles);
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [dismiss, setDismiss] = useState(false);
+
   const {
     layouts,
     allItems,
@@ -584,6 +586,10 @@ function Dashboard() {
   const [isDraggingOrResizing, setIsDraggingOrResizing] = useState(false);
   const editItems = () => setIsDraggingOrResizing((prev) => !prev);
 
+  function DismissHandler() {
+    setDismiss((d) => !d);
+  }
+
   return (
     <div
       className="min-h-screen px-9 pt-3 font-sans transition-colors"
@@ -593,7 +599,9 @@ function Dashboard() {
 
       {/* Example card */}
       <div
-        className="flex justify-between items-center px-6 py-7 rounded-xl mb-5 shadow-md transition-colors"
+        className={`flex justify-between items-center px-6 py-7 rounded-xl mb-5 shadow-md transition-colors ${
+          dismiss ? "hidden" : ""
+        }`}
         style={{ backgroundColor: styles.mainBg, color: styles.mainText }}
       >
         <div className="flex items-start space-x-3">
@@ -618,6 +626,7 @@ function Dashboard() {
           <button
             style={{ backgroundColor: styles.mainBtn, color: styles.mainText }}
             className="px-4 py-2 text-sm font-semibold rounded-lg shadow-md hover:outline-1 hover:outline-[#6C668540] transition-colors"
+            onClick={DismissHandler}
           >
             Dismiss
           </button>
@@ -704,8 +713,11 @@ function Dashboard() {
             style={{ backgroundColor: styles.mainBtn, color: styles.mainText }}
             className="font-semibold py-4 px-6 rounded-xl shadow-md transition-colors duration-200 flex items-center space-x-2 gap-1"
           >
-            <img src="basil_edit-outline.png" alt="" />
-            <span className="text-sm font-medium">Edit widget</span>
+            <img src="basil_edit-outline.png" alt="" />{" "}
+            <span className="text-sm font-medium">
+              {" "}
+              {isDraggingOrResizing ? "Done" : "Edit widget"}
+            </span>
           </button>
         </div>
       </div>

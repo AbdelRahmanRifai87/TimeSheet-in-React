@@ -144,11 +144,13 @@ export function AlertItem({ alert, order }: { alert: Alert; order: number }) {
             alt="User profile"
           />
         ) : (
-          <img
-            src={`/person not found icon/${iconSeverity[alert.severity]}`}
-            className="w-[30px] h-[30px]"
-            alt={`Alert severity: ${alert.severity}`}
-          />
+          <div className="flex items-center justify-center w-[40px] h-[40px] rounded-full">
+            <img
+              src={`/person not found icon/${iconSeverity[alert.severity]}`}
+              className="w-[30px] h-[30px]"
+              alt={`Alert severity: ${alert.severity}`}
+            />
+          </div>
         )}
       </div>
 
@@ -158,15 +160,13 @@ export function AlertItem({ alert, order }: { alert: Alert; order: number }) {
           className={`font-medium ${order === 0 ? "text-lg" : "text-sm"}`}
           style={{ color: styles.mainText }}
         >
-          ATTENTION REQUIRED - {alert.title}
+          ATTENTION REQUIRED - {alert.title} - {alert.message}
         </h4>
 
         <p
           className={`${order === 0 ? "text-lg" : "text-sm"} mt-1`}
           style={{ color: styles.mainText }}
-        >
-          {alert.message}
-        </p>
+        ></p>
       </div>
 
       {/* Arrow */}

@@ -8,3 +8,45 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+/* 
+.react-resizable-handle::after {
+  display: none !important;
+}
+
+.react-resizable-handle-n,
+.react-resizable-handle-s {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 10px; 
+  width: 100%;
+  background: transparent;
+  cursor: ns-resize;
+  z-index: 10;
+}
+
+.react-resizable-handle-n {
+  top: -5px;
+}
+.react-resizable-handle-s {
+  bottom: -5px;
+}
+
+.react-resizable-handle-w,
+.react-resizable-handle-e {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 10px;
+  height: 100%;
+  background: transparent;
+  cursor: ew-resize;
+  z-index: 10;
+}
+
+.react-resizable-handle-w {
+  left: -5px;
+}
+.react-resizable-handle-e {
+  right: -5px;
+} */

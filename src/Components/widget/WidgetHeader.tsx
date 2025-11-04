@@ -345,23 +345,39 @@ import { useDarkModeStore } from "../../Theme/useDarkModeStore";
 interface WidgetHeaderProps {
   title: string;
   onRemove: () => void;
+  isDraggingOrResizing: boolean;
+  onToggle: () => void;
+  isCollapsed: boolean;
 }
 
-export default function WidgetHeader({ title, onRemove }: WidgetHeaderProps) {
+export default function WidgetHeader({
+  title,
+  onRemove,
+  isDraggingOrResizing,
+  onToggle,
+  isCollapsed,
+}: WidgetHeaderProps) {
+  // Pull effectiveTheme from the store
   const styles = useDarkModeStore((s) => s.styles);
-
   // 🔹 Lighten color utility
 
   return (
     <header
-      className="flex items-center justify-between w-full mb-2 rounded-t-lg px-4 py-2 border-b transition-colors"
+      className="grabbable flex items-center justify-between w-full mb-2 rounded-t-lg px-4 py-2 border-b transition-colors"
       style={{
         backgroundColor: styles.widgetHeaderBg,
         color: styles.widgetText,
         borderColor: styles.widgetBorder,
       }}
     >
-      <span className="font-semibold text-lg">{title}</span>
+      <div
+        className={`absolute w-[90%] left-0 h-[100%] bg-transparent grabbable ${
+          isDraggingOrResizing ? "" : "hidden"
+        } `}
+      ></div>
+      <span className="font-semibold text-lg">
+        {title.charAt(0).toUpperCase() + title.slice(1)}
+      </span>
 
       <div className="flex space-x-2">
         <button
@@ -379,22 +395,31 @@ export default function WidgetHeader({ title, onRemove }: WidgetHeaderProps) {
         <button
           type="button"
           title="Toggle dropdown"
+        onClick={onToggle}
           className="flex items-center justify-center px-2 rounded-lg border shadow-sm focus:outline-none hover:opacity-90 transition"
           style={{
             color: styles.widgetText,
             borderColor: styles.widgetBorder,
           }}
         >
-          <i className="fa-solid fa-angle-down text-xs"></i>
+          {/* ⭐️ CRITICAL: Dynamic icon based on state */}
+          <i
+            className={`fa-solid ${
+              isCollapsed ? "fa-angle-down" : "fa-angle-up"
+            } text-xs`}
+          ></i>
         </button>
 
-        <button
+        {/* Drag handle */}
+        {/* <button
           title="Drag widget"
-          className="grabbable flex items-center justify-center w-7 h-10 rounded-lg border shadow-sm focus:outline-none hover:opacity-90 transition"
-          style={{
-            color: styles.widgetText,
-            borderColor: styles.widgetBorder,
-          }}
+          className={` flex items-center justify-center w-7 h-10 rounded-lg border shadow-sm focus:outline-none ${
+            isDraggingOrResizing ? "" : "hidden"
+          } ${
+            isDarkMode
+              ? "bg-gray-800 border-gray-600 text-gray-400 hover:text-white"
+              : "bg-white border-gray-200 text-gray-400 hover:text-[#1C75BC]"
+          }`}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -409,7 +434,7 @@ export default function WidgetHeader({ title, onRemove }: WidgetHeaderProps) {
             <circle cx="13" cy="8" r="1.5" />
             <circle cx="13" cy="16" r="1.5" />
           </svg>
-        </button>
+        </button> */}
       </div>
     </header>
   );

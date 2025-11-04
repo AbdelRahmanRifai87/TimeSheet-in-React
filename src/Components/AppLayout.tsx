@@ -31,12 +31,12 @@ function AppLayout() {
       <SidebarContainer />
 
       <TopBar
-        userName="User Name"
+        userName="User name"
         userAvatarUrl="https://columbus.in.us/wp-content/uploads/2020/01/person-01.jpg"
       />
 
       <main
-        className={`col-span-1 row-span-1   min-h-[calc(93.5vh + 1px)] outline outline-black overflow-auto transition-colors duration-500 ${
+        className={`  px-5 pt-1 col-span-1 row-span-1 rounded-tl-lg  min-h-[calc(93.5vh + 1px)] outline outline-black overflow-auto transition-colors duration-500 ${
           effectiveTheme === "dark" || effectiveTheme === "night"
             ? "bg-[#0d0d0df3] text-white"
             : "bg-[#F1F3F3] text-black"
