@@ -591,10 +591,7 @@ function Dashboard() {
   }
 
   return (
-    <div
-      className="min-h-screen px-9 pt-3 font-sans transition-colors"
-      style={{ backgroundColor: styles.mainBg, color: styles.mainText }}
-    >
+    <div className="min-h-screen px-9 pt-3 font-sans transition-colors">
       <Breadcrumb />
 
       {/* Example card */}

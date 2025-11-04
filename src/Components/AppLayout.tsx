@@ -10,6 +10,7 @@ function AppLayout() {
   const theme = useDarkModeStore((s) => s.theme);
   const effectiveTheme = useDarkModeStore((s) => s.effectiveTheme);
   const setTheme = useDarkModeStore((s) => s.setTheme);
+  const styles = useDarkModeStore((s) => s.styles);
 
   useEffect(() => {
     if (theme !== "system") return;

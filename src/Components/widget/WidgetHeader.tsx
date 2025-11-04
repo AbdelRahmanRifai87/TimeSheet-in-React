@@ -363,7 +363,7 @@ export default function WidgetHeader({
 
   return (
     <header
-      className="grabbable flex items-center justify-between w-full mb-2 rounded-t-lg px-4 py-2 border-b transition-colors"
+      className=" flex items-center justify-between w-full mb-2 rounded-t-lg px-4 py-2 border-b transition-colors"
       style={{
         backgroundColor: styles.widgetHeaderBg,
         color: styles.widgetText,
@@ -371,7 +371,7 @@ export default function WidgetHeader({
       }}
     >
       <div
-        className={`absolute w-[90%] left-0 h-[100%] bg-transparent grabbable ${
+        className={`absolute w-[82%] left-0 h-[16%] bg-transparent grabbable ${
           isDraggingOrResizing ? "" : "hidden"
         } `}
       ></div>
@@ -395,8 +395,8 @@ export default function WidgetHeader({
         <button
           type="button"
           title="Toggle dropdown"
-        onClick={onToggle}
-          className="flex items-center justify-center px-2 rounded-lg border shadow-sm focus:outline-none hover:opacity-90 transition"
+          onClick={onToggle}
+          className="flex items-center justify-center px-2 h-10 rounded-lg border shadow-sm focus:outline-none hover:opacity-90 transition"
           style={{
             color: styles.widgetText,
             borderColor: styles.widgetBorder,
