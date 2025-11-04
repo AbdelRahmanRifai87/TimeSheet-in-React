@@ -8,45 +8,48 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
-/* 
+
 .react-resizable-handle::after {
+  transform: rotate(0deg) !important;
   display: none !important;
 }
 
 .react-resizable-handle-n,
 .react-resizable-handle-s {
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 10px; 
-  width: 100%;
-  background: transparent;
-  cursor: ns-resize;
-  z-index: 10;
+  transform: rotate(0deg) !important;
+  position: absolute !important;
+  left: 0 !important;
+  right: 0 !important;
+  height: 10px !important;
+  width: 100% !important;
+  background: transparent !important;
+  cursor: ns-resize !important;
+  z-index: 10 !important;
 }
 
 .react-resizable-handle-n {
-  top: -5px;
+  top: -5px !important;
 }
 .react-resizable-handle-s {
-  bottom: -5px;
+  bottom: -5px !important;
 }
 
 .react-resizable-handle-w,
 .react-resizable-handle-e {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 10px;
-  height: 100%;
-  background: transparent;
-  cursor: ew-resize;
-  z-index: 10;
+  transform: rotate(0deg) !important;
+  position: absolute !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  width: 10px !important;
+  height: 100% !important;
+  background: transparent !important;
+  cursor: ew-resize !important;
+  z-index: 10 !important;
 }
 
 .react-resizable-handle-w {
-  left: -5px;
+  left: -5px !important;
 }
 .react-resizable-handle-e {
-  right: -5px;
-} */
+  right: -5px !important;
+}

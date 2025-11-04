@@ -60,10 +60,10 @@ export default function BlockoutItem({ blockout }: { blockout: Blockout }) {
 
         {/* Approve/Deny Buttons */}
         <div className="flex text-sm  items-center ">
-          <button className="flex-1 bg-[#388E3C] text-white font-semibold py-2 px-3 pr-4 rounded-tl-lg rounded-bl-lg text-center transition-all duration-50 ease-in-out hover:bg-green-600 ">
+          <button className=" cursor-pointer flex-1 bg-[#388E3C] text-white font-semibold py-2 px-3 pr-4 rounded-tl-lg rounded-bl-lg text-center transition-all duration-50 ease-in-out hover:bg-green-600 ">
             Approve
           </button>
-          <button className="flex-1 bg-[#D32F2FE5] text-white font-semibold py-2 px-3 pl-4 rounded-tr-lg rounded-br-lg text-center transition-all duration-50 ease-in-out hover:bg-red-600 ">
+          <button className=" cursor-pointer flex-1 bg-[#D32F2FE5] text-white font-semibold py-2 px-3 pl-4 rounded-tr-lg rounded-br-lg text-center transition-all duration-50 ease-in-out hover:bg-red-600 ">
             Deny
           </button>
         </div>

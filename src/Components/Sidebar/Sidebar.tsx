@@ -865,8 +865,6 @@ const Sidebar: React.FC = () => {
   // Get theme & precomputed styles
   // --------------------
   const styles = useDarkModeStore((state) => state.styles);
-  const theme = useDarkModeStore((state) => state.theme);
-  const customTheme = useDarkModeStore((state) => state.customTheme);
 
   // --------------------
   // Company dropdown
