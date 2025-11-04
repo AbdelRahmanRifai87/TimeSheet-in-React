@@ -23,9 +23,9 @@ function AppLayout() {
 
   return (
     <div
-      className="grid grid-rows-[auto_1fr] h-screen"
+      className="grid grid-rows-[auto_1fr] h-screen font-montserrat"
       style={{
-        gridTemplateColumns: isCollapsed ? "3rem 1fr" : "13rem 1fr",
+        gridTemplateColumns: isCollapsed ? "4rem 1fr" : "15rem 1fr",
         transition: "all 350ms ease-in-out",
       }}
     >
@@ -37,9 +37,11 @@ function AppLayout() {
       />
 
       <main
-        className={`  col-span-1 row-span-1 rounded-tl-lg  min-h-[calc(93.5vh + 1px)] outline outline-black overflow-auto transition-colors duration-500
-          `}
-        style={{ backgroundColor: styles.mainBg, color: styles.mainText }}
+        className={`  col-span-1 row-span-1   min-h-[calc(93.5vh + 1px)] outline outline-black overflow-auto transition-colors duration-500 ${
+          effectiveTheme === "dark" || effectiveTheme === "night"
+            ? "bg-[#0d0d0df3] text-white"
+            : "bg-[#F1F3F3] text-black"
+        }`}
       >
         <div className="mx-auto flex flex-col">
           <Outlet context={{ theme, effectiveTheme }} />

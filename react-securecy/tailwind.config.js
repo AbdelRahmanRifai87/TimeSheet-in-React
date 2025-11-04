@@ -10,10 +10,7 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   darkMode: "class", // keep this for system/dark/night switching
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       colors: {
@@ -33,8 +30,10 @@ export default {
 
         "global-bg": "var(--global-bg)",
       },
+      fontFamily: {
+        montserrat: ["Montserrat", "sans-serif"], // 👈 added this
+      },
     },
   },
   plugins: [],
 };
-
