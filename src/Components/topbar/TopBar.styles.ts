@@ -1,6 +1,6 @@
 export const topBarStyles = {
   topbar:
-    " h-[8.5vh] pr-[50px] pl-[8px]  flex items-center  justify-between text-white z-[9999] transition-colors duration-500 ",
+    " h-[7.5vh] pr-[50px] pl-[8px]  flex items-center  justify-between text-white z-[9999] transition-colors duration-500 ",
   companyContainer:
     "flex items-center bg-[#dbeeff] text-[#004578] px-[12px] py-[6px] rounded-[8px] font-semibold transition-colors duration-500",
   companyIcon: "text-[#248ee0] mr-[6px] transition-colors duration-500",

@@ -24,7 +24,7 @@ function AppLayout() {
     <div
       className="grid grid-rows-[auto_1fr] h-screen font-montserrat"
       style={{
-        gridTemplateColumns: isCollapsed ? "5rem 1fr" : "15rem 1fr",
+        gridTemplateColumns: isCollapsed ? "4rem 1fr" : "15rem 1fr",
         transition: "all 350ms ease-in-out",
       }}
     >

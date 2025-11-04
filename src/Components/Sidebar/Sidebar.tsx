@@ -995,7 +995,7 @@ const Sidebar: React.FC = () => {
       </div> */}
       <div
         className={`flex items-center justify-center ml-0.5 transition-all duration-300 ${
-          isCollapsed ? "h-[64px]" : "h-[59px]"
+          isCollapsed ? "h-[7.5vh]" : "h-[7.5vh]"
         }`}
         style={{ cursor: "default" }}
       >
@@ -1003,7 +1003,9 @@ const Sidebar: React.FC = () => {
           src={isCollapsed ? "/Group 2147225115.png" : "/Layer 1.png"}
           alt="SECURECY Logo"
           className={`object-contain transition-all duration-300 ${
-            isCollapsed ? "w-9   h-9 mb-0.5" : "w-[190px] h-[35px] mt-0.5"
+            isCollapsed
+              ? "w-8   h-8 mt-[0%] mb-[3%] "
+              : "w-[190px] h-[35px] mt-[1%] mb-[4%] "
           }`}
         />
       </div>
