@@ -22,21 +22,21 @@ function AppLayout() {
 
   return (
     <div
-      className="grid grid-rows-[auto_1fr] h-screen"
+      className="grid grid-rows-[auto_1fr] h-screen font-montserrat"
       style={{
-        gridTemplateColumns: isCollapsed ? "3rem 1fr" : "13rem 1fr",
+        gridTemplateColumns: isCollapsed ? "5rem 1fr" : "15rem 1fr",
         transition: "all 350ms ease-in-out",
       }}
     >
       <SidebarContainer />
 
       <TopBar
-        userName="Mohamad Zakaria"
+        userName="User Name"
         userAvatarUrl="https://columbus.in.us/wp-content/uploads/2020/01/person-01.jpg"
       />
 
       <main
-        className={`col-span-1 row-span-1 rounded-tl-lg  min-h-[calc(93.5vh + 1px)] outline outline-black overflow-auto transition-colors duration-500 ${
+        className={`col-span-1 row-span-1   min-h-[calc(93.5vh + 1px)] outline outline-black overflow-auto transition-colors duration-500 ${
           effectiveTheme === "dark" || effectiveTheme === "night"
             ? "bg-[#0d0d0df3] text-white"
             : "bg-[#F1F3F3] text-black"

@@ -110,14 +110,7 @@ interface WidgetProps {
   onToggleHeight: (newH: number) => void;
 }
 
-function Widget({
-  children,
-  title,
-  onRemove,
-  isDraggingOrResizing,
-  currentHeight,
-  onToggleHeight,
-}: WidgetProps) {
+function Widget({ children, title, onRemove }: WidgetProps) {
   // ✅ Pull precomputed widget styles from Zustand
   const styles = useDarkModeStore((state) => state.styles);
 
