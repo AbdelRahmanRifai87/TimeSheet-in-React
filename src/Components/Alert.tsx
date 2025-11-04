@@ -54,7 +54,7 @@ export function AlertItem({ alert }: { alert: Alert; order: number }) {
         ) : (
           <div className="flex items-center justify-center w-[40px] h-[40px] rounded-full">
             <img
-              src={`/person not found icon/${iconSeverity[alert.severity]}`}
+              src={`${iconSeverity[alert.severity]}`}
               className="w-[30px] h-[30px]"
               alt={`Alert severity: ${alert.severity}`}
             />
