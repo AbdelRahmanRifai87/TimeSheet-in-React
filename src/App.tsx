@@ -9,6 +9,7 @@ import General from "./pages/General";
 import SwitchToDetails from "./pages/SwitchToDetails";
 import TaskManager from "./pages/TaskManager";
 import Users from "./pages/Users";
+// import CompanyDetails from "./Components/widget/CompanyDetails";
 
 function App() {
   useEffect(() => {
@@ -22,7 +23,7 @@ function App() {
           <Route element={<AppLayout />}>
             <Route index element={<Navigate replace to="dashboard" />} />
             <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/details" element={<Details />} />
+            {/* <Route path="/details" element={<Details />} /> */}
             <Route path="/details/general" element={<General />} />
             <Route path="/tasks-manager" element={<TaskManager />} />
             <Route path="/users" element={<Users />} />
@@ -30,6 +31,7 @@ function App() {
               path="/details/switchtodetails"
               element={<SwitchToDetails />}
             />
+            {/* <Route path="/company-details" element={<CompanyDetails />} /> */}
           </Route>
         </Routes>
       </BrowserRouter>
