@@ -13,8 +13,7 @@ export const topBarStyles = {
   searchInput:
     "w-full  border-none text-[#ffffff] text-[13.5px] outline-none placeholder-white opacity-70 pl-2",
   verticalDivider:
-    "w-px h-[24px] bg-white/10 mx-[10px] transition-colors duration-500",
-
+    "w-px h-[25px] bg-white/10 mx-[10px] transition-colors duration-500",
   topbarRight: "flex items-center ml-2",
   iconButton:
     " w-[36px] h-[36px] flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 flex-shrink-0   cursor-pointer transition-colors duration-1000",

@@ -1189,21 +1189,11 @@ const SidebarMenuItem: React.FC<SidebarMenuItemProps> = ({
       // It now accounts for the +9px gap between popup and trigger.
       const safeZone = {
         left: Math.min(triggerRect.left, popupRect.left),
-        right: Math.max(triggerRect.right, popupRect.right),
-        top: Math.min(triggerRect.top, popupRect.top) - 6,
-        bottom: Math.max(triggerRect.bottom, popupRect.bottom) + 6,
       };
 
-      // Extend horizontally to include that 9px gap
       // safeZone.right += 2;
 
-      // --- 👇 Hover logic remains same ---
-      if (
-        x >= safeZone.left &&
-        x <= safeZone.right &&
-        y >= safeZone.top &&
-        y <= safeZone.bottom
-      ) {
+      if (x >= safeZone.left) {
         return;
       }
 
@@ -1230,7 +1220,7 @@ const SidebarMenuItem: React.FC<SidebarMenuItemProps> = ({
 
   return (
     <div
-      className="relative mb-[8px] mt-0"
+      className="relative  "
       onMouseEnter={() => {
         if (isCollapsed && hasChildren) {
           setIsPopupOpen(true);
@@ -1244,11 +1234,17 @@ const SidebarMenuItem: React.FC<SidebarMenuItemProps> = ({
       <Link
         ref={triggerRef}
         to={page.path}
-        className={`group flex justify-center items-center mt-1.5 rounded transition-colors duration-200
+        className={`group flex justify-center items-center  rounded transition-colors duration-200
     ${
       isCollapsed
         ? "justify-center  w-[45px] mx-auto "
-        : "justify-start w-[200px]   pt-4 ml-5"
+        : `${
+            level === 0
+              ? "justify-start w-[200px] mt-1.5   pt-4 ml-5"
+              : level === 1
+              ? "justify-start  w-[160px] pt-[4px] pb-[4px] mb-0   ml-15 mt-2"
+              : "justify-start w-[135px] ml-21 pt-[2px] pb-[2px]  mt-1.5"
+          }`
     }
   `}
         // onMouseEnter={() => setIsHovered(true)}
@@ -1273,13 +1269,12 @@ const SidebarMenuItem: React.FC<SidebarMenuItemProps> = ({
           color: isActive ? activeText : textColor,
           // paddingLeft: isCollapsed ? `${15 + level * 16}px` : " ",
           // paddingRight: "15px",
-          paddingLeft: level >= 2 ? "48px" : level === 1 ? "30px" : "",
+          paddingLeft: level >= 2 ? "" : "",
 
-          paddingTop: isChild ? "4px" : isCollapsed ? "3px" : "1px ",
-          paddingBottom: isChild ? "4px" : isCollapsed ? "3px" : "1px ",
+          paddingTop: isChild ? "" : isCollapsed ? "3px" : "1px ",
+          paddingBottom: isChild ? "" : isCollapsed ? "3px" : "1px ",
           borderRadius: "8px",
           transition: "all 0.2s ease-in-out",
-          marginBottom: isCollapsed ? "0" : "13px",
         }}
       >
         {/* Icon */}
@@ -1347,16 +1342,20 @@ const SidebarMenuItem: React.FC<SidebarMenuItemProps> = ({
                 }}
               />
             </div> */}
-            <div className="absolute  top-1/2  -translate-y-1/2">
-              <div
+            <div
+              className="absolute h-[1%] "
+              style={{
+                left: level === 0 ? "-23.5px" : "-20.5px",
+
+                width: level === 0 ? "" : level === 1 ? "16px" : "12px",
+                backgroundColor: isActive ? "#D1D5DB" : "#D1D5DB", // ⬅️ move the dash outside the container
+              }}
+            >
+              {/* <div
                 style={{
-                  height: "1.5px",
-                  width: "12px", // a bit longer
-                  backgroundColor: isActive
-                    ? "#1E73BE"
-                    : "rgba(255,255,255,0.4)",
+                
                 }}
-              />
+              /> */}
             </div>
 
             <span
@@ -1364,7 +1363,7 @@ const SidebarMenuItem: React.FC<SidebarMenuItemProps> = ({
                 color: isActive ? "#1E73BE" : textColor,
                 fontWeight: isActive ? 600 : 400,
                 fontSize: "13px",
-                marginLeft: "16px",
+                marginLeft: "5px",
               }}
             >
               {page.name}
@@ -1405,7 +1404,7 @@ const SidebarMenuItem: React.FC<SidebarMenuItemProps> = ({
             ref={popupRef}
             style={{
               position: "fixed",
-              left: `${coords.left + 17}px`,
+              left: `${coords.left + 9}px`,
               top: `${coords.top}px`,
               minWidth: "160px",
               maxHeight: "300px",
@@ -1442,22 +1441,18 @@ const SidebarMenuItem: React.FC<SidebarMenuItemProps> = ({
             style={{
               left:
                 level === 0
-                  ? "35px "
+                  ? "38px "
                   : level === 1
-                  ? "50px"
+                  ? "62px"
                   : level === 2
                   ? "68px"
-                  : `${20 + level * 20}px`,
-              top: level === 0 ? "1px" : level === 1 ? "1px" : "",
-              bottom: level === 0 ? "1px" : level === 1 ? "1px" : "",
+                  : "",
+              top: level === 0 ? "0px" : level === 1 ? "0px" : "",
+
               width: level === 0 ? "1.5px" : level === 1 ? "1.5px" : "1.5px",
-              height: "calc(100% - 27px)",
+              height: level === 0 ? "calc(100% - 13px)" : "calc(100% - 11px)",
               backgroundColor:
-                level === 0
-                  ? "rgba(255,255,255,0.25)"
-                  : level === 1
-                  ? "rgba(255,255,255,0.25)"
-                  : "rgba(255,255,255,0.25)",
+                level === 0 ? "#D1D5DB" : level === 1 ? "#D1D5DB" : "#D1D5DB",
             }}
           />
 

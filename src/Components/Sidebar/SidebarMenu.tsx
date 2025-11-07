@@ -257,7 +257,7 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
 
   return (
     <nav
-      className="sideBar-menu flex-1 scroll-smooth mt-0"
+      className="sideBar-menu flex-1 scroll-smooth mt-0 flex flex-col gap-1"
       style={{ backgroundColor: customTheme?.background || styles.sidebarBg }}
     >
       {parentItems.length > 0 ? (
