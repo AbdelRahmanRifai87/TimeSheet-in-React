@@ -16,4 +16,5 @@ export default defineConfig({
     tailwindcss(), // Tailwind plugin
     svgr(), // SVG as React component plugin
   ],
+  base: "/securecy_dashboard/",
 });

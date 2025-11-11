@@ -17,7 +17,7 @@ function General() {
     <iframe
       src="https://www.securecy.com.au/dashboard.php"
       loading="lazy"
-      className="w-full min-h-[90vh] "
+      className="w-[calc(100%)-3rem] min-h-[80vh]   border border-gray-300"
     ></iframe>
   );
 }

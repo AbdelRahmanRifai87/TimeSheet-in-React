@@ -454,10 +454,19 @@ interface Styles {
   widgetIconBg?: string;
   alertHighBg: string;
   alertHighBorder: string;
+  alertHighIcon: string;
+  alertHighIconBg: string;
+  alertHighButton: string;
   alertMediumBg: string;
   alertMediumBorder: string;
+  alertMediumIcon: string;
+  alertMediumIconBg: string;
+  alertMediumButton: string;
   alertLowBg: string;
   alertLowBorder: string;
+  alertLowIcon: string;
+  alertLowIconBg: string;
+  alertLowButton: string;
 }
 
 interface ThemeState {
@@ -535,21 +544,40 @@ export const useDarkModeStore = create<ThemeState>((set, get) => {
         ? lightenColor(customTheme.sidebar.background, 0.7)
         : applied === "dark" || applied === "night"
         ? "#272323"
-        : "#1C75BC26";
+        : "#A6CFF0";
     const alertHighBorder =
-      applied === "dark" || applied === "night" ? "#D32F2F" : "#D32F2F";
+      applied === "dark" || applied === "night" ? "#D32F2F" : "#F4AFAF";
     const alertHighBg =
-      applied === "dark" || applied === "night" ? "#3a0e0e" : "#D32F2F1A";
+      applied === "dark" || applied === "night" ? "#3a0e0e" : "#FDEEEE";
+    const alertHighIcon =
+      applied === "dark" || applied === "night" ? "#3a0e0e" : "#961C1F";
+    const alertHighIconBg =
+      applied === "dark" || applied === "night" ? "#3a0e0e" : "#F9D4D4";
+    const alertHighButton =
+      applied === "dark" || applied === "night" ? "#3a0e0e" : "#B72427";
 
     const alertMediumBorder =
-      applied === "dark" || applied === "night" ? "#FFA000" : "#FFA000";
+      applied === "dark" || applied === "night" ? "#FFA000" : "#FFE394";
     const alertMediumBg =
-      applied === "dark" || applied === "night" ? "#4a3200" : "#FFA0001A";
+      applied === "dark" || applied === "night" ? "#4a3200" : "#FFF9EB";
+    const alertMediumIcon =
+      applied === "dark" || applied === "night" ? "#4a3200" : "#B26A14";
+    const alertMediumIconBg =
+      applied === "dark" || applied === "night" ? "#4a3200" : "#FFEFC2";
+    const alertMediumButton =
+      applied === "dark" || applied === "night" ? "#4a3200" : "#D4861B";
 
     const alertLowBorder =
       applied === "dark" || applied === "night" ? "#E9D820" : "#E9D8201A";
     const alertLowBg =
       applied === "dark" || applied === "night" ? "#474700" : "#E9D8201A";
+    const alertLowIcon =
+      applied === "dark" || applied === "night" ? "#474700" : "#E9D8201A";
+
+    const alertLowIconBg =
+      applied === "dark" || applied === "night" ? "#474700" : "";
+    const alertLowButton =
+      applied === "dark" || applied === "night" ? "#474700" : "";
 
     return {
       // Topbar
@@ -648,7 +676,7 @@ export const useDarkModeStore = create<ThemeState>((set, get) => {
           ? customTheme.main.text
           : applied === "dark" || applied === "night"
           ? "#ffffff"
-          : "#000000",
+          : "#111827",
       widgetBorder:
         applied === "custom"
           ? customTheme.main.button
@@ -666,10 +694,19 @@ export const useDarkModeStore = create<ThemeState>((set, get) => {
       //Alert Colors
       alertHighBg,
       alertHighBorder,
+      alertHighIcon,
+      alertHighIconBg,
+      alertHighButton,
       alertMediumBg,
       alertMediumBorder,
+      alertMediumIcon,
+      alertMediumIconBg,
+      alertMediumButton,
       alertLowBg,
       alertLowBorder,
+      alertLowIcon,
+      alertLowIconBg,
+      alertLowButton,
     };
   };
 

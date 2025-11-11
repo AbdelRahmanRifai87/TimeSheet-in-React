@@ -3,21 +3,22 @@ import Widget from "./Widget";
 import { DataList } from "../DataList";
 import type { Layouts, Layout } from "react-grid-layout";
 
-import type { DashboardItem } from "../../hooks/useDynamicGrid";
+import type { DashboardItem } from "../../Types/Widgets";
 import { useMemo, useState } from "react";
 import { useDarkModeStore } from "../../Theme/useDarkModeStore";
 import GridOverlay from "./GridOverlay";
+import type { Breakpoints } from "../../Types/Widgets";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
-interface Breakpoints {
-  [key: string]: number;
-  lg: number;
-  md: number;
-  sm: number;
-  xs: number;
-  xxs: number;
-}
+// interface Breakpoints {
+//   [key: string]: number;
+//   lg: number;
+//   md: number;
+//   sm: number;
+//   xs: number;
+//   xxs: number;
+// }
 
 interface WidgetsGridLayoutProps {
   layouts: Layouts;
@@ -31,9 +32,9 @@ interface WidgetsGridLayoutProps {
   // theme: "light" | "dark" | "night";
 }
 
-const ROW_HEIGHT = 30;
-const MARGIN_X = 10;
-const MARGIN_Y = 10;
+const ROW_HEIGHT = 70;
+const MARGIN_X = 20;
+const MARGIN_Y = 20;
 const PADDING_X = 0;
 const PADDING_Y = 10;
 
@@ -138,7 +139,6 @@ export default function WidgetsGridLayout({
     cols: number,
     containerPadding: [number, number] // RGL passes this, but you can ignore it
   ) => {
-    console.log(margin, containerPadding);
     // Use the RGL-provided width and column count
     setContainerWidth(width);
     setCurrentCols(cols);
@@ -198,7 +198,9 @@ export default function WidgetsGridLayout({
             <Widget
               isDraggingOrResizing={isDraggingOrResizing}
               // still passed down if Widget needs it
-              title={`${item.label}`}
+              title={item.title ?? item.label}
+              label={item.label}
+              count={item.data.length}
               onRemove={() => removeItem(item.i)}
               currentHeight={item.h}
               onToggleHeight={(newH: number) => toggleItemHeight(item.i, newH)}

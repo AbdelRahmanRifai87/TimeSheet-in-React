@@ -9,6 +9,9 @@ import General from "./pages/General";
 import SwitchToDetails from "./pages/SwitchToDetails";
 import TaskManager from "./pages/TaskManager";
 import Users from "./pages/Users";
+import TabsController from "./Components/RouteTabs/TbasController";
+import { ROUTES } from "./routes/config";
+import "./styles/custom-table.css";
 // import CompanyDetails from "./Components/widget/CompanyDetails";
 
 function App() {
@@ -18,15 +21,14 @@ function App() {
 
   return (
     <SidebarProvider>
-      <BrowserRouter>
+      <BrowserRouter basename="/securecy_dashboard">
+        <TabsController />
         <Routes>
           <Route element={<AppLayout />}>
             <Route index element={<Navigate replace to="dashboard" />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            {/* <Route path="/details" element={<Details />} /> */}
-            <Route path="/details/general" element={<General />} />
-            <Route path="/tasks-manager" element={<TaskManager />} />
-            <Route path="/users" element={<Users />} />
+            {ROUTES.map((r) => (
+              <Route key={r.path} path={r.path} element={r.element} />
+            ))}
             <Route
               path="/details/switchtodetails"
               element={<SwitchToDetails />}

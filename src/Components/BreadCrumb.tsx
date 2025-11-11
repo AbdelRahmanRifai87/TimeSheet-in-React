@@ -44,29 +44,29 @@ const Breadcrumb: React.FC = () => {
   const breadcrumbItems = getBreadcrumbItems();
 
   return (
-    <nav className="breadcrumb ml-3 text-sm mb-4">
-      <ol className="flex items-center">
+    <nav className="breadcrumb ml- text-sm mb-1">
+      <ol className="flex items-center font-[500]">
         {breadcrumbItems.map((item, index) => (
           <React.Fragment key={item.path}>
-            <li className={`${item.isActive ? "font-bold" : ""}`}>
+            <li>
               {item.isActive ? (
-                <span className="text-[#1C75BC]">{item.name}</span>
+                <span className="text-[#4B5563]">{item.name}</span>
               ) : (
-                <Link to={item.path} className="text-[#1C75BC] hover:underline">
+                <Link to={item.path} className="text-[#4B5563] hover:underline">
                   {item.name}
                 </Link>
               )}
             </li>
             {/* Add the › symbol after the active item */}
             {item.isActive && (
-              <li className="mx-2 text-[#1C75BC]">
-                <span>›</span>
+              <li className="mx-1 text-[#4B5563]">
+                <span>/</span>
               </li>
             )}
             {/* Keep the separator between items that aren't the active one */}
             {!item.isActive && index < breadcrumbItems.length - 1 && (
-              <li className="mx-2 text-[#1C75BC]">
-                <span>›</span>
+              <li className="mx-1 text-[#4B5563]">
+                <span>/</span>
               </li>
             )}
           </React.Fragment>

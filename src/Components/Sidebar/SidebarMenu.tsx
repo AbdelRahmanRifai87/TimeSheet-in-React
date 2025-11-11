@@ -262,7 +262,7 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
     >
       {parentItems.length > 0 ? (
         parentItems.map((page, index) => (
-          <React.Fragment key={page.id}>
+          <React.Fragment key={index}>
             <SidebarMenuItem
               page={page}
               isCollapsed={isCollapsed}

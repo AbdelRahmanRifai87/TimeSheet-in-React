@@ -107,16 +107,13 @@
 import { useEffect, useRef, useState } from "react";
 import BlockoutItem from "./Blockout";
 import { useDarkModeStore } from "../Theme/useDarkModeStore"; // Adjust path as needed
+import type { Blockout } from "../Types/Blockout";
 
-interface Blockout {
-  id: string;
-  from: string;
-  to: string;
-  user: string;
-  subtext: string;
-}
-
-export function BlockoutList({ blockouts }: { blockouts: Blockout[] }) {
+export function BlockoutList({
+  blockouts,
+}: {
+  blockouts: ReadonlyArray<Blockout>;
+}) {
   const styles = useDarkModeStore((state) => state.styles);
 
   const containerRef = useRef<HTMLDivElement>(null);
@@ -145,19 +142,21 @@ export function BlockoutList({ blockouts }: { blockouts: Blockout[] }) {
         ref={containerRef}
         onScroll={handleScroll}
         className="flex gap-3  w-full h-full overflow-x-auto overflow-y-hidden"
-        style={{
-          scrollbarWidth: "none",
-          msOverflowStyle: "none",
-        }}
+        style={
+          {
+            // scrollbarWidth: "none",
+            // msOverflowStyle: "none",
+          }
+        }
       >
-        <div className="flex flex-col gap-2  space-x-3 w-full h-full p-2">
+        <div className="flex flex-col gap-5  space-x-3 w-full h-full pb-2">
           {blockouts.map((blockout) => (
             <BlockoutItem key={blockout.id} blockout={blockout} />
           ))}
         </div>
       </div>
 
-      {showLeftShadow && (
+      {/* {showLeftShadow && (
         <div
           className="absolute rounded-lg left-0 top-0 bottom-0 w-8 pointer-events-none"
           style={{
@@ -174,7 +173,7 @@ export function BlockoutList({ blockouts }: { blockouts: Blockout[] }) {
             transition: "opacity 500ms ease-in-out",
           }}
         />
-      )}
+      )} */}
     </div>
   );
 }

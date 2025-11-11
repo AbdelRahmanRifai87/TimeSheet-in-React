@@ -42,16 +42,9 @@
 // }
 import { useMemo } from "react";
 import { AlertItem } from "./Alert";
+import type { Alert } from "../Types/Alert";
 
-interface Alert {
-  id: string;
-  title: string;
-  message: string;
-  severity: "high" | "medium" | "low";
-  img: string | null;
-}
-
-export function AlertList({ alerts }: { alerts: Alert[] }) {
+export function AlertList({ alerts }: { alerts: ReadonlyArray<Alert> }) {
   // Order map for prioritization
   const severityOrder = {
     high: 1,
@@ -60,11 +53,13 @@ export function AlertList({ alerts }: { alerts: Alert[] }) {
   };
 
   // Sort the alerts
-  const sortedAlerts = useMemo(() => {
-    return [...alerts].sort((a, b) => {
-      return severityOrder[a.severity] - severityOrder[b.severity];
-    });
-  }, [alerts]);
+  const sortedAlerts = useMemo(
+    () =>
+      [...alerts].sort(
+        (a, b) => severityOrder[a.severity] - severityOrder[b.severity]
+      ),
+    [alerts]
+  );
 
   return (
     <div className={`flex flex-col space-y-2 w-full `}>

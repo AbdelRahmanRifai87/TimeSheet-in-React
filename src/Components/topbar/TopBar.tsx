@@ -1931,6 +1931,9 @@ import {
   IconSpeakerphone,
   IconSun,
 } from "@tabler/icons-react";
+import Layer1f from "../../assets/Layer 1.png";
+import guardImg from "../../assets/guardian_global1.png";
+import SafeWatch from "../../assets/Safewatch2_logo.png";
 
 interface TopBarProps {
   userName: string;
@@ -2123,10 +2126,10 @@ const TopBar: React.FC<TopBarProps> = ({ userName, userAvatarUrl }) => {
                   <img
                     src={
                       company === "SECURECY"
-                        ? "/Layer 1.png"
+                        ? Layer1f
                         : company === "GUARDIAN"
-                        ? "/guardian_global1.png"
-                        : "/Safewatch2_logo.png"
+                        ? guardImg
+                        : SafeWatch
                     }
                     alt={`${company} logo`}
                     className="w-6 h-auto object-contain"

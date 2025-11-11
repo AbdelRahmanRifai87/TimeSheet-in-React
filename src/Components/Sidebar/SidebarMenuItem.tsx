@@ -1125,7 +1125,7 @@ const SidebarMenuItem: React.FC<SidebarMenuItemProps> = ({
 
   const hasChildren = childrenMap && childrenMap[page.id]?.length > 0;
   const isExpanded = expandedMap[page.id] || false;
-  const closeTimer = useRef<number | null>(null);
+  // const closeTimer = useRef<number | null>(null);
   const [isHovered, setIsHovered] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const triggerRef = useRef<HTMLAnchorElement | null>(null);
