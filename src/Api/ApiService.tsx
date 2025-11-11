@@ -1288,15 +1288,6 @@ const mockPages: Page[] = [
     isActive: true,
     parentId: 8,
   },
-  {
-    id: 82,
-    name: "View Individual Reports",
-    path: "/reports/individual",
-    icon: "fas fa-file",
-    order: 2,
-    isActive: true,
-    parentId: 8,
-  },
 
   // 👇 Children of "View Individual Reports"
   {
@@ -1634,15 +1625,7 @@ const mockPages: Page[] = [
     isActive: true,
     parentId: 9,
   },
-  {
-    id: 99,
-    name: "View All Rosters",
-    path: "/rosters/view-all-rosters",
-    icon: "fas fa-eye",
-    order: 9,
-    isActive: true,
-    parentId: 9,
-  },
+
   {
     id: 99,
     name: "View All Rosters",

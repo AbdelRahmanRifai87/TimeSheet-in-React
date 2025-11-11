@@ -7,8 +7,43 @@
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
-} */
+}
+/* Add this CSS to your global or component stylesheet */
 
+.child-menu-item {
+  /* Set the link element to be a relative positioning context */
+  position: relative;
+  /* Ensures the link content starts correctly after the dash/indent space */
+  padding-left: 30px !important;
+}
+
+.child-menu-item::before {
+  content: "";
+  /* Absolute positioning relative to the link */
+  position: absolute;
+  top: 50%; /* Center vertically */
+  transform: translateY(-50%); /* Adjust for true vertical center */
+  height: 1px; /* Consistent dash line height */
+  background-color: #d1d5db; /* Light gray color */
+}
+
+/* Specific styling for Level 1 Dash (second level) */
+.child-menu-item[data-level="1"]::before {
+  width: 16px;
+  /* Adjust left position based on the sidebar's overall padding/margin */
+  left: 10px;
+}
+
+/* Specific styling for Level 2 Dash (third level) */
+.child-menu-item[data-level="2"]::before {
+  width: 12px;
+  /* Adjust left position based on the sidebar's overall padding/margin */
+  left: 20px;
+}
+
+/* Add more levels if needed */
+/* .child-menu-item[data-level="3"]::before { ... } */
+/* 
 .react-resizable-handle::after {
   transform: rotate(0deg) !important;
   display: none !important;
