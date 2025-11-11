@@ -624,7 +624,7 @@ export const useDarkModeStore = create<ThemeState>((set, get) => {
           ? "#3a5567"
           : applied === "night"
           ? "#1f1f1f"
-          : "#1C75BC26",
+          : "#ffffff",
       mainText:
         applied === "custom"
           ? customTheme.main.text

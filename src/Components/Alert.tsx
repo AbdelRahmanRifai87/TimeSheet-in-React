@@ -156,17 +156,11 @@ export function AlertItem({ alert, order }: { alert: Alert; order: number }) {
 
       {/* Title & Message */}
       <div className="ml-3">
-        <h4
-          className={`font-medium ${order === 0 ? "text-lg" : "text-sm"}`}
-          style={{ color: styles.mainText }}
-        >
+        <h4 className={`text-md`} style={{ color: styles.mainText }}>
           ATTENTION REQUIRED - {alert.title} - {alert.message}
         </h4>
 
-        <p
-          className={`${order === 0 ? "text-lg" : "text-sm"} mt-1`}
-          style={{ color: styles.mainText }}
-        ></p>
+        <p className={`text-md mt-1`} style={{ color: styles.mainText }}></p>
       </div>
 
       {/* Arrow */}
