@@ -1,7 +1,5 @@
 // GridOverlay.jsx
 
-import React from "react";
-
 interface GridOverlayProps {
   isVisible: boolean;
   unitWidth: number;
@@ -36,8 +34,6 @@ export default function GridOverlay({
     (maxRows > 0 ? maxRows - 1 : 0) * margin +
     paddingTop;
 
-  const cellColor = "rgba(0, 0, 0, 0.1)";
-
   const gridCells = [];
 
   // --- 1. Vertical Lines (for Column Margins) ---
@@ -65,7 +61,8 @@ export default function GridOverlay({
             // The size of the cell matches the content area of a 1x1 widget
             width: `${unitWidth}px`,
             height: `${rowHeight}px`,
-            border: `1px solid #a9acac`,
+            //
+            border: `1px solid #a9adaa57`,
             boxSizing: "border-box",
             borderRadius: "4px",
 

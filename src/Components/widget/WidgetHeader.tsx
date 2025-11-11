@@ -340,19 +340,24 @@
 //     </header>
 //   );
 // }
+import { useState } from "react";
 import { useDarkModeStore } from "../../Theme/useDarkModeStore";
 
 interface WidgetHeaderProps {
   title: string;
   onRemove: () => void;
+  count: number;
   isDraggingOrResizing: boolean;
   onToggle: () => void;
   isCollapsed: boolean;
+  label: string;
 }
 
 export default function WidgetHeader({
   title,
   onRemove,
+  count,
+  label,
   isDraggingOrResizing,
   onToggle,
   isCollapsed,
@@ -360,10 +365,11 @@ export default function WidgetHeader({
   // Pull effectiveTheme from the store
   const styles = useDarkModeStore((s) => s.styles);
   // 🔹 Lighten color utility
+  const [blockTypeToggle, setBlockTypeToggle] = useState("newRequest");
 
   return (
     <header
-      className=" flex items-center justify-between w-full mb-2 rounded-t-lg px-4 py-2 border-b transition-colors"
+      className=" flex items-center justify-between w-full mb-2 rounded-t-lg px-5 py-2  border-b transition-colors "
       style={{
         backgroundColor: styles.widgetHeaderBg,
         color: styles.widgetText,
@@ -371,17 +377,48 @@ export default function WidgetHeader({
       }}
     >
       <div
-        className={`absolute w-[82%] left-0 h-[16%] bg-transparent grabbable ${
+        className={`absolute w-[82%] left-0 h-[11%] bg-transparent grabbable ${
           isDraggingOrResizing ? "" : "hidden"
         } `}
       ></div>
-      <span className="font-semibold text-lg">
-        {title.charAt(0).toUpperCase() + title.slice(1)}
-      </span>
+      <div className="flex gap-3 items-center">
+        <span className="font-[600] text-lg">
+          {title.charAt(0).toUpperCase() + title.slice(1)}
+        </span>
+        <span className=" px-2.5 py-1 text-sm mr-4 bg-[#539EDC] rounded-full flex items-center justify-center font-medium text-white">
+          {count}
+        </span>
+      </div>
 
-      <div className="flex space-x-2">
+      <div className="flex space-x-2 h-full">
+        {label === "blockouts" && (
+          <div className="flex gap-3 bg-white p-[2px] h-10 rounded-md font-[500] text-sm  border  border-[#D1D5DB]">
+            <button
+              className={` cursor-pointer ${
+                blockTypeToggle === "newRequest"
+                  ? "bg-[#1C75BC] text-white"
+                  : "bg-white text-[#1F2937]"
+              } px-3 py-1 rounded-lg`}
+              onClick={() => setBlockTypeToggle("newRequest")}
+            >
+              New Request
+            </button>
+            <button
+              className={` cursor-pointer ${
+                blockTypeToggle === "upcoming"
+                  ? "bg-[#1C75BC] text-white"
+                  : "bg-white text-[#1F2937]"
+              } px-3 py-2 rounded-lg`}
+              onClick={() => setBlockTypeToggle("upcoming")}
+            >
+              Upcoming
+            </button>
+          </div>
+        )}
         <button
-          className="flex items-center justify-center px-3 rounded-lg border shadow-sm focus:outline-none hover:opacity-90 transition"
+          className={`flex items-center h-10 justify-center bg-white px-4 py-4 rounded-lg border shadow-sm focus:outline-none hover:opacity-90 transition  cursor-pointer ${
+            isDraggingOrResizing ? "" : "hidden"
+          }`}
           style={{
             color: styles.widgetText,
             borderColor: styles.widgetBorder,
@@ -396,7 +433,7 @@ export default function WidgetHeader({
           type="button"
           title="Toggle dropdown"
           onClick={onToggle}
-          className="flex items-center justify-center px-2 h-10 rounded-lg border shadow-sm focus:outline-none hover:opacity-90 transition"
+          className="flex items-center h-10 justify-center bg-white px-4 py-4 rounded-lg border shadow-sm focus:outline-none hover:opacity-90 transition cursor-pointer"
           style={{
             color: styles.widgetText,
             borderColor: styles.widgetBorder,
@@ -404,7 +441,7 @@ export default function WidgetHeader({
         >
           {/* ⭐️ CRITICAL: Dynamic icon based on state */}
           <i
-            className={`fa-solid ${
+            className={`fa-solid text-[#6B7280] ${
               isCollapsed ? "fa-angle-down" : "fa-angle-up"
             } text-xs`}
           ></i>

@@ -1,173 +1,147 @@
-// import React from "react";
-// import { useDarkModeStore } from "../Theme/useDarkModeStore"; // ✅ Zustand store
-// import { MdArrowForwardIos } from "react-icons/md";
-
-// interface Alert {
-//   id: string;
-//   title: string;
-//   message: string;
-//   severity: "high" | "medium" | "low";
-//   img: string | null;
-// }
-
-// export function AlertItem({ alert, order }: { alert: Alert; order: number }) {
-//   const effectiveTheme = useDarkModeStore((state) => state.effectiveTheme);
-//   const isDarkOrNight = effectiveTheme === "dark" || effectiveTheme === "night";
-
-//   const severityColors = {
-//     high: isDarkOrNight
-//       ? "border-[#D32F2F] bg-[#3a0e0e]"
-//       : "border-[#D32F2F] bg-[#D32F2F1A]",
-//     medium: isDarkOrNight
-//       ? "border-[#FFA000] bg-[#4a3200]"
-//       : "border-[#FFA000] bg-[#FFA0001A]",
-//     low: isDarkOrNight
-//       ? "border-[#E9D820] bg-[#474700]"
-//       : "border-[#E9D820] bg-[#E9D8201A]",
-//   };
-
-//   const arrowColor = {
-//     high: "#D32F2F",
-//     medium: "#FFA000",
-//     low: "#E9D820",
-//   };
-
-//   const iconSeverity = {
-//     high: "dangerIcon.png",
-//     medium: "mediumIcon.png",
-//     low: "lowIcon.png",
-//   };
-
-//   return (
-//     <div
-//       className={`flex relative items-start border-t-2 rounded-lg p-3 gap-3 mb-2 shadow-sm w-full ${
-//         severityColors[alert.severity]
-//       }`}
-//     >
-//       {/* Icon */}
-//       <div className="flex-shrink-0 mt-1">
-//         {alert.img ? (
-//           <img
-//             src={alert.img}
-//             width="40px"
-//             height="40px"
-//             className="rounded-full"
-//             alt="User profile"
-//           />
-//         ) : (
-//           <img
-//             src={`/person not found icon/${iconSeverity[alert.severity]}`}
-//             className="w-[30px] h-[30px]"
-//             alt={`Alert severity: ${alert.severity}`}
-//           />
-//         )}
-//       </div>
-
-//       {/* Title & Message */}
-//       <div className="ml-3">
-//         <h4
-//           className={`font-medium ${order === 0 ? "text-lg" : "text-sm"} ${
-//             isDarkOrNight ? "text-white" : "text-[#1E0E06]"
-//           }`}
-//         >
-//           ATTENTION REQUIRED - {alert.title}
-//         </h4>
-
-//         <p
-//           className={`${order === 0 ? "text-lg" : "text-sm"} ${
-//             isDarkOrNight ? "text-white" : "text-[#1E0E06]"
-//           } mt-1`}
-//         >
-//           {alert.message}
-//         </p>
-//       </div>
-
-//       {/* Arrow */}
-//       <div className="absolute bottom-2 right-2">
-//         <MdArrowForwardIos style={{ color: arrowColor[alert.severity] }} />
-//       </div>
-//     </div>
-//   );
-// }
-
+import { useMemo } from "react";
+import { AppIcon } from "../icons";
 import { useDarkModeStore } from "../Theme/useDarkModeStore";
 import { MdArrowForwardIos } from "react-icons/md";
+import type { Alert } from "../Types/Alert";
+import App from "../App";
 
-interface Alert {
-  id: string;
-  title: string;
-  message: string;
-  severity: "high" | "medium" | "low";
-  img: string | null;
-}
-
-export function AlertItem({ alert, order }: { alert: Alert; order: number }) {
+export function AlertItem({ alert }: { alert: Alert; order: number }) {
   const styles = useDarkModeStore((state) => state.styles);
 
-  const severityColors = {
-    high: {
-      border: styles.alertHighBorder,
-      bg: styles.alertHighBg,
-    },
-    medium: {
-      border: styles.alertMediumBorder,
-      bg: styles.alertMediumBg,
-    },
-    low: {
-      border: styles.alertLowBorder,
-      bg: styles.alertLowBg,
-    },
-  };
+  const severityColors = useMemo(
+    () => ({
+      high: {
+        border: styles.alertHighBorder,
+        bg: styles.alertHighBg,
+        icon: styles.alertHighIcon,
+        iconBg: styles.alertHighIconBg,
+        button: styles.alertHighButton,
+      },
+      medium: {
+        border: styles.alertMediumBorder,
+        bg: styles.alertMediumBg,
+        icon: styles.alertMediumIcon,
+        iconBg: styles.alertMediumIconBg,
+        button: styles.alertMediumButton,
+      },
+      low: {
+        border: styles.alertLowBorder,
+        bg: styles.alertLowBg,
+        icon: styles.alertLowIcon,
+        iconBg: styles.alertLowIconBg,
+        button: styles.alertLowButton,
+      },
+    }),
+    [styles]
+  );
+  console.log("colors", severityColors);
 
-  const iconSeverity = {
-    high: "dangerIcon.png",
-    medium: "mediumIcon.png",
-    low: "lowIcon.png",
-  };
+  let icon;
+  console.log("alert type", alert.type);
+  switch (alert.type) {
+    case "staff license":
+      icon = (
+        <AppIcon
+          name="userFilled"
+          size={30}
+          style={{ color: severityColors[alert.severity].icon }}
+        />
+      );
+      break;
+    case "resource":
+      icon =
+        alert.severity === "high" ? (
+          <AppIcon
+            name="car"
+            size={30}
+            style={{ color: severityColors[alert.severity].icon }}
+          />
+        ) : (
+          <AppIcon
+            name="key"
+            size={30}
+            style={{ color: severityColors[alert.severity].icon }}
+          />
+        );
+      break;
+    case "keyDispatch":
 
+    default:
+      break;
+  }
+  console.log("icon", icon);
   return (
     <div
-      className="flex relative items-start border-t-2 rounded-lg p-3 gap-3 mb-2 shadow-sm w-full"
+      className="flex relative items-start border-1 rounded-xl p-3 py-2 gap-3 mb-5  shadow-sm w-full"
       style={{
         borderColor: severityColors[alert.severity].border,
         backgroundColor: severityColors[alert.severity].bg,
       }}
     >
-      {/* Icon */}
-      <div className="flex-shrink-0 mt-1">
-        {alert.img ? (
-          <img
-            src={alert.img}
-            width="40px"
-            height="40px"
-            className="rounded-full"
-            alt="User profile"
-          />
-        ) : (
-          <div className="flex items-center justify-center w-[40px] h-[40px] rounded-full">
-            <img
-              src={`/person not found icon/${iconSeverity[alert.severity]}`}
+      <div className="flex justify-between items-center w-full gap-3">
+        <div className="flex items-center">
+          {/* Icon */}
+          <div className="flex-shrink-0 mt-1">
+            {alert.img ? (
+              <img
+                src={alert.img}
+                width="40px"
+                height="40px"
+                className="rounded-full"
+                alt="User profile"
+              />
+            ) : (
+              <div
+                className="flex items-center justify-center w-[40px] h-[40px] rounded-full "
+                style={{
+                  backgroundColor: severityColors[alert.severity].iconBg,
+                }}
+              >
+                {/* <img
+              src={`${iconSeverity[alert.severity]}`}
               className="w-[30px] h-[30px]"
               alt={`Alert severity: ${alert.severity}`}
-            />
+            /> */}
+
+                {icon}
+              </div>
+            )}
           </div>
-        )}
-      </div>
 
-      {/* Title & Message */}
-      <div className="ml-3">
-        <h4 className={`text-md`} style={{ color: styles.mainText }}>
-          ATTENTION REQUIRED - {alert.title} - {alert.message}
-        </h4>
+          {/* Title & Message */}
+          <div className="ml-3">
+            <span
+              className={`text-md block`}
+              style={{ color: styles.mainText }}
+            >
+              <strong
+                className="text-xs"
+                style={{ color: severityColors[alert.severity].icon }}
+              >
+                {" "}
+                {alert.severity === "high" ? "Immidiate" : ""} Attention
+                Required
+              </strong>
+            </span>
+            <span className="font-[600] text-[#1F2937]">
+              {alert.title} - {alert.message}
+            </span>
 
-        <p className={`text-md mt-1`} style={{ color: styles.mainText }}></p>
-      </div>
+            <p
+              className={`text-md mt-1`}
+              style={{ color: styles.mainText }}
+            ></p>
+          </div>
+        </div>
 
-      {/* Arrow */}
-      <div className="absolute bottom-2 right-2">
-        <MdArrowForwardIos
-          style={{ color: severityColors[alert.severity].border }}
-        />
+        {/* Arrow */}
+
+        <button
+          style={{ backgroundColor: severityColors[alert.severity].button }}
+          className="text-white px-2 py-1 rounded-md font-[600] cursor-pointer"
+        >
+          Review
+        </button>
       </div>
     </div>
   );

@@ -105,17 +105,21 @@ import { useEffect, useState } from "react";
 interface WidgetProps {
   children: React.ReactNode;
   title: string;
+  count: number;
+  label: string;
   onRemove: () => void;
   isDraggingOrResizing: boolean;
   currentHeight: number;
   onToggleHeight: (newH: number) => void;
 }
 
-const COLLAPSED_HEIGHT = 2;
+const COLLAPSED_HEIGHT = 1;
 
 function Widget({
   children,
   title,
+  label,
+  count,
   onRemove,
   isDraggingOrResizing,
   currentHeight,
@@ -159,14 +163,16 @@ function Widget({
         isDraggingOrResizing={isDraggingOrResizing}
         title={title}
         onRemove={onRemove}
+        label={label}
+        count={count}
         isCollapsed={isCollapsed}
         onToggle={handleToggle}
       />
 
       {!isCollapsed && (
-        <div className="relative w-full h-full">
+        <div className="relative w-full h-full min-h-0">
           <div
-            className={`widget-content flex justify-center absolute inset-0 overflow-auto pt-2 px-3 `}
+            className={`widget-content flex justify-center  absolute inset-0 overflow-y-auto pt-2 px-7 `}
           >
             {children}
           </div>

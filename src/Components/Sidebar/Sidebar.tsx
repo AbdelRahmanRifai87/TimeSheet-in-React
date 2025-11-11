@@ -849,14 +849,16 @@
 import SidebarMenu from "./SidebarMenu";
 import SidebarFooter from "./SidebarFooter";
 import { useSidebarContext } from "../../Context/SidebarContext";
-import { useEffect, useRef, useState } from "react";
+// import { useEffect, useRef, useState } from "react";
 import { useDarkModeStore } from "../../Theme/useDarkModeStore"; // zustand store
 import {
-  IconChevronLeft,
-  IconChevronRight,
+  // IconChevronLeft,
+  // IconChevronRight,
   IconChevronsLeft,
   IconChevronsRight,
 } from "@tabler/icons-react";
+import Layer1Url from "../../assets/Layer 1.png";
+import Groupimg from "../../assets/Group 2147225115.png";
 
 const Sidebar: React.FC = () => {
   const { isCollapsed, setIsCollapsed, menuPages } = useSidebarContext();
@@ -865,8 +867,6 @@ const Sidebar: React.FC = () => {
   // Get theme & precomputed styles
   // --------------------
   const styles = useDarkModeStore((state) => state.styles);
-  const theme = useDarkModeStore((state) => state.theme);
-  const customTheme = useDarkModeStore((state) => state.customTheme);
 
   // --------------------
   // Company dropdown
@@ -921,7 +921,7 @@ const Sidebar: React.FC = () => {
 
   return (
     <aside
-      className="row-span-2 flex flex-col transition-all duration-300"
+      className="row-span-2 flex flex-col h-full transition-all duration-300"
       style={{
         backgroundColor: styles.sidebarBg,
         color: styles.sidebarText,
@@ -1000,7 +1000,7 @@ const Sidebar: React.FC = () => {
         style={{ cursor: "default" }}
       >
         <img
-          src={isCollapsed ? "/Group 2147225115.png" : "/Layer 1.png"}
+          src={isCollapsed ? Groupimg : Layer1Url}
           alt="SECURECY Logo"
           className={`object-contain transition-all duration-300 ${
             isCollapsed
@@ -1011,7 +1011,7 @@ const Sidebar: React.FC = () => {
       </div>
 
       {/* Sidebar Menu */}
-      <div className="flex-1 overflow-y-auto overflow-x-hidden no-scrollbar">
+      <div className=" sidebar-menu flex-1 overflow-y-auto overflow-x-hidden no-scrollbar">
         <SidebarMenu
           pages={menuPages || []}
           isCollapsed={isCollapsed}

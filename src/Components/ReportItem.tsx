@@ -53,7 +53,7 @@ export function ReportItem({ report }: { report: Report }) {
       </div>
 
       {/* Enter Report Button */}
-      <button className="bg-[#1C75BC] text-white font-semibold py-3 px-6 rounded-lg text-center w-full transition-all duration-300 ease-in-out hover:bg-[#155a8e] focus:outline-none focus:ring-2 focus:ring-[#1C75BC] focus:ring-opacity-50">
+      <button className="bg-[#1C75BC] text-white  cursor-pointer font-semibold py-3 px-6 rounded-lg text-center w-full transition-all duration-300 ease-in-out hover:bg-[#155a8e] focus:outline-none focus:ring-2 focus:ring-[#1C75BC] focus:ring-opacity-50">
         Enter Report
       </button>
     </div>

@@ -19,7 +19,7 @@ const SidebarFooter: React.FC = () => {
       {!isCollapsed && (
         <div className="flex flex-col items-center mt-0">
           <span>Powered by</span>
-          <img src="/sec250.png" alt="Securecy Logo" className="h-5 mt-1" />
+          <img src="sec250.png" alt="Securecy Logo" className="h-5 mt-1" />
         </div>
       )}
     </div>
